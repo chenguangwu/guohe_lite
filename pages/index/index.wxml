@@ -16,7 +16,7 @@
   <view  class="main-card">
    <!--今日课表-->
     <view class="main-card-item" id="kb" wx:if="{{card.kb.show}}">
-      <navigator url="/pages/core/kb/kb">
+      <navigator url="/pages/score/score">
         <view class="card-item-hd">
           <image class="card-item-icon" src="/images/core/kb.png"></image>
           <text class="card-item-name">今日课表</text>

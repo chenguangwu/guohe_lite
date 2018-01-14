@@ -12,7 +12,7 @@ Page({
         if(res.data){
           console.log('用户已登录')
           wx.navigateTo({
-            url: '/pages/score/score',
+            url: '/pages/index/index',
           })
         }
         

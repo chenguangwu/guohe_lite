@@ -17,7 +17,7 @@ Page({
     cores: [
       [
         { id: 'kb', name: '课表查询', disabled: false, teacher_disabled: false, offline_disabled: false },
-        { id: 'cj', name: '成绩查询', disabled: false, teacher_disabled: true, offline_disabled: false },
+        { id: 'score', name: '成绩查询', disabled: false, teacher_disabled: true, offline_disabled: false },
         { id: 'ks', name: '考试安排', disabled: false, teacher_disabled: false, offline_disabled: false },
         { id: 'kjs', name: '空教室', disabled: false, teacher_disabled: false, offline_disabled: true },
         { id: 'xs', name: '学生查询', disabled: false, teacher_disabled: false, offline_disabled: true },
