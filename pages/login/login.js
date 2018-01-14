@@ -10,14 +10,11 @@ Page({
       key: 'account',
       success: function (res) {
         if(res.data){
-          console.log('用户已登录')
+          console.log('用户已登录'+res.data)
           wx.navigateTo({
             url: '/pages/index/index',
           })
-        }
-        
-        
-      
+        } 
       }
     })
   },
@@ -30,7 +27,7 @@ Page({
     this.setData({
       isLoading: true
     })
-    //console.log(e.detail.value)
+    console.log(e.detail.value)
     //获得表单数据
     var objData = e.detail.value;
     if (objData.username && objData.password) {
@@ -45,21 +42,21 @@ Page({
           'content-type': 'application/x-www-form-urlencoded' // 默认值
         },
         success: function (res) {
-          //console.log(res.data)
+          console.log(res.data)
           if(res.data.code==200){
             //登录成功
             wx.showToast({
               title: '登录成功',
             })
             var result=res.data.info
-            result.password= objData.password
+            result.password= objData.password//?
             console.log(result)
             wx.setStorage({
               key: "account",
               data: result
             })
             wx.reLaunch({
-              url: '../score/score',
+              url: '/pages/index/index',
             })
            
           }else{
@@ -76,8 +73,8 @@ Page({
       })
     } else {
       wx.showToast({
-        title: '学号或密码不能为空',
-        icon: 'success',
+        title: '学号/密码不能为空',
+        icon: 'loading',
         duration: 2000
       })
     }

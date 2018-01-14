@@ -1,44 +1,71 @@
 <view class="spinner {{loadStyle}}"></view>
 
 <view class='{{tableStyle}} changeBtn'>
-  <button data-hi='选择学期' bindtap='switchSemester'>{{currentSemester}}</button>
+  <!-- <button data-hi='选择学期' bindtap='switchSemester'>{{currentSemester}}</button> -->
+  <picker bindchange="bindPickerChange" value="{{index}}" range="{{grade_years}}">
+        <!-- <button data-hi='选择学期' type="default">{{currentSemester}}</button> -->
+         <button data-hi='选择学期' class="weui-btn" type="primary" plain="true" >{{currentSemester}}</button>
+  </picker>
 </view>
-<view class="b1" hidden="{{flag}}"> 
-   <view class="t_w"> 
-      <block class="b2" wx:for="{{gradePoint}}"> 
-         <view class="btn1" bindtap="menuClick" data-num='{{item.year}}'> 
-          {{item.year}}
-        </view> 
-      </block> 
-   </view> 
-</view> 
- 
 
+
+<view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell">
+                <view class="weui-cell__hd">
+                    <image src="/images/core/kjs.png" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
+                </view>
+                <view class="weui-cell__bd">绩点GPA</view>
+                <view class="weui-cell__ft"></view>
+            </view>
+         
+        </view>
 <view wx:for="{{gradePoint}}" class='grade-point'>
-  <view class='p-tr'>
-    <view class='td'>{{item.year}}</view>
-    <view class='td'>{{item.point}}</view>
-  </view>
+ 
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell">
+                <view wx:if="{{item.year=='all'}}" class="weui-cell__bd">综合</view>
+                <view wx:else class="weui-cell__bd">{{item.year}}</view>
+                <view class="weui-cell__ft">{{item.point}}</view>
+            </view>
+        </view>
 
 </view>
 <view class="table {{tableStyle}}">
-  <view class="tr bg-w">
+  <!-- <view class="tr bg-w">
     <view class="th">课程名</view>
     <view class="th ">学分</view>
     <view class="th">分数</view>
-  </view>
+  </view> -->
+  <view class="weui-cell">
+                <view class="weui-cell__hd">
+                    <image src="/images/core/score.png" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
+                </view>
+                <view class="weui-cell__bd">科目成绩</view>
+                <view class="weui-cell__ft"></view>
+            </view>
+  <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell">
+                <view class="weui-cell__bd">课程名</view>
+                <view class="weui-cell__ft">分数</view>
+            </view>
+        </view>
   <block wx:for="{{change_scores}}" wx:key="{{code}}">
-    <view class="tr bg-g" wx:if="{{index % 2 == 0}}">
+    <!-- <view class="tr bg-g" wx:if="{{index % 2 == 0}}">
       <view class="td">{{item.course_name}}</view>
       <view class="td">{{item.credit}}</view>
       <view class="td">{{item.score}}</view>
-
     </view>
+   
     <view class="tr" wx:else>
       <view class="td">{{item.course_name}}</view>
       <view class="td">{{item.credit}}</view>
       <view class="td">{{item.score}}</view>
-
-    </view>
+    </view> -->
+     <view class="weui-cells weui-cells_after-title">
+            <navigator url="/pages/index/index" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                <view class="weui-cell__bd">{{item.course_name}}</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access">{{item.score}}</view>
+            </navigator>
+        </view>
   </block>
 </view>

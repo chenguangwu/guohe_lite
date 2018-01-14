@@ -3,7 +3,8 @@
     "pages/login/login",
     "pages/index/index",
     "pages/logs/logs",
-    "pages/core/score/score"
+    "pages/core/score/score",
+    "pages/core/table/table"
   ],
   "window":{
     "backgroundTextStyle":"light",
