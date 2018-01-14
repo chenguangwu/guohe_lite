@@ -1,0 +1,54 @@
+<!--index.wxml-->
+
+ <!--功能导航-->
+<swiper class="main-swpier" indicator-dots="true" indicator-active-color="#73b4ef">
+  <swiper-item class="main-core" wx:for="{{cores}}"  wx:for-item="core" wx:key="id" >
+    <block wx:for="{{core}}" wx:key="id">
+      <navigator  class="main-core-item" url="{{'/pages/core/'+item.id+'/'+item.id}}">
+        <image class="core-item-icon" src="/images/core/{{item.id}}.png"></image>
+        <text class="core-item-name">{{item.name}}</text>
+      </navigator>
+    </block>
+  </swiper-item >
+  </swiper>
+ 
+   <!--卡片列表-->
+  <view  class="main-card">
+   <!--今日课表-->
+    <view class="main-card-item" id="kb" wx:if="{{card.kb.show}}">
+      <navigator url="/pages/core/kb/kb">
+        <view class="card-item-hd">
+          <image class="card-item-icon" src="/images/core/kb.png"></image>
+          <text class="card-item-name">今日课表</text>
+        </view>
+        <view wx:if="{{card.kb.nothing}}" class="card-item-bd kb-nothing">
+          <text>今天居然没有课~😆</text>
+        </view>
+        <view wx:else class="card-item-bd">
+          <view class="kb-item" wx:for="{{card.kb.data}}" wx:key="when">
+            <view class="kb-item-left">
+              <text class="kb-item-what">{{item.what}}</text>
+              <text class="kb-item-when">{{item.when}}</text>
+            </view>
+            <text class="kb-item-where">{{item.where}}</text>
+          </view>
+        </view>
+        <view class="kb-open">
+          <text>查看完整课表</text>
+        </view>
+      </navigator>
+    </view>
+    <scroll-view scroll-y="true" style="height: 150px">
+    <view style=" width: 400px; height: 100px" >
+    <view style="text-align: center;"> <audio  poster="{{poster}}" name="{{name}}" author="{{author}}" src="{{src}}" id="myAudio" controls loop></audio></view>
+</view>
+    <view style=" width: 400px; height: 100px"><view style="text-align: center;">此刻谁在茫茫人海之中</view></view>
+    <view style=" width: 400px; height: 100px"><view style="text-align: center;">在这浩瀚的宇宙</view></view>
+    <view style=" width: 400px; height: 100px"><view style="text-align: center;">只是生命的旅程</view></view>
+</scroll-view>
+    </view>
+
+
+
+
+
