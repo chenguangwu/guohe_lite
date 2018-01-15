@@ -18,7 +18,7 @@
     <view class="main-card-item" id="kb" wx:if="{{card.kb.show}}">
       <navigator url="/pages/score/score">
         <view class="card-item-hd">
-          <image class="card-item-icon" src="/images/core/kb.png"></image>
+          <image class="card-item-icon" src="/images/core/table.png"></image>
           <text class="card-item-name">今日课表</text>
         </view>
         <view wx:if="{{card.kb.nothing}}" class="card-item-bd kb-nothing">

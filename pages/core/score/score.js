@@ -1,29 +1,30 @@
 // pages/school/library/library.js
+
 Page({
-  menuClick: function (event) {
-    var num = event.currentTarget.dataset.num
-    if(num=='all'){
+  bindPickerChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    if (e.detail.value=='0'){
       this.setData({
         change_scores: this.data.scores,
-        currentSemester: num
-
+        currentSemester: "所有学期"
       })
     }else{
       var temp = this.data.scores
       var result = new Array()
       for (var i = 0; i < temp.length; i++) {
-        if (temp[i].start_semester == num) {
+        if (temp[i].start_semester == this.data.grade_years[e.detail.value]) {
           result.push(temp[i])
         }
       }
       this.setData({
         change_scores: result,
-        currentSemester: num
+        currentSemester: this.data.grade_years[e.detail.value]
 
       })
     }
-    this.setData({ flag: true })
-
+    this.setData({
+      index: e.detail.value
+    })
   },
   switchSemester: function (e) {
     this.setData({
@@ -46,6 +47,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    index:0,
+    grade_years:[],
     scores: {},
     flag: true,
     change_scores: {},
@@ -59,6 +62,8 @@ Page({
    */
   onLoad: function (options) {
     var that = this
+   
+    //获取缓存
     wx.getStorage({
       key: 'account',
       success: function (res) {
@@ -76,9 +81,15 @@ Page({
           },
           success: function (res) {
             console.log(res.data)
-
+            var years = [];
+            for (var i = 0; i < res.data.info.length; i++) {
+              years[i] = res.data.info[i].year
+            }
+            
+            console.log(years)
             that.setData({
               gradePoint: res.data.info,
+              grade_years: years,
               loadStyle: 'hide',
               tableStyle: 'show'
             })
@@ -88,6 +99,7 @@ Page({
             wx.showToast('获取失败')
           }
         })
+        //获取成绩
         wx.request({
           url: 'https://guohe3.com/api/score',
           method: 'POST',
@@ -100,11 +112,13 @@ Page({
           },
           success: function (res) {
             console.log(res.data)
+            
+            
             that.setData({
               scores: res.data.info,
+              
               change_scores: res.data.info,
             })
-
           },
           fail: function () {
             wx.showToast('获取失败')
@@ -112,9 +126,8 @@ Page({
         })
       }
     })
-
-
   },
+  
 
   /**
    * 生命周期函数--监听页面初次渲染完成
