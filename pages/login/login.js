@@ -59,7 +59,7 @@ Page({
               data: result
             })
             wx.reLaunch({
-              url: '../score/score',
+              url: '/pages/index/index',
             })
            
           }else{
