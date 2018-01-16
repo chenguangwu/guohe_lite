@@ -1,10 +1,12 @@
 {
   "pages":[
     "pages/core/table/table",
+    "pages/core/score/score",
+    
       "pages/login/login",
     "pages/index/index",
-    "pages/logs/logs",
-    "pages/core/score/score"
+    "pages/logs/logs"
+    
   ],
   "window":{
     "backgroundTextStyle":"light",

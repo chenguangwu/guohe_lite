@@ -80,7 +80,32 @@ Page({
             'content-type': 'application/x-www-form-urlencoded' // 默认值
           },
           success: function (res) {
-            console.log(res.data)
+            var info = res.data.info
+            var year_list = new Array()
+            var point_list = new Array()
+            for (var i = 1; i < info.length; i++) {
+              year_list.push(info[i].year)
+              point_list.push(info[i].point)
+            }
+            console.log(point_list)
+            var wxCharts = require('../../../utils/wxcharts-min.js');
+            new wxCharts({
+              canvasId: 'point',
+              type: 'line',
+              categories: year_list,
+              series: [{
+                name: '绩点变化',
+                data: point_list,
+
+              },],
+              yAxis: {
+                title: '绩点(GPA)',
+
+              },
+              width: 420,
+              height: 200,
+
+            });
             var years = [];
             for (var i = 0; i < res.data.info.length; i++) {
               years[i] = res.data.info[i].year
