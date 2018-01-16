@@ -1,4 +1,49 @@
 /**index.wxss**/
+.out{
+box-shadow:0px 0px  10px 5px #aaa;
+}
+.in{
+box-shadow:0px 0px 2px 2px rgba(0, 0, 0,0.2) inset;
+}
+.box {
+ 
+  display: flex;
+  height: 200rpx;
+  margin: 20rpx auto;
+  background-color: white;
+
+  width: 100%;
+}
+
+.box .item {
+  height: 52rpx;
+  font-size: 0.8rem;
+  color: rgb(49, 49, 49);
+}
+
+.box .num {
+  line-height: 200rpx;
+  text-align: center;
+  color: rgb(0, 154, 97);
+  flex: 1 0 auto;
+  width: 50rpx;
+}
+
+.box .right {
+  flex: 5 0 auto;
+  height: 260rpx;
+  display: flex;
+  flex-direction: column;
+  padding-top: 30rpx;
+}
+
+.address {
+  flex: 1 0 auto;
+  font-size: 0.8rem;
+  line-height: 200rpx;
+  text-align: center;
+  color: #058;
+}
 page {
   background-color: #f8f8f8;
 }
@@ -189,11 +234,11 @@ page .navigator-hover{
 }
 .kb-open{
   display: flex;
-  align-items: center;
+  
   justify-content: center;
   text-align: center;
   color: #7f848a;
-  height: 90rpx;
+
   border-top: 1rpx solid #e5e5e5;
   margin-top: -1rpx;
 }
