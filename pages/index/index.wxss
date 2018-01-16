@@ -1,4 +1,7 @@
 /**index.wxss**/
+page {
+  background-color: #f8f8f8;
+}
 .container{
   padding-bottom: 0;
   background-color: #f0eff5;
@@ -34,8 +37,8 @@
 }
 .core-item-icon{
   display: block;
-  width: 85rpx;
-  height: 85rpx;
+  width: 80rpx;
+  height: 80rpx;
   margin: 15rpx auto;
 }
 .core-item-name{
@@ -52,15 +55,15 @@
 }
 /**卡片列表**/
 .main-card {
-  padding-bottom: 300rpx;
+  padding-bottom: 400rpx;
 }
 .main-card-item{
   display: flex;
   flex-direction: column;
   background: #fff;
-  border-top: 1rpx solid #e5e5e5;
-  border-bottom: 1rpx solid #e5e5e5;
-  margin-bottom: 20rpx;
+  border-top: 1rpx solid #F6F6EF;
+  border-bottom: 1rpx solid #F6F6EF;
+  margin-bottom: 25rpx;
   background-repeat: no-repeat;
   background-size: 100% auto;
   background-position: bottom center;
@@ -373,4 +376,12 @@ page .navigator-hover{
 .sdf-text{
   color: #acacac;
   font-size: 13pt;
+}
+
+.weui-footer {
+  margin: 50rpx 0;
+}
+
+.weui-center {
+  text-align: center;
 }

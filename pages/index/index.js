@@ -16,18 +16,16 @@ Page({
     src: 'http://ws.stream.qqmusic.qq.com/M500001VfvsJ21xFqb.mp3?guid=ffffffff82def4af4b12b3cd9337d5e7&uin=346897220&vkey=6292F51E1E384E06DCBDC9AB7C49FD713D632D313AC4858BACB8DDD29067D3C601481D36E62053BF8DFEAF74C0A5CCFADD6471160CAF3E6A&fromtag=46',
     cores: [
       [
-        { id: 'table', name: '课表查询', disabled: false, teacher_disabled: false, offline_disabled: false },
-        { id: 'score', name: '成绩查询', disabled: false, teacher_disabled: true, offline_disabled: false },
-        { id: 'ks', name: '考试安排', disabled: false, teacher_disabled: false, offline_disabled: false },
-        { id: 'kjs', name: '空教室', disabled: false, teacher_disabled: false, offline_disabled: true },
-        { id: 'xs', name: '学生查询', disabled: false, teacher_disabled: false, offline_disabled: true },
-        { id: 'ykt', name: '一卡通', disabled: false, teacher_disabled: false, offline_disabled: false },
-        { id: 'jy', name: '借阅信息', disabled: false, teacher_disabled: false, offline_disabled: false },
-        { id: 'xf', name: '学费信息', disabled: false, teacher_disabled: true, offline_disabled: false },
-        { id: 'sdf', name: '电费查询', disabled: false, teacher_disabled: true, offline_disabled: false },
-        { id: 'bx', name: '物业报修', disabled: false, teacher_disabled: false, offline_disabled: true }
-      ], [
+        { id: 'table', name: '课表', disabled: false, teacher_disabled: false, offline_disabled: false },
+        { id: 'score', name: '成绩', disabled: false, teacher_disabled: true, offline_disabled: false },
+        { id: 'classroom', name: '空教室', disabled: false, teacher_disabled: false, offline_disabled: true },
+        { id: 'student', name: '校友', disabled: false, teacher_disabled: false, offline_disabled: true },
+        { id: 'library', name: '馆藏', disabled: false, teacher_disabled: false, offline_disabled: false },
+        { id: 'bus', name: '校车', disabled: false, teacher_disabled: true, offline_disabled: false },
+        { id: 'sport', name: '体育', disabled: false, teacher_disabled: true, offline_disabled: false },
         { id: 'cet', name: '四六级', disabled: false, teacher_disabled: true, offline_disabled: true },
+        { id: 'wall', name: '学院墙', disabled: false, teacher_disabled: true, offline_disabled: true },
+      ], [
         { id: 'fw', name: "志愿活动", disabled: false, teacher_disabled: true, offline_disabled: false }
       ]
     ],
