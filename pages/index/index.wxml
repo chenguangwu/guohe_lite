@@ -16,7 +16,7 @@
   <view  class="main-card">
    <!--今日课表-->
     <view class="main-card-item" id="kb" wx:if="{{card.kb.show}}">
-      <navigator url="/pages/score/score">
+      <navigator url="/pages/core/table/table">
         <view class="card-item-hd">
           <image class="card-item-icon" src="/images/core/table.png"></image>
           <text class="card-item-name">今日课表</text>
@@ -38,14 +38,24 @@
         </view>
       </navigator>
     </view>
-    <scroll-view scroll-y="true" style="height: 150px">
-    <view style=" width: 400px; height: 100px" >
-    <view style="text-align: center;"> <audio  poster="{{poster}}" name="{{name}}" author="{{author}}" src="{{src}}" id="myAudio" controls loop></audio></view>
+   
+    <!--音乐-->
+     <view class="main-card-item" id="music">
+     <view class="card-item-hd">
+          <image class="card-item-icon" src="/images/index/music.png"></image>
+          <text class="card-item-name">小曲儿</text>
+        </view>
+      <view style="background:white; height:10px"></view>
+
+    <scroll-view scroll-y="true" style="height: 100px">
+    <view style="  height: 100px" >
+    <view style="text-align: center"> <audio  poster="{{poster}}" name="{{name}}" author="{{author}}" src="{{src}}" id="myAudio" controls loop></audio></view>
 </view>
     <view style=" width: 400px; height: 100px"><view style="text-align: center;">此刻谁在茫茫人海之中</view></view>
     <view style=" width: 400px; height: 100px"><view style="text-align: center;">在这浩瀚的宇宙</view></view>
     <view style=" width: 400px; height: 100px"><view style="text-align: center;">只是生命的旅程</view></view>
 </scroll-view>
+</view>
     </view>
 
 
