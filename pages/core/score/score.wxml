@@ -49,7 +49,7 @@
                 <view class="weui-cell__ft">分数</view>
             </view>
         </view>
-  <block wx:for="{{change_scores}}" wx:key="{{code}}">
+  <block wx:for="{{change_scores}}">
     <!-- <view class="tr bg-g" wx:if="{{index % 2 == 0}}">
       <view class="td">{{item.course_name}}</view>
       <view class="td">{{item.credit}}</view>
