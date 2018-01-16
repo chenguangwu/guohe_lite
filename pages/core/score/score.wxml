@@ -1,4 +1,5 @@
 <view class="spinner {{loadStyle}}"></view>
+<canvas style="width: 85%; height: 200px;" canvas-id="point"></canvas>
 
 <view class='{{tableStyle}} changeBtn'>
   <!-- <button data-hi='选择学期' bindtap='switchSemester'>{{currentSemester}}</button> -->
