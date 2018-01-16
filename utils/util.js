@@ -17,5 +17,115 @@ function formatNumber(n) {
 }
 
 module.exports = {
-  formatTime: formatTime
+  formatTime: formatTime,
+  showData: showData
+}
+function showData(semester, week, that) {//week是星期几
+  wx.getStorage({
+    key: semester,
+    success: function (res) {
+      console.log("从缓存读取")
+      that.setData({
+        load: 'hide',
+        content: 'show'
+      })
+      showDataUtil(res.data, semester, week, that)
+    },
+    fail: function () {
+      wx.request({
+        url: 'https://guohe3.com/api/kb',
+        method: 'POST',
+        data: {
+          username: '152210702119',
+          password: '935377012pxc',
+          semester: semester
+        },
+        header: {
+          'content-type': 'application/x-www-form-urlencoded' // 默认值
+        },
+        success: function (res) {
+          if (res.data.code == 200) {
+            wx.setStorage({
+              key: semester,
+              data: res.data.info,
+            })
+            showDataUtil(res.data.info, semester, week, that)
+            that.setData({
+              load: 'hide',
+              content: 'show'
+            })
+          }
+        }
+      })
+    }
+  })
+
+
+}
+function showDataUtil(info, semester, week, that) {
+  var data_list = [[], [], [], [], [], [], []]
+
+  var date = semester + '_' + (parseInt(week) + 1)
+  var _data = info[parseInt(week)][date]//整个学期的课表数据(未转化)
+
+  //把行数据转换为列数据
+  for (var i = 0; i < _data.length; i++) {
+    for (var key in _data[i]) {
+      if (key == 'monday') {
+        data_list[0].push(_data[i][key])
+
+      }
+      if (key == 'tuesday') {
+        data_list[1].push(_data[i][key])
+      }
+      if (key == 'wednesday') {
+        data_list[2].push(_data[i][key])
+      }
+      if (key == 'thursday') {
+        data_list[3].push(_data[i][key])
+      }
+      if (key == 'friday') {
+        data_list[4].push(_data[i][key])
+      }
+      if (key == 'saturday') {
+        data_list[5].push(_data[i][key])
+      }
+      if (key == 'sunday') {
+        data_list[6].push(_data[i][key])
+      }
+    }
+  }
+
+  that.setData({
+    kbData: data_list,
+    todayData: data_list[week]//默认显示第一周
+  })
+  console.log(4)
+  var today_data = data_list[0]
+  var today_data_list = new Array()
+
+  for (var i = 0; i < today_data.length; i++) {
+    var temp = {}
+    if (today_data[i]) {
+      var info_list = today_data[i].split("@")
+      temp.index = (i * 2 + 1) + '-' + (i * 2 + 2)
+      temp.cnum = info_list[0]
+
+      if (info_list[1].length >= 20) {
+        temp.cname = info_list[1].split(' ', 1).join(' ')
+      } else {
+        temp.cname = info_list[1]
+      }
+      temp.tname = info_list[2]
+      temp.address = info_list.length >= 4 ? info_list[3] : '未指定'
+    }
+
+    if (JSON.stringify(temp) != "{}") {
+      today_data_list.push(temp)
+    }
+  }
+
+  that.setData({
+    todayData: today_data_list
+  })
 }
