@@ -37,11 +37,12 @@ page {
 }
 .core-item-icon{
   display: block;
-  width: 80rpx;
-  height: 80rpx;
+  width: 55rpx;
+  height: 55rpx;
   margin: 15rpx auto;
 }
 .core-item-name{
+  font-size: 12px;
   display: block;
   margin: 5rpx;
 }
