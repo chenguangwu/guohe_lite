@@ -8,7 +8,11 @@ Page({
         change_scores: this.data.scores,
         currentSemester: "所有学期"
       })
+      this.setData({
+        flag_choose: 'hide'
+      })
     }else{
+      console.log(this.data.flag_choose)
       var temp = this.data.scores
       var result = new Array()
       for (var i = 0; i < temp.length; i++) {
@@ -18,9 +22,38 @@ Page({
       }
       this.setData({
         change_scores: result,
-        currentSemester: this.data.grade_years[e.detail.value]
-
+        currentSemester: this.data.grade_years[e.detail.value],
+        flag_choose : 'show'
       })
+      var after_choose_scores = this.data.change_scores
+      console.log(after_choose_scores)
+      console.log("xuanze")
+      var name_list = new Array()
+      var score_list = new Array()
+      for (var i = 1; i < after_choose_scores.length; i++) {
+        if (after_choose_scores[i].score%1===0){
+        name_list.push(after_choose_scores[i].course_name.substring(0, 4))
+        score_list.push(after_choose_scores[i].score)
+        }
+      }
+      console.log(score_list)
+      var wxCharts = require('../../../utils/wxcharts-min.js');
+      new wxCharts({
+        canvasId: 'score',
+        type: 'column',
+        categories: name_list,
+        series: [{
+          name: '科目',
+          data: score_list,
+        }
+        ],
+        yAxis: {
+          titie: "分数",
+          min:0
+        },
+        width: 300,
+        height: 200
+      });
     }
     this.setData({
       index: e.detail.value
@@ -51,6 +84,7 @@ Page({
     grade_years:[],
     scores: {},
     flag: true,
+    flag_choose:'hide',
     change_scores: {},
     loadStyle: 'show',
     tableStyle: 'hide',
@@ -96,13 +130,12 @@ Page({
               series: [{
                 name: '绩点变化',
                 data: point_list,
-
-              },],
+                
+              }],
               yAxis: {
-                title: '绩点(GPA)',
-
+                title: 'GPA'
               },
-              width: 420,
+              width: 300,
               height: 200,
 
             });
@@ -136,12 +169,9 @@ Page({
             'content-type': 'application/x-www-form-urlencoded' // 默认值
           },
           success: function (res) {
-            console.log(res.data)
-            
-            
+
             that.setData({
               scores: res.data.info,
-              
               change_scores: res.data.info,
             })
           },

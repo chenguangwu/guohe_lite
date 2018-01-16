@@ -11,7 +11,7 @@ Page({
       success: function (res) {
         if(res.data){
           console.log('用户已登录'+res.data)
-          wx.navigateTo({
+          wx.reLaunch({
             url: '/pages/index/index',
           })
         } 
