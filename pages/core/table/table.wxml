@@ -4,24 +4,24 @@
 </view>
 
 <view class='fixed {{content}}'>
-<view class='changeBox'>
-  <view class="section">
-    <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
-      <view class="picker">
-        {{array[index]}}
-        <view class='down'></view>
-      </view>
-    </picker>
+  <view class='changeBox'>
+    <view class="section">
+      <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+        <view class="picker">
+          {{array[index]}}
+          <view class='down'></view>
+        </view>
+      </picker>
+    </view>
+    <view class="semesterBox">
+      <picker bindchange="bindSemesterChange" value="{{Sindex}}" range="{{semesterArray}}">
+        <view class="semester">
+          {{semesterArray[Sindex]}}
+          <view class='down'></view>
+        </view>
+      </picker>
+    </view>
   </view>
-  <view class="semesterBox">
-    <picker bindchange="bindSemesterChange" value="{{Sindex}}" range="{{semesterArray}}">
-      <view class="semester">
-        {{semesterArray[Sindex]}}
-        <view class='down'></view>
-      </view>
-    </picker>
-  </view>
-</view>
 </view>
 <view class='table'>
   <scroll-view scroll-x="true" class="tab-h" scroll-left="{{scrollLeft}}">
@@ -47,10 +47,6 @@
             </view>
             <text class='address'>{{item.address}}</text>
           </block>
-
-
-
-
 
         </view>
       </scroll-view>
