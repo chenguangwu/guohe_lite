@@ -1,6 +1,6 @@
 {
   "pages":[
-    "pages/login/login",
+      "pages/login/login",
     "pages/index/index",
     "pages/logs/logs",
     "pages/core/score/score",
@@ -11,5 +11,30 @@
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "果核Lite",
     "navigationBarTextStyle":"black"
+  },
+  "tabBar": {
+    "color": "#7f848a",
+    "selectedColor": "#7acfa6",
+    "backgroundColor": "#FFFFFF",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "今日",
+        "iconPath": "images/index/sun.png",
+        "selectedIconPath": "images/index/sun_click.png"
+      },
+      {
+        "pagePath": "pages/core/table/table",
+        "text": "社群",
+        "iconPath": "images/index/community.png",
+        "selectedIconPath": "images/index/community_click.png"
+      },
+      {
+        "pagePath": "pages/index/index",
+        "text": "我",
+        "iconPath": "images/index/i.png",
+        "selectedIconPath": "images/index/i_click.png"
+      }
+    ]
   }
 }

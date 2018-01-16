@@ -42,7 +42,7 @@
     <!--音乐-->
      <view class="main-card-item" id="music">
      <view class="card-item-hd">
-          <image class="card-item-icon" src="/images/core/table.png"></image>
+          <image class="card-item-icon" src="/images/index/music.png"></image>
           <text class="card-item-name">小曲儿</text>
         </view>
       <view style="background:white; height:10px"></view>
@@ -57,8 +57,6 @@
 </scroll-view>
 </view>
     </view>
-
-    <view class="weui-footer weui-center">- 我没有底线 -</view>
 
 
 
