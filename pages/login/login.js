@@ -25,6 +25,11 @@ Page({
       }
     })
   },
+  username(){
+    this.setData({
+      inputPassword: false
+    })
+  },
   pwdFocus() {
     this.setData({
       inputPassword: true
@@ -83,22 +88,28 @@ Page({
         }
       })
     } else {
+      var toastr = require('../../utils/toastr-wxapp.js');
       toastr.error({
-        title: '学号或密码不能为空',
+        title: '不能为空',
         duration: 1000,
       });
     }
-
-
-
-
-
     setTimeout(() => {
       this.setData({
         isLoading: false
       })
     }, 1000)
 
+  },
+  onLoad(){
+    wx.setNavigationBarColor({
+      frontColor: '#ffffff',
+      backgroundColor: '#4A699F',
+      animation: {
+        duration: 400,
+        timingFunc: 'easeIn'
+      }
+    })
   }
 
 })
