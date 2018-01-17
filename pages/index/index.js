@@ -135,7 +135,7 @@ Page({
                 } else {
                   zj = 0
                 }
-                var zc = info.index-10
+                var zc = info.index
                 var semester = '2017-2018-2'
                 console.log(zc + ' ' + zj + " " + account.password)
                 var today_data = wx.getStorageSync("today_data")

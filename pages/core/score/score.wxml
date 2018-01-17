@@ -1,4 +1,4 @@
-<view class="spinner {{loadStyle}}"></view>
+<image class='logo {{loadStyle}}' src='../../../images/logo.jpg'></image>
 <canvas style="width: 100%; height: 200px;" canvas-id="point"></canvas>
 
 <view class="weui-cells weui-cells_after-title">
