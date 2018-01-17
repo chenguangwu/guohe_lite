@@ -7,15 +7,27 @@ Page({
   },
   onLoad: function () {
     wx.getStorage({
-      key: 'account',
+      key: '2017-2018-1',
       success: function (res) {
         if(res.data){
-          console.log('用户已登录'+res.data)
-          wx.reLaunch({
-            url: '/pages/index/index',
-          })
-        } 
+          console.log('清理缓存')
+         wx.clearStorage()
+        }
       }
+    })
+    wx.getStorage({
+      key: '2017-2018-2',
+      success: function (res) {
+        if (res.data) {
+          console.log('清理缓存')
+        /wx.clearStorage()
+        }
+      }
+    })
+  },
+  username(){
+    this.setData({
+      inputPassword: false
     })
   },
   pwdFocus() {
@@ -42,12 +54,15 @@ Page({
           'content-type': 'application/x-www-form-urlencoded' // 默认值
         },
         success: function (res) {
-          console.log(res.data)
+        
+          
+          var toastr = require('../../utils/toastr-wxapp.js');
+          toastr.ok({
+            title: '登录成功',
+            duration: 1000,
+          });
           if(res.data.code==200){
-            //登录成功
-            wx.showToast({
-              title: '登录成功',
-            })
+    
             var result=res.data.info
             result.password= objData.password//?
             console.log(result)
@@ -62,33 +77,39 @@ Page({
           }else{
 
              //登录失败
-             console.log('登录失败')
-             wx.showToast({
-               title: '登录失败',
-               icon:'loading',
-               duration: 2000
-             })
+            toastr.error({
+              title: '用户名或你妈错误',
+              duration: 1000,
+            });
+            
+             
+             
           }
         }
       })
     } else {
-      wx.showToast({
-        title: '学号/密码不能为空',
-        icon: 'loading',
-        duration: 2000
-      })
+      var toastr = require('../../utils/toastr-wxapp.js');
+      toastr.error({
+        title: '不能为空',
+        duration: 1000,
+      });
     }
-
-
-
-
-
     setTimeout(() => {
       this.setData({
         isLoading: false
       })
     }, 1000)
 
+  },
+  onLoad(){
+    wx.setNavigationBarColor({
+      frontColor: '#ffffff',
+      backgroundColor: '#4A699F',
+      animation: {
+        duration: 400,
+        timingFunc: 'easeIn'
+      }
+    })
   }
 
 })

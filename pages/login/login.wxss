@@ -1,11 +1,41 @@
 page{
-  background-color: rgb(56, 176, 176);
+
+background: url('http://106.14.220.63/static/images/day_images/img0.jpg');
+  background-position:center;
+  background-size:100%;
+  
+}
+.weui-footer{color:#999;font-size:14px;text-align:center}.weui-footer_fixed-bottom{position:fixed;bottom:.52em;left:0;right:0}.weui-footer__links{font-size:0}.weui-footer__link{display:inline-block;vertical-align:top;margin:0 .62em;position:relative;font-size:14px;color:#586c94}.weui-footer__link:before{content:" ";position:absolute;left:0;top:0;width:1px;bottom:0;border-left:1rpx solid #c7c7c7;color:#c7c7c7;left:-.65em;top:.36em;bottom:.36em}.weui-footer__link:first-child:before{display:none}.weui-footer__text{padding:0 .34em;font-size:12px}
+.myfooter{
+  position: fixed;
+  transform: translateX(-50%);
+  margin-left: 50%;
+  bottom: 20rpx;
+  color: #ccc;
+  
+}
+input{
+  color:#fff;
+  padding: 0 !important;
+  font-size: 1rem;
+}
+.login-btn{
+  margin-top: 60rpx !important;
+  background-color: transparent !important;
+  width: 40%;
+  margin: 0 auto;
+  border-bottom: 1px solid #aaa;
+
+  color: #fff !important;
+  border-radius: 265rpx;
+  
+
 }
 
 .wrapper {
   width: 100%;
   height: 400rpx;
-  background-color: rgb(56, 176, 176);
+
   position: absolute;
 }
 
@@ -89,22 +119,20 @@ page{
   height: 400rpx;
   margin: 0 auto;
   padding: 20rpx;
-  background-color:rgb(56, 176, 176);
-  border: 1px solid #ddd;
+ 
+  border-top: 4rpx solid rgba(71, 45, 32,0.3);
 }
 
 .control {
-  width: 650rpx;
+  width: 75%;
   height: 80rpx;
   margin: 20rpx auto;
   padding: 15rpx;
   font-size: 40rpx;
-  border: 1px solid #ddd;
-  border-radius: 10rpx;
+  border-bottom: 1px solid #ddd;
+  
 }
-.placeholder{
-  color: red;
-}
+
 
 button {
   margin-top: 40rpx;

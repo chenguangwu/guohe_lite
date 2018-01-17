@@ -32,31 +32,39 @@ function showData(semester, week, that) {//week是星期几
       showDataUtil(res.data, semester, week, that)
     },
     fail: function () {
-      wx.request({
-        url: 'https://guohe3.com/api/kb',
-        method: 'POST',
-        data: {
-          username: '152210702119',
-          password: '935377012pxc',
-          semester: semester
-        },
-        header: {
-          'content-type': 'application/x-www-form-urlencoded' // 默认值
-        },
+      wx.getStorage({
+        key: 'account',
         success: function (res) {
-          if (res.data.code == 200) {
-            wx.setStorage({
-              key: semester,
-              data: res.data.info,
-            })
-            showDataUtil(res.data.info, semester, week, that)
-            that.setData({
-              load: 'hide',
-              content: 'show'
+          if (res.data) {
+            wx.request({
+              url: 'https://guohe3.com/api/kb',
+              method: 'POST',
+              data: {
+                username: res.data.username,
+                password: res.data.password,
+                semester: semester
+              },
+              header: {
+                'content-type': 'application/x-www-form-urlencoded' // 默认值
+              },
+              success: function (res) {
+                if (res.data.code == 200) {
+                  wx.setStorage({
+                    key: semester,
+                    data: res.data.info,
+                  })
+                  showDataUtil(res.data.info, semester, week, that)
+                  that.setData({
+                    load: 'hide',
+                    content: 'show'
+                  })
+                }
+              }
             })
           }
         }
       })
+      
     }
   })
 

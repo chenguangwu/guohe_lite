@@ -1,8 +1,4 @@
-<view class="spinner {{load}}">
-  <div class="cube1"></div>
-  <div class="cube2"></div>
-</view>
-
+<image class='logo {{load}}' src='../../../images/logo.jpg'></image>
 <view class='fixed {{content}}'>
   <view class='changeBox'>
     <view class="section">

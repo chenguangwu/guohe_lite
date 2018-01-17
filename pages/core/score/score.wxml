@@ -1,5 +1,5 @@
-<view class="spinner {{loadStyle}}"></view>
-<canvas style="width: 100%; height: 200px;" canvas-id="point"></canvas>
+<image class='logo {{loadStyle}}' src='../../../images/logo.jpg'></image>
+<canvas style="width:500rpx; height: 200px;" canvas-id="point"></canvas>
 
 <view class="weui-cells weui-cells_after-title">
             <view class="weui-cell">
@@ -45,7 +45,7 @@
 </view>
 
   <view class="canvasStyle {{flag_choose}}">
-  <canvas style="width: 100%; height: 200px;" canvas-id="score"></canvas>
+  <canvas style="width: 500rpx; height: 200px;" canvas-id="score"></canvas>
   </view>
 
   <view class="weui-cells weui-cells_after-title">

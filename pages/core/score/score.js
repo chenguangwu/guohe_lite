@@ -121,7 +121,7 @@ Page({
               year_list.push(info[i].year)
               point_list.push(info[i].point)
             }
-            console.log(point_list)
+            
             var wxCharts = require('../../../utils/wxcharts-min.js');
             new wxCharts({
               canvasId: 'point',

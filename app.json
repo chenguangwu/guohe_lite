@@ -1,17 +1,19 @@
 {
-  "pages":[
+  "pages": [
+    "pages/index/index",
     "pages/login/login",
+    "pages/core/person/person",
+   
+   
     "pages/core/table/table",
     "pages/core/score/score",
-    "pages/index/index",
     "pages/logs/logs"
-    
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "果核Lite",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle": "black"
   },
   "tabBar": {
     "color": "#000000",
@@ -32,7 +34,7 @@
         "selectedIconPath": "images/index/community_click.png"
       },
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/login/login",
         "text": "我",
         "iconPath": "images/index/i.png",
         "selectedIconPath": "images/index/i_click.png"
