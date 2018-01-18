@@ -136,8 +136,7 @@ Page({
                   zj = 0
                 }
                 var zc = info.index
-                var semester = '2017-2018-2'
-                console.log(zc + ' ' + zj + " " + account.password)
+                var semester = '2017-2018-2'//默认首页是第二学期的课表
                 var today_data = wx.getStorageSync("today_data")
                 if (today_data) {
                   console.log('以后再说')

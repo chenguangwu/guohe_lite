@@ -12,7 +12,7 @@ Page({
         flag_choose: 'hide'
       })
     }else{
-      console.log(this.data.flag_choose)
+     
       var temp = this.data.scores
       var result = new Array()
       for (var i = 0; i < temp.length; i++) {
@@ -26,8 +26,7 @@ Page({
         flag_choose : 'show'
       })
       var after_choose_scores = this.data.change_scores
-      console.log(after_choose_scores)
-      console.log("xuanze")
+    
       var name_list = new Array()
       var score_list = new Array()
       for (var i = 1; i < after_choose_scores.length; i++) {
@@ -36,7 +35,6 @@ Page({
         score_list.push(after_choose_scores[i].score)
         }
       }
-      console.log(score_list)
       var wxCharts = require('../../../utils/wxcharts-min.js');
       new wxCharts({
         canvasId: 'score',
@@ -64,16 +62,7 @@ Page({
       flag: false,
     })
     
-   
-    // console.log('退出登录')
-    // wx.removeStorage({
-    //   key: 'account',
-    //   success: function (res) {
-    //     wx.navigateTo({
-    //       url: '/pages/login/login',
-    //     })
-    //   }
-    // })
+  
 
   },
   /**
@@ -101,7 +90,7 @@ Page({
     wx.getStorage({
       key: 'account',
       success: function (res) {
-        console.log(res.data)
+
         var result = res.data
         wx.request({
           url: 'https://guohe3.com/api/gradePoint',
@@ -144,7 +133,7 @@ Page({
               years[i] = res.data.info[i].year
             }
             
-            console.log(years)
+            
             that.setData({
               gradePoint: res.data.info,
               grade_years: years,
@@ -154,7 +143,11 @@ Page({
 
           },
           fail: function () {
-            wx.showToast('获取失败')
+            wx.showToast({
+              title: '网络获取失败',
+              icon: 'loading',
+              duration: 2000
+            })
           }
         })
         //获取成绩
@@ -176,7 +169,27 @@ Page({
             })
           },
           fail: function () {
-            wx.showToast('获取失败')
+            wx.showToast({
+              title: '网络获取失败',
+              icon: 'loading',
+              duration: 2000
+            })
+          }
+        })
+      },fail(){
+        console.log('未登录')
+        wx.showModal({
+          title: '提示',
+          content: '请先用教务系统账号登录',
+          success: function (res) {
+            if (res.confirm) {
+              console.log('用户点击确定')
+              wx.navigateTo({
+                url: '/pages/login/login',
+              })
+            } else if (res.cancel) {
+              console.log('用户点击取消')
+            }
           }
         })
       }

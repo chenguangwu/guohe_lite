@@ -5,26 +5,6 @@ Page({
     password: '',
     username: ''
   },
-  onLoad: function () {
-    wx.getStorage({
-      key: '2017-2018-1',
-      success: function (res) {
-        if(res.data){
-          console.log('清理缓存')
-         wx.clearStorage()
-        }
-      }
-    })
-    wx.getStorage({
-      key: '2017-2018-2',
-      success: function (res) {
-        if (res.data) {
-          console.log('清理缓存')
-        /wx.clearStorage()
-        }
-      }
-    })
-  },
   username(){
     this.setData({
       inputPassword: false
@@ -78,7 +58,7 @@ Page({
 
              //登录失败
             toastr.error({
-              title: '用户名或你妈错误',
+              title: '用户名或密码错误',
               duration: 1000,
             });
             
@@ -102,6 +82,9 @@ Page({
 
   },
   onLoad(){
+    //登录前清除缓存
+    wx.clearStorageSync()
+    console.log('清除缓存')
     wx.setNavigationBarColor({
       frontColor: '#ffffff',
       backgroundColor: '#4A699F',

@@ -18,6 +18,8 @@ input{
   color:#fff;
   padding: 0 !important;
   font-size: 1rem;
+  border-bottom: 1px solid #ddd;
+
 }
 .login-btn{
   margin-top: 60rpx !important;
@@ -129,7 +131,7 @@ input{
   margin: 20rpx auto;
   padding: 15rpx;
   font-size: 40rpx;
-  border-bottom: 1px solid #ddd;
+ 
   
 }
 
