@@ -4,4 +4,5 @@
   </view>
   <view class='card'>
   </view>
+  <button bindtap='changeAccount'>切换账号</button>
 </view>

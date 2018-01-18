@@ -20,7 +20,7 @@ module.exports = {
   formatTime: formatTime,
   showData: showData
 }
-function showData(semester, week, that) {//week是星期几
+function showData(semester, week, currentTab,that) {//week是星期几
   wx.getStorage({
     key: semester,
     success: function (res) {
@@ -29,9 +29,10 @@ function showData(semester, week, that) {//week是星期几
         load: 'hide',
         content: 'show'
       })
-      showDataUtil(res.data, semester, week, that)
+      showDataUtil(res.data, semester, week, currentTab,that)
     },
     fail: function () {
+      console.log('从网络获取')
       wx.getStorage({
         key: 'account',
         success: function (res) {
@@ -49,19 +50,43 @@ function showData(semester, week, that) {//week是星期几
               },
               success: function (res) {
                 if (res.data.code == 200) {
+                  //设置课表缓存
                   wx.setStorage({
                     key: semester,
                     data: res.data.info,
                   })
-                  showDataUtil(res.data.info, semester, week, that)
+                 
+                  showDataUtil(res.data.info, semester, week, currentTab,that)
                   that.setData({
                     load: 'hide',
                     content: 'show'
                   })
                 }
+              },fail(){
+                wx.showToast({
+                  title: '网络获取失败',
+                  icon: 'loading',
+                  duration: 2000
+                })
               }
             })
           }
+        },fail(){
+          console.log('用户未登录')
+          wx.showModal({
+            title: '提示',
+            content: '请先用教务系统账号登录',
+            success: function (res) {
+              if (res.confirm) {
+                console.log('用户点击确定')
+                wx.navigateTo({
+                  url: '/pages/login/login',
+                })
+              } else if (res.cancel) {
+                console.log('用户点击取消')
+              }
+            }
+          })
         }
       })
       
@@ -70,10 +95,11 @@ function showData(semester, week, that) {//week是星期几
 
 
 }
-function showDataUtil(info, semester, week, that) {
+function showDataUtil(info, semester, week, currentTab,that) {
   var data_list = [[], [], [], [], [], [], []]
 
   var date = semester + '_' + (parseInt(week) + 1)
+ 
   var _data = info[parseInt(week)][date]//整个学期的课表数据(未转化)
 
   //把行数据转换为列数据
@@ -105,11 +131,10 @@ function showDataUtil(info, semester, week, that) {
   }
 
   that.setData({
-    kbData: data_list,
-    todayData: data_list[week]//默认显示第一周
+    kbData: data_list
   })
-  console.log(4)
-  var today_data = data_list[0]
+  
+  var today_data = data_list[currentTab]
   var today_data_list = new Array()
 
   for (var i = 0; i < today_data.length; i++) {

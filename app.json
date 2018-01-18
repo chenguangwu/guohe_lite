@@ -1,11 +1,12 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/core/table/table",
     "pages/login/login",
     "pages/core/person/person",
    
    
-    "pages/core/table/table",
+
     "pages/core/score/score",
     "pages/logs/logs"
   ],
@@ -34,7 +35,7 @@
         "selectedIconPath": "images/index/community_click.png"
       },
       {
-        "pagePath": "pages/login/login",
+        "pagePath": "pages/core/person/person",
         "text": "我",
         "iconPath": "images/index/i.png",
         "selectedIconPath": "images/index/i_click.png"
