@@ -12,7 +12,6 @@ Page({
         flag_choose: 'hide'
       })
     }else{
-     
       var temp = this.data.scores
       var result = new Array()
       for (var i = 0; i < temp.length; i++) {

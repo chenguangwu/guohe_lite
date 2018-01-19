@@ -8,6 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    musicSwitch:'',
     todayData: [],
     tdIsNull:false,
     toView: 'red',
@@ -100,10 +101,28 @@ Page({
   onLoad: function (options) {
     var that=this
     wx.getStorage({
+      key: 'musicSwitchGlobal',
+      success: function (res) {
+        console.log("music卡片flag:", res.data)
+        console.log("执行异步，获取卡片信息成功")
+        var music_flag = res.data
+        that.setData({
+          musicSwitch: music_flag
+        })
+        console.log("设置卡片参数")
+      },
+      fail: function () {
+        console.log("执行异步，获取卡片信息失败")
+      }
+    })
+    
+    
+    wx.getStorage({
       key: 'account',
       success: function (res) {
+        console.log("执行异步，获取账号信息成功")
         if (res.data) {
-          console.log('用户已登录' + res.data)
+          console.log('用户已登录')
           var account = res.data
           wx.request({
             url: 'https://guohe3.com/api/xiaoli',
@@ -242,12 +261,15 @@ Page({
         }
       },
       fail: function () {
-        console.log('未登录')
+        console.log("执行异步，获取账号信息失败")
         wx.navigateTo({
           url: '/pages/login/login',
         })
       }
     })
+
+    
+    
   },
 
   /**
@@ -262,7 +284,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    // this.onload()
   },
 
   /**

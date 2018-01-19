@@ -52,6 +52,8 @@ App({
     }
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    // musicSwitch:'show',
+    // toastSwitch:'show'
   }
 })

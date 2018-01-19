@@ -1,0 +1,18 @@
+<!--pages/core/person/switch/switch.wxml-->
+
+<view class='switchs'>
+  <view class="weui-cells__title">卡片开关</view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_switch">
+                <view class="weui-cell__bd">小曲儿</view>
+                <view class="weui-cell__ft">
+                <view wx:if="{{musicIsChecked}}">
+                <switch checked bindchange="musicSwitchChange"/>
+                </view>
+                <view wx:else>
+                <switch  bindchange="musicSwitchChange"/>
+                </view>
+                </view>
+        </view>
+    </view>
+</view>

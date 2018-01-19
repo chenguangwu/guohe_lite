@@ -52,9 +52,20 @@
       </view>
     </navigator>
   </view>
+  <!-- 通知 -->
+  <view class="main-card-item {{toastSwitch}}" id="toast">
+  <view class="card-item-hd">
+      <image class="card-item-icon" src="/images/index/music.png"></image>
+      <text class="card-item-name">大事儿</text>
+    </view>
+    <view style="maigin:15rpx">
+    这里是一件大事
+    </view>
+
+  </view>
 
   <!--音乐-->
-  <view class="main-card-item" id="music">
+  <view class="main-card-item {{musicSwitch}}" id="music">
     <view class="card-item-hd">
       <image class="card-item-icon" src="/images/index/music.png"></image>
       <text class="card-item-name">小曲儿</text>
