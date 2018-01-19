@@ -58,7 +58,7 @@
       <image class="card-item-icon" src="/images/index/music.png"></image>
       <text class="card-item-name">大事儿</text>
     </view>
-    <view style="maigin:15rpx">
+    <view style="text-align:center;margin:8px;">
     这里是一件大事
     </view>
 

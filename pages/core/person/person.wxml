@@ -4,13 +4,7 @@
     <view class="userinfo-username">{{userInfo.nickName}}</view>
   </view>
   <view class='card'>
-         <!-- <view class="weui-cells weui-cells_after-title">
-            <navigator url="/pages/index/index" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-                <view class="weui-cell__bd">测试</view>
-                <view class="weui-cell__ft weui-cell__ft_in-access">111</view>
-            </navigator>
-        </view> -->
-         <view class="weui-panel" style="margin-bottom:12px; margin-left: 12rpx;margin-right: 12rpx; border-radius: 15rpx;">
+         <view class="weui-panel" style="margin-bottom:12px; margin-left: 14rpx;margin-right: 14rpx; border-radius: 15rpx;">
             <view class="weui-panel__hd" style='font-size:30rpx'>设置</view>
             <view class="weui-panel__bd">
                 <view class="weui-media-box weui-media-box_small-appmsg">
@@ -42,6 +36,44 @@
                                 <view class='card-item-font'>反馈</view>
                             </view>
                             <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                        </navigator>
+                    </view>
+                </view>
+            </view>
+        </view>
+
+        <view class="weui-panel" style="margin-bottom:12px; margin-left: 14rpx;margin-right: 14rpx; border-radius: 15rpx;">
+            <view class="weui-panel__hd" style='font-size:30rpx'>个人信息</view>
+            <view class="weui-panel__bd">
+                <view class="weui-media-box weui-media-box_small-appmsg">
+                    <view class="weui-cells weui-cells_in-small-appmsg">
+                        <navigator url="/pages/core/person/about/about" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                            <!-- <view class="weui-cell__hd"><image src="/images/core/cet.png" style="width: 20px;height: 20px;margin-right: 5px" /></view> -->
+                             <view class="weui-cell__bd weui-cell_primary" > 
+                                <view class='card-item-font'>姓名</view>
+                            </view>
+                            <!-- <view class="weui-cell__ft weui-cell__ft_in-access"></view> -->
+                        </navigator>
+                        <navigator url="/pages/core/person/switch/switch" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                            <!-- <view class="weui-cell__hd"><image src="/images/core/cet.png" style="width: 20px;height: 20px;margin-right: 5px" /></view> -->
+                            <view class="weui-cell__bd weui-cell_primary">
+                                <view class='card-item-font'>学号</view>
+                            </view>
+                            <!-- <view class="weui-cell__ft weui-cell__ft_in-access"></view> -->
+                        </navigator>
+                         <navigator url="/pages/core/person/log/log" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                            <!-- <view class="weui-cell__hd"><image src="/images/core/cet.png" style="width: 20px;height: 20px;margin-right: 5px" /></view> -->
+                            <view class="weui-cell__bd weui-cell_primary">
+                                <view class='card-item-font'>学院</view>
+                            </view>
+                            <!-- <view class="weui-cell__ft weui-cell__ft_in-access"></view> -->
+                        </navigator>
+                         <navigator url="/pages/core/person/feedback/feedback" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                            <!-- <view class="weui-cell__hd"><image src="/images/core/cet.png" style="width: 20px;height: 20px;margin-right: 5px" /></view> -->
+                            <view class="weui-cell__bd weui-cell_primary">
+                                <view class='card-item-font'>专业</view>
+                            </view>
+                             <!-- <view class="weui-cell__ft weui-cell__ft_in-access"></view>  -->
                         </navigator>
                     </view>
                 </view>
