@@ -1,13 +1,70 @@
-// pages/core/person/feedback/feedback.js
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    
+    content:'',
+    contact:''
   },
-
+  contactImput(e){
+    this.setData({
+       contact:e.detail.value
+    })
+  },
+  contentImput(e) {
+    this.setData({
+      content:e.detail.value
+    })
+  },
+  submit(){
+    if (this.data.content){
+    var that=this
+    wx.getStorage({
+      key: 'account',
+      success: function(res) {
+        wx.request({
+          url: 'https://guohe3.com/api/feedback', 
+          method:'post',
+          data: {
+            content: that.data.content,
+            contact: that.data.contact,
+            name:res.data.name,
+            category:'1'
+          },
+          header: {
+            'content-type': 'application/x-www-form-urlencoded' // 默认值
+          },
+          success: function (res) {
+            console.log(res.data)
+            if(res.data.code!=200){
+              wx.showToast({
+                title: '评论接口异常',
+                icon: 'loading'
+              })
+            }else{
+              wx.showToast({
+                title: '评论成功'
+              })
+            }
+          }, fail() {
+            wx.showToast({
+              title: '评论接口异常',
+              icon: 'loading'
+            })
+          }
+        })
+      },
+    })
+    }else{
+      wx.showToast({
+        title: '数据不能为空',
+        icon: 'loading'
+      })
+    }
+   
+  },
   /**
    * 生命周期函数--监听页面加载
    */

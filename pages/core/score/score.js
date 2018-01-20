@@ -99,9 +99,16 @@ Page({
             password: result.password
           },
           header: {
-            'content-type': 'application/x-www-form-urlencoded' // 默认值
+            'content-type': 'application/x-www-form-urlencoded' 
           },
           success: function (res) {
+            if(res.data.code==500){
+              console.log(res.data)
+              wx.showToast({
+                title: '教务系统异常',
+                icon: 'loding'
+              })
+            }
             var info = res.data.info
             var year_list = new Array()
             var point_list = new Array()
@@ -161,7 +168,12 @@ Page({
             'content-type': 'application/x-www-form-urlencoded' // 默认值
           },
           success: function (res) {
-
+            if (res.data.code == 500) {
+              wx.showToast({
+                title: '教务系统异常',
+                icon: 'loding'
+              })
+            }
             that.setData({
               scores: res.data.info,
               change_scores: res.data.info,

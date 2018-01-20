@@ -49,6 +49,12 @@ function showData(semester, week, currentTab,that) {//week是星期几
                 'content-type': 'application/x-www-form-urlencoded' // 默认值
               },
               success: function (res) {
+                if (res.data.code == 500) {
+                  wx.showToast({
+                    title: '教务系统异常',
+                    icon: 'loding'
+                  })
+                }
                 if (res.data.code == 200) {
                   //设置课表缓存
                   wx.setStorage({

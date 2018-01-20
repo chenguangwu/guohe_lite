@@ -97,14 +97,14 @@ Page({
    */
 
   onLoad: function (options) {
+    
     var that=this
     
     
-    
+  
     wx.getStorage({
       key: 'account',
       success: function (res) {
-        console.log("执行异步，获取账号信息成功")
         if (res.data) {
           console.log('用户已登录')
           var account = res.data
@@ -115,6 +115,12 @@ Page({
               'content-type': 'application/x-www-form-urlencoded' // 默认值
             },
             success: function (res) {
+               if(res.data.code==500){
+              wx.showToast({
+                title: '教务系统异常',
+                icon: 'loading'
+              })
+            }
               if (res.data.code == 200) {
                 var zj = 0;
                 var info = res.data.info
@@ -245,7 +251,7 @@ Page({
         }
       },
       fail: function () {
-        console.log("执行异步，获取账号信息失败")
+        console.log("未登录")
         wx.navigateTo({
           url: '/pages/login/login',
         })
@@ -268,12 +274,26 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    var music_flag = wx.getStorageSync('music_flag')
-    var news_flag = wx.getStorageSync('news_flag')
-    this.setData({
-      music_flag: music_flag,
-      news_flag: news_flag
+  var that=this
+    wx.getStorage({
+      key: 'music_flag',
+      success: function (res) {
+        that.setData({
+          music_flag: res.data
+        })
+      },
     })
+    wx.getStorage({
+      key: 'news_flag',
+      success: function (res) {
+        console.log(res.data)
+        that.setData({
+          news_flag: res.data
+        })
+      },
+    })
+    
+    
   },
 
   /**
