@@ -58,6 +58,8 @@
     text-align: left;
   }
 
+  .weui-footer__text{padding:0 .34em;font-size:12px}
+
   page{
   /* background-color: #f8f8f8; */
   background-color: #fff;
