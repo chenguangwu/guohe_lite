@@ -1,13 +1,13 @@
 {
   "pages": [
-   
+    "pages/core/person/about/about",
     "pages/index/index",
     "pages/core/person/person",
     "pages/core/table/table",
     "pages/login/login",
     "pages/core/score/score",
     "pages/logs/logs",
-    "pages/core/person/about/about",
+
     "pages/core/person/switch/switch",
     "pages/core/person/log/log",
     "pages/core/person/feedback/feedback"
