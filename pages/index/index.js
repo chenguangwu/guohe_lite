@@ -8,7 +8,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    musicSwitch:'',
+    music_flag:true,
+    news_flag:true,
     todayData: [],
     tdIsNull:false,
     toView: 'red',
@@ -93,28 +94,13 @@ Page({
     user: {},
     disabledItemTap: false //点击了不可用的页面
   },
-
-
   /**
    * 生命周期函数--监听页面加载
    */
+
   onLoad: function (options) {
     var that=this
-    wx.getStorage({
-      key: 'musicSwitchGlobal',
-      success: function (res) {
-        console.log("music卡片flag:", res.data)
-        console.log("执行异步，获取卡片信息成功")
-        var music_flag = res.data
-        that.setData({
-          musicSwitch: music_flag
-        })
-        console.log("设置卡片参数")
-      },
-      fail: function () {
-        console.log("执行异步，获取卡片信息失败")
-      }
-    })
+    
     
     
     wx.getStorage({
@@ -284,7 +270,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    // this.onload()
+    var music_flag = wx.getStorageSync('music_flag')
+    var news_flag = wx.getStorageSync('news_flag')
+    this.setData({
+      music_flag: music_flag,
+      news_flag: news_flag
+    })
   },
 
   /**

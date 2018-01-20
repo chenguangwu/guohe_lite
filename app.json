@@ -1,7 +1,8 @@
 {
   "pages": [
+        "pages/index/index",
     "pages/core/person/about/about",
-    "pages/index/index",
+
     "pages/core/person/person",
     "pages/core/table/table",
     "pages/login/login",
