@@ -29,8 +29,6 @@ Page({
         { id: 'sport', name: '体育', disabled: false, teacher_disabled: true, offline_disabled: false },
         { id: 'cet', name: '四六级', disabled: false, teacher_disabled: true, offline_disabled: true },
         { id: 'wall', name: '学院墙', disabled: false, teacher_disabled: true, offline_disabled: true },
-      ], [
-        { id: 'fw', name: "志愿活动", disabled: false, teacher_disabled: true, offline_disabled: false }
       ]
     ],
     card: {
@@ -282,7 +280,7 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    
   },
 
   /**

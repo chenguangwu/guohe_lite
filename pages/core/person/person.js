@@ -2,12 +2,13 @@ var app = getApp()
 Page({
   data: {
     motto: 'Hello World',
-    userInfo: {}
+    userInfo: {},
+    info:{}
   },
   changeAccount(){
     wx.showModal({
       title: '提示',
-      content: '确认切换账户（清除缓存）',
+      content: '确认切换账户吗？（将会清除缓存）',
       success: function (res) {
         if (res.confirm) {
           console.log('用户点击确定')
@@ -23,6 +24,15 @@ Page({
   },
   onLoad: function () {
     var that = this
+    wx.getStorage({
+       key: 'account',
+          success: function (res) {
+          console.log(res.data)
+           that.setData({
+           info: res.data
+             })
+            },
+     })
     //调用应用实例的方法获取全局数据  
     app.getUserInfo(function (userInfo) {
       //更新数据  

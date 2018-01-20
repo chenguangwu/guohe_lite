@@ -1,19 +1,16 @@
 <image class='logo {{load}}' src='../../../images/logo.jpg'></image>
 <view class='fixed {{content}}'>
-  <view class='changeBox'>
-    <view class="section">
+  <view class='changeBox'> 
       <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
         <view class="picker">
           {{array[index]}}
-          <view class='down'></view>
         </view>
       </picker>
-    </view>
+    
     <view class="semesterBox">
       <picker bindchange="bindSemesterChange" value="{{Sindex}}" range="{{semesterArray}}">
         <view class="semester">
           {{semesterArray[Sindex]}}
-          <view class='down'></view>
         </view>
       </picker>
     </view>

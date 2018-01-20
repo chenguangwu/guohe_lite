@@ -1,2 +1,10 @@
 <!--pages/core/person/log/log.wxml-->
-<text>pages/core/person/log/log.wxml</text>
+<view class='contant'>
+  <view class='logo' style='margin-bottom:20px'>
+   <image class='logo' src='../../../../images/log.png'></image>
+  </view>
+  <view class='top'>「果核Lite」正在逐渐完善中，鲁迅说过：BUG就像海绵里的水。假如你在使用中遇到问题，可以点击「反馈」或者电邮casual_ji@hotmail.com(๑•́ ₃ •̀๑)</view>
+  <view class='text_title'>v1.0.0</view>
+  <view class='text'>完成整体风格设计。由于时间紧迫，提供了成绩、课表两个主要功能以便使用，后续将会持续更新。</view>
+
+</view>

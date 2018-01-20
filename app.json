@@ -1,9 +1,11 @@
 {
   "pages": [
-        "pages/index/index",
+    "pages/index/index",
+    "pages/core/person/person",
+    
     "pages/core/person/about/about",
 
-    "pages/core/person/person",
+    "pages/core/community/community",
     "pages/core/table/table",
     "pages/login/login",
     "pages/core/score/score",
@@ -32,7 +34,7 @@
         "selectedIconPath": "images/index/sun_click.png"
       },
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/core/community/community",
         "text": "社群",
         "iconPath": "images/index/community.png",
         "selectedIconPath": "images/index/community_click.png"

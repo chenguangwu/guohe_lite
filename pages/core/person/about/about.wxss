@@ -53,13 +53,14 @@
   .text_title{
     margin: 30rpx;
     margin-bottom: 10rpx;
-    background-color: #f8f8f8;
+    background-color: #fff;
     font-size: 30rpx;
     text-align: left;
   }
 
   page{
-  background-color: #f8f8f8;
+  /* background-color: #f8f8f8; */
+  background-color: #fff;
   background-position:center;
   background-size:100%;
   text-align:center;
