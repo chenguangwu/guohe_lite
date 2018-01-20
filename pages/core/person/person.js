@@ -27,7 +27,7 @@ Page({
     wx.getStorage({
        key: 'account',
           success: function (res) {
-          console.log(res.data)
+          
            that.setData({
            info: res.data
              })
@@ -39,7 +39,7 @@ Page({
       that.setData({
         userInfo: userInfo
       })
-      console.log(userInfo)
+
     })
   }
 }) 

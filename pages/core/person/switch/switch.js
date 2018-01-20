@@ -16,8 +16,11 @@ Page({
 
     }
     var musicIsChecked = this.data.musicIsChecked
-
-    wx.setStorageSync("music_flag", musicIsChecked)
+    wx.setStorage({
+      key: 'music_flag',
+      data: musicIsChecked,
+    })
+    //wx.setStorageSync("music_flag", musicIsChecked)
     
 
   },
@@ -36,8 +39,11 @@ Page({
 
     }
     var newsIsChecked = this.data.newsIsChecked
-
-    wx.setStorageSync("news_flag", newsIsChecked)
+    wx.setStorage({
+      key: 'news_flag',
+      data: newsIsChecked,
+    })
+   // wx.setStorageSync("news_flag", newsIsChecked)
 
 
   },
@@ -56,13 +62,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var music_flag = wx.getStorageSync('music_flag')
-    var news_flag = wx.getStorageSync('news_flag')
-    this.setData({
-      musicIsChecked: music_flag,
-      newsIsChecked: news_flag
-    })
-
   },
 
   /**
@@ -76,7 +75,26 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    // var music_flag = wx.getStorageSync('music_flag')
+    // var news_flag = wx.getStorageSync('news_flag')
+    var that=this
+    wx.getStorage({
+      key: 'music_flag',
+      success: function(res) {
+        that.setData({
+          musicIsChecked: res.data
+        })
+      },
+    })
+    wx.getStorage({
+      key: 'news_flag',
+      success: function (res) {
+        console.log(res.data)
+        that.setData({
+          newsIsChecked: res.data
+        })
+      },
+    })
   },
 
   /**
