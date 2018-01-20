@@ -35,7 +35,7 @@
           </block>
 
         </view>
-      
+
       </view>
       <view wx:else class="card-item-bd">
         <view class="kb-item" wx:for="{{card.kb.data}}" wx:key="when">
@@ -52,20 +52,20 @@
       </view>
     </navigator>
   </view>
-  <!-- 通知 -->
-  <view class="main-card-item {{toastSwitch}}" id="toast">
-  <view class="card-item-hd">
+  <!-- 大事 -->
+  <view class="main-card-item" id="toast" wx:if="{{news_flag}}">
+    <view class="card-item-hd" >
       <image class="card-item-icon" src="/images/index/music.png"></image>
       <text class="card-item-name">大事儿</text>
     </view>
     <view style="text-align:center;margin:8px;">
-    这里是一件大事
+      这里是一件大事
     </view>
 
   </view>
 
   <!--音乐-->
-  <view class="main-card-item {{musicSwitch}}" id="music">
+  <view class="main-card-item" id="music" wx:if="{{music_flag}}">
     <view class="card-item-hd">
       <image class="card-item-icon" src="/images/index/music.png"></image>
       <text class="card-item-name">小曲儿</text>

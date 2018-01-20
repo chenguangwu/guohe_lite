@@ -1,61 +1,66 @@
 // pages/core/person/switch/switch.js
 var app = getApp();
 Page({
-    musicSwitchChange: function (e) { 
-    console.log('switch 发生 change 事件，携带值为', e.detail.value)
+  musicSwitchChange: function (e) {
     if (e.detail.value == false) {
-      var musicSwitch = 'hide'
-      console.log('musicSwitch 发生 change 事件，musicSwitchGlobal为', musicSwitch)
+
       this.setData({
-        musicIsChecked:false
+        musicIsChecked: false
       })
-      console.log("此时开关状态为", this.data.musicIsChecked)
-    } else{
-      var musicSwitch = 'show'
-      console.log('musicSwitch 发生 change 事件，musicSwitchGlobal为', musicSwitch)
+
+    } else {
+
       this.setData({
-        musicIsChecked:true
+        musicIsChecked: true
       })
-      console.log("此时开关状态为", this.data.musicIsChecked)
+
     }
     var musicIsChecked = this.data.musicIsChecked
-    var musicSwitchGlobal = musicSwitch
-    wx. setStorage({
-      key: 'music_flag',
-      data: musicIsChecked
-    })
-    wx.setStorage({
-      key: 'musicSwitchGlobal',
-      data: musicSwitchGlobal
-    })
+
+    wx.setStorageSync("music_flag", musicIsChecked)
+    
 
   },
- 
+  newsSwitchChange: function (e) {
+    if (e.detail.value == false) {
+
+      this.setData({
+        newsIsChecked: false
+      })
+
+    } else {
+
+      this.setData({
+        newsIsChecked: true
+      })
+
+    }
+    var newsIsChecked = this.data.newsIsChecked
+
+    wx.setStorageSync("news_flag", newsIsChecked)
+
+
+  },
+
 
 
   /**
    * 页面的初始数据
    */
   data: {
-    musicIsChecked:false
+    musicIsChecked: true,
+    newsIsChecked:true
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that=this
-    wx.getStorage({
-      key: 'music_flag',
-      success: function(res) {
-        console.log(res.data)
-        var flags=res.data
-        that.setData({
-          musicIsChecked: flags
-        })
-      },
-      fail: function(res) {},
-      // complete: function(res) {},
+    var music_flag = wx.getStorageSync('music_flag')
+    var news_flag = wx.getStorageSync('news_flag')
+    this.setData({
+      musicIsChecked: music_flag,
+      newsIsChecked: news_flag
     })
 
   },
@@ -64,48 +69,48 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-    
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    
+
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-    
+
   }
 })
