@@ -150,7 +150,7 @@ Page({
           },
           fail: function () {
             wx.showToast({
-              title: '网络获取失败',
+              title: '教务系统异常',
               icon: 'loading',
               duration: 2000
             })
@@ -181,7 +181,7 @@ Page({
           },
           fail: function () {
             wx.showToast({
-              title: '网络获取失败',
+              title: '教务系统异常',
               icon: 'loading',
               duration: 2000
             })

@@ -257,10 +257,11 @@ page .navigator-hover{
 }
 .kb-open{
   display: flex;
-  
+  font-size: 0.6rem;
   justify-content: center;
   text-align: center;
-  color: #7f848a;
+  color: #ccc;
+  margin: 20rpx;
 
   border-top: 1rpx solid #e5e5e5;
   margin-top: -1rpx;

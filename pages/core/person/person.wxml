@@ -47,38 +47,38 @@
             <view class="weui-panel__bd">
                 <view class="weui-media-box weui-media-box_small-appmsg">
                     <view class="weui-cells weui-cells_in-small-appmsg">
-                        <navigator url="/pages/core/person/about/about" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                        <view  class="weui-cell weui-cell_access">
                             <!-- <view class="weui-cell__hd"><image src="/images/core/cet.png" style="width: 20px;height: 20px;margin-right: 5px" /></view> -->
                              <view class="weui-cell__bd weui-cell_primary" > 
                                 <view class='card-item-font'>姓名</view>
                                 <view class='user_info'>{{info.name}}</view>
                             </view>
                             <!-- <view class="weui-cell__ft weui-cell__ft_in-access"></view> -->
-                        </navigator>
-                        <navigator url="/pages/core/person/switch/switch" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                        </view>
+                        <view class="weui-cell weui-cell_access" >
                             <!-- <view class="weui-cell__hd"><image src="/images/core/cet.png" style="width: 20px;height: 20px;margin-right: 5px" /></view> -->
                             <view class="weui-cell__bd weui-cell_primary">
                                 <view class='card-item-font'>学号</view>
                                 <view class='user_info'>{{info.username}}</view>
                             </view>
                             <!-- <view class="weui-cell__ft weui-cell__ft_in-access"></view> -->
-                        </navigator>
-                         <navigator url="/pages/core/person/log/log" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                        </view>
+                         <view  class="weui-cell weui-cell_access" >
                             <!-- <view class="weui-cell__hd"><image src="/images/core/cet.png" style="width: 20px;height: 20px;margin-right: 5px" /></view> -->
                             <view class="weui-cell__bd weui-cell_primary">
                                 <view class='card-item-font'>学院</view>
                                 <view class='user_info'>{{info.academy}}</view> 
                             </view>
                             <!-- <view class="weui-cell__ft weui-cell__ft_in-access"></view> -->
-                        </navigator>
-                         <navigator url="/pages/core/person/feedback/feedback" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                        </view>
+                         <view  class="weui-cell weui-cell_access">
                             <!-- <view class="weui-cell__hd"><image src="/images/core/cet.png" style="width: 20px;height: 20px;margin-right: 5px" /></view> -->
                             <view class="weui-cell__bd weui-cell_primary">
                                 <view class='card-item-font'>专业</view>
                                 <view class='user_info' >{{info.major}}</view> 
                             </view>
                              <!-- <view class="weui-cell__ft weui-cell__ft_in-access"></view>  -->
-                        </navigator>
+                        </view>
                     </view>
                 </view>
             </view>
