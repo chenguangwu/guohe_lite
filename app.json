@@ -11,7 +11,8 @@
     "pages/logs/logs",
     "pages/core/person/feedback/feedback",
     "pages/core/person/switch/switch",
-    "pages/core/person/log/log"
+    "pages/core/person/log/log",
+    "pages/core/bus/bus"
     
   ],
   "window": {
