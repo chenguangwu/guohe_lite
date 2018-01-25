@@ -36,7 +36,7 @@
 }
  .top{
     margin: 25rpx;
-    margin-bottom: 100rpx;
+    margin-bottom: 30rpx;
     font-size: 30rpx;
     text-align: center;
     color: #778899;
