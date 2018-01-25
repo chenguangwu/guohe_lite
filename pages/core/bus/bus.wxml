@@ -2,6 +2,7 @@
 <view class='logo' style='margin-bottom:20px'>
    <image class='logo' src='/images/schoolbus.png'></image>
   </view>
+<view class='top'>来不及解释了，快上车。</view>
 <!-- navbar -->
 <view class="page">
     <view class="page__bd">
