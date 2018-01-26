@@ -13,6 +13,8 @@
     "pages/core/person/switch/switch",
     "pages/core/person/log/log",
     "pages/core/bus/bus",
+    "pages/core/sport/sport",
+    "pages/core/library/library",
     "pages/core/classroom/classroom"
     
   ],
