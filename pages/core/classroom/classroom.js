@@ -119,27 +119,42 @@ Page({
     })
     if(this.data.area_index==0){
       that.setData({
-        chooseBuildingArray:this.data.eastBuildingArray
+        chooseBuildingArray:this.data.eastBuildingArray,
+        building_para: 2,
+        building:'综合楼B'
       })
     } else if (this.data.area_index == 1){
       that.setData({
-        chooseBuildingArray: this.data.southBuildingArray
+        chooseBuildingArray: this.data.southBuildingArray,
+        building_para: 12,
+        building: '一宗'
       })
     } else if (this.data.area_index == 2) {
       that.setData({
-        chooseBuildingArray: this.data.westBuildingArray
+        chooseBuildingArray: this.data.westBuildingArray,
+        building_para:10,
+        building: '西综'
       })
     } else if (this.data.area_index == 3) {
       that.setData({
-        chooseBuildingArray: this.data.zhangBuildingArray
+        chooseBuildingArray: this.data.zhangBuildingArray,
+        building_para:26,
+        building: '教学楼E'
       })
     }else{
       that.setData({
-        chooseBuildingArray: this.data.suBuildingArray
+        chooseBuildingArray: this.data.suBuildingArray,
+        building_para:18,
+        building: '教学楼A'
       })
     }
 
-    
+    console.log(this.data.area)
+    console.log(this.data.area_para)
+    console.log(this.data.zc)
+    console.log(this.data.zc_para)
+    console.log(this.data.building)
+    console.log(this.data.building_para)
   },
   //切换周次
   bindZcChange: function (e) {
@@ -149,9 +164,13 @@ Page({
       zc_index: e.detail.value,
       zc: zc_value,
       zc_para: Number(e.detail.value)+1
-    
-    })
-   
+       })
+    console.log(this.data.area)
+    console.log(this.data.area_para)
+    console.log(this.data.zc)
+    console.log(this.data.zc_para)
+    console.log(this.data.building)
+    console.log(this.data.building_para)
   },
   // 切换楼
   bindBuildingChange: function (e) {
@@ -169,6 +188,49 @@ Page({
     console.log(this.data.building)
     console.log(this.data.building_para)
     
+  },
+
+  search:function(event){
+    var that = this
+    wx.getStorage({
+      key: 'account',
+      success: function (res) {
+        if (res.data) {
+          var account = res.data
+          that.setData({
+            username: account.username,
+            password: account.password
+          })
+          wx.request({
+            url: 'https://guohe3.com/vpnClassroom',
+            method: 'POST',
+            data: {
+              username: that.data.username,
+              password: that.data.password,
+              school_year: that.data.school_year,
+              area_id: that.data.area_para,
+              building_id: that.data.building_para,
+              zc1: that.data.zc_para
+            },
+            header: {
+              'content-type': 'application/x-www-form-urlencoded' // 默认值
+            },
+            success: function (res) {
+              if (res.data.code == 200) {
+                that.setData({
+                  empty_classroom_info: res.data.info
+                })
+                console.log(that.data.empty_classroom_info)
+              } else {
+                console.log("空教室查询失败")
+              }
+            }
+          })
+        } else {
+          console.log("未登录")
+        }
+      },
+    })
   },
 
   /**

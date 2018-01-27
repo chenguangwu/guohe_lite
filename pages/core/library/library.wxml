@@ -11,7 +11,7 @@
     <view class="weui-tab">
       <view class="weui-navbar">
         <block wx:for="{{tabs}}" wx:key="*this">
-          <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+          <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick" style='background-color:#fff'>
             <view class="weui-navbar__title">{{item}}</view>
           </view>
         </block>
@@ -20,7 +20,7 @@
       <view class="weui-tab__panel">
       <image wx:if="{{isLoad}}" class='load1' src='../../../images/logo.jpg'></image>
         <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
-            <view class='card'>
+             <!-- <view class='card'>
             <view class="table">
                <view class="tr bg-w">
                 <view class="th">书名</view>
@@ -30,7 +30,7 @@
               <block wx:for="{{dataList}}" wx:key="{{code}}" wx:if="{{!isLoad}}">
                 <view class="tr bg-g" wx:if="{{index % 2 == 0}}">
                  
-                  <view class="td">{{item.name}}</view>
+                  <view class="td" >{{item.name}}</view>
                   <view class="td">{{item.author}}</view>
                   <view class="td">{{item.press}}</view>
                   
@@ -38,14 +38,46 @@
                 </view>
                 <view class="tr" wx:else>
                 
-                <view class="td">{{item.name}}</view>
+                <view class="td" >{{item.name}}</view>
                   <view class="td">{{item.author}}</view>
                   <view class="td">{{item.press}}</view>
                 </view>
               </block>
             </view>
+          </view>  -->
+ <block wx:for="{{dataList}}" wx:key="{{code}}" wx:if="{{!isLoad}}">
+
+ <view class='card'>
+              <view class="weui-form-preview">
+            <view class="weui-form-preview__hd">
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">书名</view>
+                    <view class="weui-form-preview__value_in-hd">{{item.name}}</view>
+                </view>
+            </view>
+            <view class="weui-form-preview__bd">
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">作者</view>
+                    <view class="weui-form-preview__value">{{item.author}}</view>
+                </view>
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">出版社</view>
+                    <view class="weui-form-preview__value">{{item.press}}</view>
+                </view>
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">借阅情况</view>
+                    <view class="weui-form-preview__value">馆藏X本，可借X本</view>
+                </view>
+            </view>
+            <view class="weui-form-preview__ft">
+                <navigator url="" class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active">查看</navigator>
+            </view>
           </view>
+          </view>
+    </block>
         </view>
+
+        <!-- 查询界面 -->
         <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
           <!-- 搜索框 -->
           <view class="page">
