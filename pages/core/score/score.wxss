@@ -11,6 +11,12 @@
 
 			
 		}
+    .show{
+      display: block;
+    }
+    .hide{
+      display: none;
+    }
 @keyframes myfirst
 {
 from {transform: rotate(0deg);}

@@ -1,82 +1,80 @@
 <!--pages/core/library/library.wxml-->
 <view class='logo' style='margin-bottom:20px'>
-   <image class='logo' src='/images/library.png'></image>
-  </view>
+  <image class='logo' src='/images/library.png'></image>
+</view>
 
-  <view class='top'>读万卷书，行万里路。</view>
+<view class='top'>读万卷书，行万里路。</view>
 
-  <!-- navbar -->
+<!-- navbar -->
 <view class="page">
-    <view class="page__bd">
-        <view class="weui-tab">
-            <view class="weui-navbar" >
-                <block wx:for="{{tabs}}" wx:key="*this">
-                    <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
-                        <view class="weui-navbar__title">{{item}}</view>
-                    </view>
-                </block>
-                <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+  <view class="page__bd">
+    <view class="weui-tab">
+      <view class="weui-navbar">
+        <block wx:for="{{tabs}}" wx:key="*this">
+          <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+            <view class="weui-navbar__title">{{item}}</view>
+          </view>
+        </block>
+        <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+      </view>
+      <view class="weui-tab__panel">
+      <image wx:if="{{isLoad}}" class='load1' src='../../../images/logo.jpg'></image>
+        <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
+            <view class='card'>
+            <view class="table">
+               <view class="tr bg-w">
+                <view class="th">书名</view>
+                <view class="th">作者</view>
+                <view class="th ">出版社</view>
+              </view> 
+              <block wx:for="{{dataList}}" wx:key="{{code}}" wx:if="{{!isLoad}}">
+                <view class="tr bg-g" wx:if="{{index % 2 == 0}}">
+                 
+                  <view class="td">{{item.name}}</view>
+                  <view class="td">{{item.author}}</view>
+                  <view class="td">{{item.press}}</view>
+                  
+                  
+                </view>
+                <view class="tr" wx:else>
+                
+                <view class="td">{{item.name}}</view>
+                  <view class="td">{{item.author}}</view>
+                  <view class="td">{{item.press}}</view>
+                </view>
+              </block>
             </view>
-            <view class="weui-tab__panel">
-                <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
-                   
-                </view>
-                <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
-                 <!-- 搜索框 -->
-                 <view class="page">
-    <!-- <view class="page__hd">
-        <view class="page__title">SearchBar</view>
-        <view class="page__desc">搜索栏</view>
-    </view> -->
-    <view class="page__bd">
-        <view class="weui-search-bar">
-            <view class="weui-search-bar__form">
-                <view class="weui-search-bar__box">
+          </view>
+        </view>
+        <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
+          <!-- 搜索框 -->
+          <view class="page">
+            <view class="page__bd">
+              <view class="weui-search-bar">
+                <view class="weui-search-bar__form">
+                  <view class="weui-search-bar__box">
                     <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
-                    <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
+                    <input type="text" class="weui-search-bar__input"  value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
                     <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
-                        <icon type="clear" size="14"></icon>
+                      <icon type="clear" size="14"></icon>
                     </view>
-                </view>
-                <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+                  </view>
+                  <label class="weui-search-bar__label" hidden="{{activeIndex != 1}}" bindtap="showInput">
                     <icon class="weui-icon-search" type="search" size="14"></icon>
                     <view class="weui-search-bar__text">搜索</view>
-                </label>
+                  </label>
+                </view>
+                <view class="weui-search-bar__cancel-btn" hidden="{{activeIndex != 1}}" bindtap="hideInput" bindtap='search'>搜索</view>
+              </view>
+
             </view>
-            <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
+          </view>
+
         </view>
-        <view class="weui-cells searchbar-result" wx:if="{{inputVal.length > 0}}">
-            <navigator url="" class="weui-cell" hover-class="weui-cell_active">
-                <view class="weui-cell__bd">
-                    <view>实时搜索文本</view>
-                </view>
-            </navigator>
-            <navigator url="" class="weui-cell" hover-class="weui-cell_active">
-                <view class="weui-cell__bd">
-                    <view>实时搜索文本</view>
-                </view>
-            </navigator>
-            <navigator url="" class="weui-cell" hover-class="weui-cell_active">
-                <view class="weui-cell__bd">
-                    <view>实时搜索文本</view>
-                </view>
-            </navigator>
-            <navigator url="" class="weui-cell" hover-class="weui-cell_active">
-                <view class="weui-cell__bd">
-                    <view>实时搜索文本</view>
-                </view>
-            </navigator>
-        </view>
+
+
+
+      </view>
     </view>
+  </view>
 </view>
-
-                </view>
-
-               
-               
-            </view>
-        </view>
-    </view>
-</view>
-
-
