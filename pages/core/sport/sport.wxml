@@ -1,4 +1,22 @@
 <!--pages/core/sport/sport.wxml-->
+
+<!--弹窗-->
+<view wx:if="{{isNoPassword}}">
+<view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+<view class="modal-dialog" wx:if="{{showModal}}">
+  <view class="modal-title">请输入体育学院密码（一般为姓名拼音首字母大写）</view>
+  <view class="modal-content">
+    <view class="modal-input">
+      <input placeholder-class="input-holder" type="text"  bindinput="inputChange" class="input" placeholder="请输入密码"></input>
+    </view>
+  </view>
+  <view class="modal-footer">
+    <view class="btn-cancel" bindtap="onCancel" data-status="cancel">取消</view>
+    <view class="btn-confirm" bindtap="onConfirm" data-status="confirm">确定</view>
+  </view>
+</view>
+</view>
+
 <view class='logo' style='margin-bottom:20px'>
   <image class='logo' src='/images/sport.png'></image>
 </view>
