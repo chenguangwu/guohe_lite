@@ -1,5 +1,8 @@
 {
   "pages": [
+    "pages/core/library/library",
+    "pages/core/classroom/classroom",
+    "pages/core/sport/sport",
     
     "pages/index/index",
     "pages/core/person/person",
@@ -12,10 +15,7 @@
     "pages/core/person/feedback/feedback",
     "pages/core/person/switch/switch",
     "pages/core/person/log/log",
-    "pages/core/bus/bus",
-    "pages/core/sport/sport",
-    "pages/core/library/library",
-    "pages/core/classroom/classroom"
+    "pages/core/bus/bus"
     
   ],
   "window": {

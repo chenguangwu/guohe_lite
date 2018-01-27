@@ -2,14 +2,27 @@
 .logo{
 			width: 150rpx;
 			height: 150rpx;
-			animation: myfirst 5s;
+			
       margin: 40rpx auto;
+      display: block;
+			
+		}
+		.load1{
+			width: 150rpx;
+			height: 150rpx;
+			animation: myfirst 5s;
+      margin: 300rpx auto;
       display: block;
 			animation-iteration-count:100;
 			animation-timing-function:linear;
 			animation-duration:1.8s;
+			
 		}
-  
+  @keyframes myfirst
+{
+from {transform: rotate(0deg);}
+to {transform: rotate(360deg);}
+}
     
 .top{
     margin: 25rpx;
@@ -72,6 +85,7 @@
     width:40%;
     justify-content: center;
     text-align: center;
+    font-size: 0.8rem;
 }
 .bg-w{
   background: snow;

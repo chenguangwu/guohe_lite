@@ -6,11 +6,13 @@ Page({
    */
   data: {
     tabs: ["推荐", "查询"],
-    activeIndex: 1,
+    activeIndex: 0,
     sliderOffset: 0,
     sliderLeft: 0,
     inputShowed: false,
-    inputVal: ""
+    inputVal: "",
+    dataList:[],
+    isLoad:true
   },
 
 
@@ -43,10 +45,72 @@ Page({
       inputVal: e.detail.value
     });
   },
+  search(){
+    console.log(this.data.inputVal)
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    //获取缓存
+    var that=this
+    wx.getStorage({
+      key: 'account',
+      success: function (res) {
+
+        var result = res.data
+        wx.request({
+          url: 'https://guohe3.com/vpnBookTop100',
+          method: 'POST',
+          data: {
+            username: result.username,
+            password: result.password
+          },
+          header: {
+            'content-type': 'application/x-www-form-urlencoded' // 
+          },
+          success: function (res) {
+            if (res.data.code != 200) {
+              wx.showToast({
+                title: res.data.msg,
+                icon: 'loading'
+              })
+            } else {
+              that.setData({
+                dataList: res.data.info,
+                isLoad:false
+              })
+
+            }
+
+          },
+          fail: function () {
+            wx.showToast({
+              title: '体育系统异常',
+              icon: 'loading',
+              duration: 2000
+            })
+          }
+        })
+        
+      }, fail() {
+        console.log('未登录')
+        wx.showModal({
+          title: '提示',
+          content: '请先用教务系统账号登录',
+          success: function (res) {
+            if (res.confirm) {
+              console.log('用户点击确定')
+              wx.navigateTo({
+                url: '/pages/login/login',
+              })
+            } else if (res.cancel) {
+              console.log('用户点击取消')
+            }
+          }
+        })
+      }
+    })
     
   },
 

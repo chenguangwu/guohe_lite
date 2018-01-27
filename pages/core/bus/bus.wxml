@@ -1,76 +1,76 @@
 <!--pages/core/bus/bus.wxml-->
 <view class='logo' style='margin-bottom:20px'>
-   <image class='logo' src='/images/schoolbus.png'></image>
-  </view>
+  <image class='logo' src='/images/schoolbus.png'></image>
+</view>
 <view class='top'>来不及解释了，快上车。</view>
 <!-- navbar -->
 <view class="page">
-    <view class="page__bd">
-        <view class="weui-tab">
-            <view class="weui-navbar" >
-                <block wx:for="{{tabs}}" wx:key="*this">
-                    <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
-                        <view class="weui-navbar__title">{{item}}</view>
-                    </view>
-                </block>
-                <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
-            </view>
-            <view class="weui-tab__panel">
-                <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
-                    <!-- 图表 -->
-                     <view class='card'>
-                    <view class="table">
-  <view class="tr bg-w">
-    <view class="th">东校区</view>
-    <view class="th">南校区</view>
-    <view class="th ">西校区</view>
-    <view class='th'>每周</view>
-  </view>
-  <block wx:for="{{listData1}}" wx:key="{{code}}">
-    <view class="tr bg-g" wx:if="{{index % 2 == 0}}">
-      <view class="td">{{item.east}}</view>
-      <view class="td">{{item.south}}</view>
-      <view class="td">{{item.west}}</view>
-      <view class="td">{{item.tip}}</view>
-    </view>
-    <view class="tr" wx:else>
-      <view class="td">{{item.east}}</view>
-      <view class="td">{{item.south}}</view>
-      <view class="td">{{item.west}}</view>
-      <view class="td">{{item.tip}}</view>
-    </view>
-  </block>
-</view>
-</view>
+  <view class="page__bd">
+    <view class="weui-tab">
+      <view class="weui-navbar">
+        <block wx:for="{{tabs}}" wx:key="*this">
+          <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+            <view class="weui-navbar__title">{{item}}</view>
+          </view>
+        </block>
+        <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+      </view>
+      <view class="weui-tab__panel">
+        <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
+          <!-- 图表 -->
+          <view class='card'>
+            <view class="table">
+              <view class="tr bg-w">
+                <view class="th">东校区</view>
+                <view class="th">南校区</view>
+                <view class="th ">西校区</view>
+                <view class='th'>每周</view>
+              </view>
+              <block wx:for="{{listData1}}" wx:key="{{code}}">
+                <view class="tr bg-g" wx:if="{{index % 2 == 0}}">
+                  <view class="td">{{item.east}}</view>
+                  <view class="td">{{item.south}}</view>
+                  <view class="td">{{item.west}}</view>
+                  <view class="td">{{item.tip}}</view>
                 </view>
-                <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
-                 <!-- 图表 -->
-                     <view class='card'>
-                    <view class="table">
-  <view class="tr bg-w">
-    <view class="th">东校区</view>
-    <view class="th">南校区</view>
-    <view class='th'>每周</view>
-  </view>
-  <block wx:for="{{listData1}}" wx:key="{{code}}">
-    <view class="tr bg-g" wx:if="{{index % 2 == 0}}">
-      <view class="td">{{item.east}}</view>
-      <view class="td">{{item.south}}</view>
-     
-      <view class="td">{{item.tip}}</view>
-    </view>
-    <view class="tr" wx:else>
-      <view class="td">{{item.east}}</view>
-      <view class="td">{{item.south}}</view>
-     
-      <view class="td">{{item.tip}}</view>
-    </view>
-  </block>
-</view>
-</view>
+                <view class="tr" wx:else>
+                  <view class="td">{{item.east}}</view>
+                  <view class="td">{{item.south}}</view>
+                  <view class="td">{{item.west}}</view>
+                  <view class="td">{{item.tip}}</view>
                 </view>
-                 <view class="weui-tab__content" hidden="{{activeIndex != 2}}">选项三的内容</view> 
+              </block>
             </view>
+          </view>
         </view>
+        <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
+          <!-- 图表 -->
+          <view class='card'>
+            <view class="table">
+              <view class="tr bg-w">
+                <view class="th">东校区</view>
+                <view class="th">南校区</view>
+                <view class='th'>每周</view>
+              </view>
+              <block wx:for="{{listData1}}" wx:key="{{code}}">
+                <view class="tr bg-g" wx:if="{{index % 2 == 0}}">
+                  <view class="td">{{item.east}}</view>
+                  <view class="td">{{item.south}}</view>
+
+                  <view class="td">{{item.tip}}</view>
+                </view>
+                <view class="tr" wx:else>
+                  <view class="td">{{item.east}}</view>
+                  <view class="td">{{item.south}}</view>
+
+                  <view class="td">{{item.tip}}</view>
+                </view>
+              </block>
+            </view>
+          </view>
+        </view>
+        <view class="weui-tab__content" hidden="{{activeIndex != 2}}">选项三的内容</view>
+      </view>
     </view>
+  </view>
 </view>

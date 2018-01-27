@@ -6,32 +6,140 @@ Page({
    */
   data: {
     tabs: ["早操", "俱乐部"],
-    activeIndex: 1,
+    activeIndex: 0,
     sliderOffset: 0,
     sliderLeft: 0,
+    dataList:[],
+    isLoad:true,
   },
 
 
   tabClick: function (e) {
+
     this.setData({
       sliderOffset: e.currentTarget.offsetLeft,
-      activeIndex: e.currentTarget.id
+      activeIndex: e.currentTarget.id,
+      isLoad:true,
     });
+    if (e.currentTarget.id==1){
+      var that = this
+      wx.request({
+        url: 'https://guohe3.com/vpnSport',
+        method: 'POST',
+        data: {
+          username: '152210702119',
+          password: 'PXC'
+        },
+        header: {
+          'content-type': 'application/x-www-form-urlencoded' // 
+        },
+        success: function (res) {
+          if (res.data.code != 200) {
+            wx.showToast({
+              title: res.data.msg,
+              icon: 'loading'
+            })
+          } else {
+            that.setData({
+              isLoad: false,
+              dataList: res.data.info[1],
+            })
 
+          }
+
+        },
+        fail: function () {
+          wx.showToast({
+            title: '体育系统异常',
+            icon: 'loading',
+            duration: 2000
+          })
+        }
+      })
+    
+    }else{
+      var that = this
+      wx.request({
+        url: 'https://guohe3.com/vpnRun',
+        method: 'POST',
+        data: {
+          username: '152210702119',
+          password: 'PXC'
+        },
+        header: {
+          'content-type': 'application/x-www-form-urlencoded' // 
+        },
+        success: function (res) {
+          if (res.data.code != 200) {
+            wx.showToast({
+              title: '体育系统异常',
+              icon: 'loading'
+            })
+          } else {
+            that.setData({
+              isLoad: false,
+              dataList: res.data.info[1],
+            })
+
+          }
+
+        },
+        fail: function () {
+          wx.showToast({
+            title: '体育系统异常',
+            icon: 'loading',
+            duration: 2000
+          })
+        }
+      })
+    }
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    var that=this
+    wx.request({
+      url: 'https://guohe3.com/vpnRun',
+      method: 'POST',
+      data: {
+        username: '152210702119',
+        password: 'PXC'
+      },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded' // 
+      },
+      success: function (res) {
+        if (res.data.code != 200) {
+          wx.showToast({
+            title: '体育系统异常',
+            icon: 'loading'
+          })
+        } else {
+          that.setData({
+            isLoad:false,
+            dataList:res.data.info[1],
+          })
+          
+        }
+
+      },
+      fail: function () {
+        wx.showToast({
+          title: '体育系统异常',
+          icon: 'loading',
+          duration: 2000
+        })
+      }
+    })
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    
+   
   },
 
   /**
