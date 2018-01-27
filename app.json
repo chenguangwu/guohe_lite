@@ -1,6 +1,8 @@
 {
   "pages": [
+    
     "pages/index/index",
+    "pages/core/library/book/book",
     "pages/core/library/library",
     "pages/core/classroom/classroom",
     "pages/core/sport/sport",
