@@ -69,12 +69,14 @@ Page({
           },
           success: function (res) {
             if (res.data.code != 200) {
+             
               wx.showToast({
                 title: res.data.msg,
                 icon: 'loading'
               })
             } else {
               var result = res.data.info
+             
             console.log(result)
             
 
@@ -148,7 +150,7 @@ Page({
               })
             } else {
               var result = res.data.info
-              
+            
               for(var i=0;i<result.length;i++){
                 result[i].url = result[i].url.split("=").pop()
               

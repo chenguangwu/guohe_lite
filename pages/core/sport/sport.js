@@ -5,6 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    info:'',
     tabs: ["早操", "俱乐部"],
     activeIndex: 0,
     sliderOffset: 0,
@@ -14,6 +15,17 @@ Page({
     showModal: true,
     inputVal:'',
     isNoPassword:true,
+  },
+  showInfo(){
+    console.log(this.data.info)
+    wx.showModal({
+      title: '小提示',
+      showCancel:false,
+      content: this.data.info,
+      success: function (res) {
+        
+      }
+    })
   },
   inputChange(e){
     this.setData({
@@ -63,7 +75,7 @@ Page({
                 password: sport
               },
               header: {
-                'content-type': 'application/x-www-form-urlencoded' // 
+                'content-type': 'application/x-www-form-urlencoded' 
               },
               success: function (res) {
                 if (res.data.code != 200) {
@@ -73,6 +85,7 @@ Page({
                   })
                   wx.removeStorageSync('sport')
                 } else {
+                  
                   that.setData({
                     isLoad: false,
                     dataList: res.data.info[1],
@@ -139,7 +152,9 @@ Page({
                   icon: 'loading'
                 })
               } else {
+                console.log(res.data.info)
                 that.setData({
+                  info: res.data.info[0].name + "\\n" + res.data.info[0].sum + "\\n" + res.data.info[0].year + res.data.info[0].total,
                   isLoad: false,
                   dataList: res.data.info[1],
                 })
@@ -252,7 +267,9 @@ Page({
                     icon: 'loading'
                   })
                 } else {
+                  console.log(res.data.info[0])
                   that.setData({
+                    info: res.data.info[0].name + ' \r\n ' + res.data.info[0].year +' \r\n '+res.data.info[0].total,
                     isLoad: false,
                     dataList: res.data.info[1],
                   })
@@ -355,6 +372,7 @@ Page({
               } else {
                 wx.hideNavigationBarLoading() 
                 that.setData({
+                  info: res.data.info[0].name + ' \r\n ' + res.data.info[0].year + ' \r\n ' + res.data.info[0].total,
                   isLoad: false,
                   dataList: res.data.info[1],
                 })
