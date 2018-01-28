@@ -7,6 +7,6 @@
   <view class='text_title'>v1.0</view>
   <view class='text'>完成整体风格设计。由于时间紧迫，提供了成绩、课表两个主要功能以便使用，后续将会持续更新。</view>
   <view class='text_title'>v1.1</view>
-  <view class='text'>完成「空教室」「馆藏」「校车」「体育」功能，修复部分BUG，修改部分样式</view>
+  <view class='text'>完成「空教室」「馆藏」「校车」「体育」功能，动态获取「大事儿」，修复部分BUG，修改部分样式。</view>
 
 </view>

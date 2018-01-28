@@ -8,6 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    toast:'',
     music_flag:true,
     news_flag:true,
     todayData: [],
@@ -257,7 +258,22 @@ Page({
         })
       }
     })
+wx.request({
+  
+  url: 'https://guohe3.com/getToast',
+  method:'GET',
+  header: {
+    'content-type': 'application/x-www-form-urlencoded' // 默认值
+  },
+  success:function(res){
+    var message = res.data.info[0]
+    console.log(message)
+    that.setData({
+      toast: message
+    })
+  }
 
+})
     
     
   },

@@ -59,17 +59,9 @@
       <text class="card-item-name">大事儿</text>
     </view>
     <view class='toast'>
-     果核Lite终于和大家见面啦~(๑´ڡ`๑)
+     {{toast}}
     </view>
-     <view class='toast'>
-     时间紧迫，我们初步完成了完成整体风格设计，提供了成绩、课表两个主要功能以便使用，后续将会持续更新。
-    </view>
-     <view class='toast'>
-     如果觉得不错，可以将小程序分享给你的同学，你的支持是对我们最大的鼓励。
-    </view>
-    <view class='toast'>
-     祝寒假愉快σ`∀´)σ
-    </view> 
+ 
 
   </view>
 
