@@ -38,6 +38,14 @@
 			animation-duration:1.8s;
 		}
 
+.top{
+    margin: 25rpx;
+    margin-bottom: 30rpx;
+    font-size: 30rpx;
+    text-align: center;
+    color: #778899;
+  }
+
 .changeBox{
    height: 60rpx;
    line-height: 100rpx;
