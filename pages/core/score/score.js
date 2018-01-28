@@ -340,6 +340,7 @@ Page({
               scores: res.data.info,
               change_scores: res.data.info,
             })
+            wx.stopPullDownRefresh()
           },
           fail: function () {
             wx.showToast({
@@ -367,6 +368,7 @@ Page({
         })
       }
     })
+    
   },
 
   /**

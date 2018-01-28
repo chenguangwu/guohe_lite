@@ -395,7 +395,7 @@ Page({
                   isLoad: false,
                   dataList: res.data.info[1],
                 })
-
+                wx.stopPullDownRefresh()
               }
 
             },

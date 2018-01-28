@@ -155,6 +155,7 @@ Page({
                 book: book,
                 areas: areas
               })
+              wx.stopPullDownRefresh()
 
             }
 

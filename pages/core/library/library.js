@@ -264,7 +264,7 @@ Page({
                 dataList: result,
                 isLoad: false
               })
-
+              wx.stopPullDownRefresh()
 
             }
 
