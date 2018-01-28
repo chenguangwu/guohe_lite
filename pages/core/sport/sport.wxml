@@ -50,7 +50,7 @@
                 <view class="tr" wx:else>
                 
                   <view class="td">{{item.time}}</view>
-                  <view class="td">{{item.data}}</view>
+                  <view class="td">{{item.date}}</view>
                 </view>
               </block>
             </view>
