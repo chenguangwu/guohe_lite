@@ -22,11 +22,11 @@ Page({
       [
         { id: 'table', name: '课表', disabled: false, teacher_disabled: false, offline_disabled: false },
         { id: 'score', name: '成绩', disabled: false, teacher_disabled: true, offline_disabled: false },
-        { id: 'classroom', name: '空教室', disabled: false, teacher_disabled: false, offline_disabled: true },
-        { id: 'student', name: '校友', disabled: false, teacher_disabled: false, offline_disabled: true },
+        { id: 'classroom', name: '空教室', disabled: false, teacher_disabled: false, offline_disabled: true },     
         { id: 'library', name: '馆藏', disabled: false, teacher_disabled: false, offline_disabled: false },
         { id: 'bus', name: '校车', disabled: false, teacher_disabled: true, offline_disabled: false },
         { id: 'sport', name: '体育', disabled: false, teacher_disabled: true, offline_disabled: false },
+        { id: 'student', name: '校友', disabled: false, teacher_disabled: false, offline_disabled: true },
         { id: 'cet', name: '四六级', disabled: false, teacher_disabled: true, offline_disabled: true },
         { id: 'wall', name: '学院墙', disabled: false, teacher_disabled: true, offline_disabled: true },
       ]
