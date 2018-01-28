@@ -190,7 +190,9 @@ Page({
                   icon: 'loading'
                 })
               } else {
+                
                 that.setData({
+                  info: res.data.info[0].name + "\\n"  + res.data.info[0].year + res.data.info[0].total,
                   isLoad: false,
                   dataList: res.data.info[1],
                 })
