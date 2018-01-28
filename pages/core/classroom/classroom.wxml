@@ -2,7 +2,7 @@
 <view class='logo' style='margin-bottom:20px'>
   <image class='logo' src='/images/classroom.png'></image>
 </view>
-
+<view class='top'>斯是陋室。</view>
 <!-- <view class='fixed {{content}}'> -->
 
 <view class='changeBox'>
