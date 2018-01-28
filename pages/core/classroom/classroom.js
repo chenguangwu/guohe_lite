@@ -355,6 +355,7 @@ Page({
                   isLoad: false,
                   empty_classroom_info: res.data.info
                 })
+                wx.stopPullDownRefresh()
                 console.log(that.data.empty_classroom_info)
               } else {
                 console.log("空教室查询失败")
