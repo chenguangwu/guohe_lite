@@ -4,7 +4,8 @@
 <view wx:if="{{isNoPassword}}">
 <view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
 <view class="modal-dialog" wx:if="{{showModal}}">
-  <view class="modal-title">请输入体育学院密码（一般为姓名拼音首字母大写）</view>
+  <view class="modal-title">请输入体育学院密码</view>
+  <view class="modal-title">（通常为姓名首字母大写）</view>
   <view class="modal-content">
     <view class="modal-input">
       <input placeholder-class="input-holder" type="text"  bindinput="inputChange" class="input" placeholder="请输入密码"></input>

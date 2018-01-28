@@ -8,15 +8,50 @@
 			animation-timing-function:linear;
 			animation-duration:1.8s;
 			
-
-			
 		}
+    .card{
+  margin-bottom:12px;
+   margin-left: 14rpx;
+   margin-right: 14rpx; 
+}
     .show{
       display: block;
     }
     .hide{
       display: none;
     }
+
+    .table {
+  border: 0px solid darkgray;
+}
+.tr {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  height: 3rem;
+  align-items: center;
+}
+.td {
+    width:40%;
+    justify-content: center;
+    text-align: center;
+    font-size: 30rpx;
+}
+.bg-w{
+  background: snow;
+}
+.bg-g{
+  background: #E6F3F9;
+}
+.th {
+  width: 40%;
+  justify-content: center;
+  background: #F4F4F4;
+  color: #000;
+  display: flex;
+  height: 3rem;
+  align-items: center;
+}
 @keyframes myfirst
 {
 from {transform: rotate(0deg);}
@@ -67,49 +102,7 @@ to {transform: rotate(360deg);}
   }
 }
 
-.table {
-  border: 0px solid darkgray;
-}
 
-.show {
-  display: block;
-}
-
-.hide {
-  display: none;
-}
-
-.tr {
-  display: table;
-  width: 100%;
-  height: 3rem;
-  text-align: center;
-}
-
-.td {
-  width: 40%;
-  text-align: center;
-  height: 100%;
-  display: table-cell;
-  vertical-align: middle;
-}
-
-.bg-w {
-  background: snow;
-}
-
-.bg-g {
-  background: #e6f3f9;
-}
-
-.th {
-  display: table-cell;
-  vertical-align: middle;
-  width: 40%;
-  background: #36f;
-  color: #fff;
-  height: 3rem;
-}
 
 .grade-point .p-tr {
   display: table;
