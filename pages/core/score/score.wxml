@@ -17,8 +17,8 @@
 <view class='card'>
  <view class="table">
   <view class="tr bg-w">
-         <view class="th" style='font-size:45rpx'>学期</view>
-         <view class="th" style='font-size:45rpx'>绩点</view>
+         <view class="th" >学期</view>
+         <view class="th" >绩点</view>
    </view>
      <block wx:for="{{gradePoint}}" wx:key="{{code}}">
                 <view class="tr bg-g" wx:if="{{index % 2 == 0}}">

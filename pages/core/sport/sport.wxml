@@ -41,31 +41,36 @@
           <view class='card'>
             <view class="table">
             
+               <view class="tr bg-w">
+                <view class="th">时长</view>
+                <view class="th">日期</view>
+              </view>
               <block wx:for="{{dataList}}" wx:key="{{code}}" wx:if="{{!isLoad}}">
+            
                 <view class="tr bg-g" wx:if="{{index % 2 == 0}}">
                  
                   <view class="td">{{item.time}}</view>
                   <view class="td">{{item.date}}</view>
                 </view>
                 <view class="tr" wx:else>
-                
                   <view class="td">{{item.time}}</view>
-                  <view class="td">{{item.data}}</view>
+                  <view class="td">{{item.date}}</view>
                 </view>
               </block>
             </view>
           </view>
         </view>
         <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
+      
         <view class='card'>
             <view class="table">
-              <!-- <view class="tr bg-w">
-                <view class="th">东校区</view>
-                <view class="th">南校区</view>
-                <view class="th ">西校区</view>
-                <view class='th'>每周</view>
-              </view> -->
+               <view class="tr bg-w">
+                <view class="th">时长</view>
+                <view class="th">日期</view>
+               
+              </view>
               <block  wx:for="{{dataList}}" wx:key="{{code}}" wx:if="{{!isLoad}}">
+                
                 <view class="tr bg-g" wx:if="{{index % 2 == 0}}">
            
                   <view class="td">{{item.time}}</view>
@@ -74,7 +79,7 @@
                 <view class="tr" wx:else>
                   
                   <view class="td">{{item.time}}</view>
-                  <view class="td">{{item.data}}</view>
+                  <view class="td">{{item.date}}</view>
                 </view>
               </block>
             </view>

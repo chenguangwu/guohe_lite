@@ -171,7 +171,7 @@ to {transform: rotate(360deg);}
     width:40%;
     justify-content: center;
     text-align: center;
-    font-size: 0.8rem;
+    font-size:30rpx;
 }
 .bg-w{
   background: snow;
@@ -180,7 +180,7 @@ to {transform: rotate(360deg);}
   background: #E6F3F9;
 }
 .th {
-  width: 40%;
+   width: 80%; 
   justify-content: center;
   background: #F4F4F4;
   color: #000;
