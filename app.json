@@ -1,11 +1,13 @@
 {
   "pages": [
-    
-    "pages/index/index",
-    "pages/core/library/book/book",
-    "pages/core/library/library",
-    "pages/core/classroom/classroom",
+        "pages/index/index",
     "pages/core/sport/sport",
+    "pages/core/library/library",
+
+    "pages/core/library/book/book",
+   
+    "pages/core/classroom/classroom",
+    
     
     
     "pages/core/person/person",

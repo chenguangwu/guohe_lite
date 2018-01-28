@@ -5,6 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    isLoad:true,
     empty_classroom_info:[],
     username:'',
     password:'',
@@ -191,6 +192,10 @@ Page({
   },
 
   search:function(event){
+    this.setData({
+      isLoad: true,
+      
+    })
     var that = this
     wx.getStorage({
       key: 'account',
@@ -218,7 +223,8 @@ Page({
             success: function (res) {
               if (res.data.code == 200) {
                 that.setData({
-                  empty_classroom_info: res.data.info
+                  empty_classroom_info: res.data.info,
+                  isLoad:false,
                 })
                 console.log(that.data.empty_classroom_info)
               } else {
@@ -251,6 +257,7 @@ Page({
             url: 'https://guohe3.com/vpnClassroom',
             method:'POST',
             data:{
+              
               username:that.data.username,
               password:that.data.password,
               school_year: that.data.school_year,
@@ -264,6 +271,7 @@ Page({
            success:function(res){
              if (res.data.code == 200) {
                that.setData({
+                 isLoad: false,
                   empty_classroom_info:res.data.info
                 })
                console.log(that.data.empty_classroom_info)

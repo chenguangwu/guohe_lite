@@ -46,7 +46,78 @@ Page({
     });
   },
   search(){
+    this.setData({
+      isLoad: true
+    })
     console.log(this.data.inputVal)
+    var that = this
+    wx.getStorage({
+      key: 'account',
+      success: function (res) {
+
+        var result = res.data
+        wx.request({
+          url: 'https://guohe3.com/vpnBookList',
+          method: 'POST',
+          data: {
+            username: result.username,
+            password: result.password,
+            bookName: that.data.inputVal
+          },
+          header: {
+            'content-type': 'application/x-www-form-urlencoded' // 
+          },
+          success: function (res) {
+            if (res.data.code != 200) {
+              wx.showToast({
+                title: res.data.msg,
+                icon: 'loading'
+              })
+            } else {
+              var result = res.data.info
+            console.log(result)
+            
+
+            for (var i = 0; i < result.length; i++) {
+              result[i].book_url = result[i].book_url.split("=").pop()
+
+            }
+              that.setData({
+                dataList: result,
+                isLoad: false
+              })
+
+
+            }
+
+          },
+          fail: function () {
+            wx.showToast({
+              title: '体育系统异常',
+              icon: 'loading',
+              duration: 2000
+            })
+          }
+        })
+
+      }, fail() {
+        console.log('未登录')
+        wx.showModal({
+          title: '提示',
+          content: '请先用教务系统账号登录',
+          success: function (res) {
+            if (res.confirm) {
+              console.log('用户点击确定')
+              wx.navigateTo({
+                url: '/pages/login/login',
+              })
+            } else if (res.cancel) {
+              console.log('用户点击取消')
+            }
+          }
+        })
+      }
+    })
   },
   /**
    * 生命周期函数--监听页面加载
@@ -76,11 +147,19 @@ Page({
                 icon: 'loading'
               })
             } else {
+              var result = res.data.info
+              
+              for(var i=0;i<result.length;i++){
+                result[i].url = result[i].url.split("=").pop()
+              
+              }
+              
               that.setData({
-                dataList: res.data.info,
+                dataList: result,
                 isLoad:false
               })
-
+              
+             
             }
 
           },
