@@ -194,7 +194,6 @@ Page({
   search:function(event){
     this.setData({
       isLoad: true,
-      
     })
     var that = this
     wx.getStorage({
@@ -320,7 +319,53 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    
+    wx.showNavigationBarLoading()
+    this.setData({
+      isLoad:true,
+    })
+    var that = this
+    wx.getStorage({
+      key: 'account',
+      success: function (res) {
+        if (res.data) {
+          var account = res.data
+          that.setData({
+            username: account.username,
+            password: account.password
+          })
+          wx.request({
+            url: 'https://guohe3.com/vpnClassroom',
+            method: 'POST',
+            data: {
+
+              username: that.data.username,
+              password: that.data.password,
+              school_year: that.data.school_year,
+              area_id: that.data.area_para,
+              building_id: that.data.building_para,
+              zc1: that.data.zc_para
+            },
+            header: {
+              'content-type': 'application/x-www-form-urlencoded' // 默认值
+            },
+            success: function (res) {
+              if (res.data.code == 200) {
+                wx.hideNavigationBarLoading()
+                that.setData({
+                  isLoad: false,
+                  empty_classroom_info: res.data.info
+                })
+                console.log(that.data.empty_classroom_info)
+              } else {
+                console.log("空教室查询失败")
+              }
+            }
+          })
+        } else {
+          console.log("未登录")
+        }
+      },
+    })
   },
 
   /**
