@@ -14,6 +14,7 @@ Page({
    */
   onLoad: function (options) {
     console.log(options)
+    wx.setStorageSync('options', options)
     var that=this
     wx.getStorage({
       key: 'account',
@@ -117,7 +118,74 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
+    wx.showNavigationBarLoading()
+    var options = wx.getStorageSync('options')
+    var that = this
+    wx.getStorage({
+      key: 'account',
+      success: function (res) {
 
+        var result = res.data
+        wx.request({
+          url: 'https://guohe3.com/vpnBookDetail',
+          method: 'POST',
+          data: {
+            username: result.username,
+            password: result.password,
+            bookUrl: 'https://vpn.just.edu.cn/opac/,DanaInfo=lib.just.edu.cn,Port=8080+item.php?marc_no=' + options.url
+          },
+          header: {
+            'content-type': 'application/x-www-form-urlencoded' // 
+          },
+          success: function (res) {
+            if (res.data.code != 200) {
+              wx.showToast({
+                title: res.data.msg,
+                icon: 'loading'
+              })
+            } else {
+              wx.hideNavigationBarLoading()
+              var book = res.data.info.pop()
+              console.log(book)
+              var areas = res.data.info
+              for (var i = 0; i < areas.length; i++) {
+                areas[i].place = areas[i].place.replace(/(^\s*)|(\s*$)/g, "")
+              }
+              that.setData({
+                book: book,
+                areas: areas
+              })
+
+            }
+
+          },
+          fail: function () {
+            wx.showToast({
+              title: '图书系统异常',
+              icon: 'loading',
+              duration: 2000
+            })
+          }
+        })
+
+      }, fail() {
+        console.log('未登录')
+        wx.showModal({
+          title: '提示',
+          content: '请先用教务系统账号登录',
+          success: function (res) {
+            if (res.confirm) {
+              console.log('用户点击确定')
+              wx.navigateTo({
+                url: '/pages/login/login',
+              })
+            } else if (res.cancel) {
+              console.log('用户点击取消')
+            }
+          }
+        })
+      }
+    })
   },
 
   /**

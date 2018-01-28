@@ -240,7 +240,133 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
+    wx.showNavigationBarLoading()
+    this.setData({
+      loadStyle: 'show',
+      tableStyle: 'hide',
+    })
+    var that = this
 
+    //获取缓存
+    wx.getStorage({
+      key: 'account',
+      success: function (res) {
+
+        var result = res.data
+        wx.request({
+          url: 'https://guohe3.com/api/gradePoint',
+          method: 'POST',
+          data: {
+            username: result.username,
+            password: result.password
+          },
+          header: {
+            'content-type': 'application/x-www-form-urlencoded'
+          },
+          success: function (res) {
+            if (res.data.code == 500) {
+              console.log(res.data)
+              wx.showToast({
+                title: '教务系统异常',
+                icon: 'loding'
+              })
+            }
+            var info = res.data.info
+            var year_list = new Array()
+            var point_list = new Array()
+            for (var i = 1; i < info.length; i++) {
+              year_list.push(info[i].year)
+              point_list.push(info[i].point)
+            }
+
+            var wxCharts = require('../../../utils/wxcharts-min.js');
+            new wxCharts({
+              canvasId: 'point',
+              type: 'line',
+              categories: year_list,
+              series: [{
+                name: '绩点变化',
+                data: point_list,
+
+              }],
+              yAxis: {
+                title: 'GPA'
+              },
+              width: 300,
+              height: 200,
+
+            });
+            var years = [];
+            for (var i = 0; i < res.data.info.length; i++) {
+              years[i] = res.data.info[i].year
+            }
+
+            wx.hideNavigationBarLoading()
+            that.setData({
+              gradePoint: res.data.info,
+              grade_years: years,
+              loadStyle: 'hide',
+              tableStyle: 'show'
+            })
+
+          },
+          fail: function () {
+            wx.showToast({
+              title: '教务系统异常',
+              icon: 'loading',
+              duration: 2000
+            })
+          }
+        })
+        //获取成绩
+        wx.request({
+          url: 'https://guohe3.com/api/score',
+          method: 'POST',
+          data: {
+            username: result.username,
+            password: result.password
+          },
+          header: {
+            'content-type': 'application/x-www-form-urlencoded' // 默认值
+          },
+          success: function (res) {
+            if (res.data.code == 500) {
+              wx.showToast({
+                title: '教务系统异常',
+                icon: 'loding'
+              })
+            }
+            that.setData({
+              scores: res.data.info,
+              change_scores: res.data.info,
+            })
+          },
+          fail: function () {
+            wx.showToast({
+              title: '教务系统异常',
+              icon: 'loading',
+              duration: 2000
+            })
+          }
+        })
+      }, fail() {
+        console.log('未登录')
+        wx.showModal({
+          title: '提示',
+          content: '请先用教务系统账号登录',
+          success: function (res) {
+            if (res.confirm) {
+              console.log('用户点击确定')
+              wx.navigateTo({
+                url: '/pages/login/login',
+              })
+            } else if (res.cancel) {
+              console.log('用户点击取消')
+            }
+          }
+        })
+      }
+    })
   },
 
   /**

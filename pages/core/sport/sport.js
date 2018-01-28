@@ -324,7 +324,110 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    
+    wx.showNavigationBarLoading() //在标题栏中显示加载
+    this.setData({
+      isLoad: true,
+    });
+    var that = this
+    wx.getStorage({
+      key: 'account',
+      success: function (res) {
+        var sport = wx.getStorageSync("sport")
+        console.log(sport)
+        if (that.data.activeIndex == 1) {
+          wx.request({
+            url: 'https://guohe3.com/vpnSport',
+            method: 'POST',
+            data: {
+              username: res.data.username,
+              password: sport
+            },
+            header: {
+              'content-type': 'application/x-www-form-urlencoded' // 
+            },
+            success: function (res) {
+
+              if (res.data.code != 200) {
+                wx.showToast({
+                  title: res.data.msg,
+                  icon: 'loading'
+                })
+              } else {
+                wx.hideNavigationBarLoading() 
+                that.setData({
+                  isLoad: false,
+                  dataList: res.data.info[1],
+                })
+
+              }
+
+            },
+            fail: function () {
+              wx.showToast({
+                title: '体育系统异常',
+                icon: 'loading',
+                duration: 2000
+              })
+            }
+          })
+
+        } else {
+
+          wx.request({
+            url: 'https://guohe3.com/vpnRun',
+            method: 'POST',
+            data: {
+              username: res.data.username,
+              password: sport
+            },
+            header: {
+              'content-type': 'application/x-www-form-urlencoded' // 
+            },
+            success: function (res) {
+              if (res.data.code != 200) {
+                wx.showToast({
+                  title: '密码错误',
+                  icon: 'loading'
+                })
+              } else {
+                wx.hideNavigationBarLoading() 
+                that.setData({
+                  isLoad: false,
+                  dataList: res.data.info[1],
+                })
+
+              }
+
+            },
+            fail: function () {
+              wx.showToast({
+                title: '体育系统异常',
+                icon: 'loading',
+                duration: 2000
+              })
+            }
+          })
+        }
+
+      }, fail() {
+        console.log('未登录')
+        wx.showModal({
+          title: '提示',
+          content: '请先用教务系统账号登录',
+          success: function (res) {
+            if (res.confirm) {
+              console.log('用户点击确定')
+              wx.navigateTo({
+                url: '/pages/login/login',
+              })
+            } else if (res.cancel) {
+              console.log('用户点击取消')
+            }
+          }
+        })
+      }
+    })
+   
   },
 
   /**
