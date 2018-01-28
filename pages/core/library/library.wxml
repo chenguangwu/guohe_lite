@@ -40,8 +40,8 @@
                     <view class="weui-form-preview__value">{{item.press}}</view>
                   </view>
                   <view class="weui-form-preview__item">
-                    <view class="weui-form-preview__label">借阅情况</view>
-                    <view class="weui-form-preview__value">馆藏X本，可借X本</view>
+                    <view class="weui-form-preview__label">借阅次数</view>
+                    <view class="weui-form-preview__value">{{item.borrow_times}}</view>
                   </view>
                 </view>
                 <view class="weui-form-preview__ft">
