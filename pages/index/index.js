@@ -8,11 +8,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-    toast:'',
-    music_flag:true,
-    news_flag:true,
+    toast: '',
+    music_flag: true,
+    news_flag: true,
     todayData: [],
-    tdIsNull:false,
+    tdIsNull: false,
     toView: 'red',
     scrollTop: 100,
     poster: 'http://y.gtimg.cn/music/photo_new/T002R300x300M000003rsKF44GyaSk.jpg?max_age=2592000',
@@ -23,7 +23,7 @@ Page({
       [
         { id: 'table', name: '课表', disabled: false, teacher_disabled: false, offline_disabled: false },
         { id: 'score', name: '成绩', disabled: false, teacher_disabled: true, offline_disabled: false },
-        { id: 'classroom', name: '空教室', disabled: false, teacher_disabled: false, offline_disabled: true },     
+        { id: 'classroom', name: '空教室', disabled: false, teacher_disabled: false, offline_disabled: true },
         { id: 'library', name: '馆藏', disabled: false, teacher_disabled: false, offline_disabled: false },
         { id: 'bus', name: '校车', disabled: false, teacher_disabled: true, offline_disabled: false },
         { id: 'sport', name: '体育', disabled: false, teacher_disabled: true, offline_disabled: false },
@@ -98,11 +98,9 @@ Page({
    */
 
   onLoad: function (options) {
-    
-    var that=this
-    
-    
-  
+
+    var that = this
+
     wx.getStorage({
       key: 'account',
       success: function (res) {
@@ -116,12 +114,12 @@ Page({
               'content-type': 'application/x-www-form-urlencoded' // 默认值
             },
             success: function (res) {
-               if(res.data.code==500){
-              wx.showToast({
-                title: '教务系统异常',
-                icon: 'loading'
-              })
-            }
+              if (res.data.code == 500) {
+                wx.showToast({
+                  title: '教务系统异常',
+                  icon: 'loading'
+                })
+              }
               if (res.data.code == 200) {
                 var zj = 0;
                 var info = res.data.info
@@ -151,7 +149,7 @@ Page({
                 if (today_data) {
                   console.log('以后再说')
                 } else {
-                  
+
                   wx.request({
                     url: 'https://guohe3.com/api/kb',
                     method: 'POST',
@@ -223,25 +221,19 @@ Page({
                           }
 
                         }
-                        if (today_data_list.length>0){
+                        if (today_data_list.length > 0) {
                           console.log(today_data_list)
                           that.setData({
                             todayData: today_data_list,
-                            tdIsNull:false
+                            tdIsNull: false
                           })
-                         
-                        }else{
+
+                        } else {
                           that.setData({
                             todayData: today_data_list,
                             tdIsNull: true
                           })
-                          
                         }
-                        
-                        
-                        
-
-
                       }
                     }
                   })
@@ -258,24 +250,37 @@ Page({
         })
       }
     })
-wx.request({
-  
-  url: 'https://guohe3.com/getToast',
-  method:'GET',
-  header: {
-    'content-type': 'application/x-www-form-urlencoded' // 默认值
-  },
-  success:function(res){
-    var message = res.data.info[0]
-    console.log(message)
-    that.setData({
-      toast: message
-    })
-  }
+    wx.request({
 
-})
-    
-    
+      url: 'https://guohe3.com/getToast',
+      method: 'GET',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded' // 默认值
+      },
+      success: function (res) {
+        var message = res.data.info[0]
+        console.log(message)
+        that.setData({
+          toast: message
+        })
+      }
+
+    })
+    wx.request({
+      url: 'https://jirenguapi.applinzi.com/fm/getSong.php', //仅为示例，并非真实的接口地址
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function (res) {
+        console.log(res.data)
+        that.setData({
+          poster: res.data.song[0].picture,
+          name: res.data.song[0].title,
+          author: res.data.song[0].artist,
+          src: res.data.song[0].url
+        })
+      }
+    })
   },
 
   /**
@@ -290,7 +295,7 @@ wx.request({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  var that=this
+    var that = this
     wx.getStorage({
       key: 'music_flag',
       success: function (res) {
@@ -308,15 +313,15 @@ wx.request({
         })
       },
     })
-    
-    
+
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    
+
   },
 
   /**
