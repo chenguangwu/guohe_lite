@@ -30,7 +30,7 @@ Page({
             bookUrl: 'https://vpn.just.edu.cn/opac/,DanaInfo=lib.just.edu.cn,Port=8080+item.php?marc_no=' + options.url
           },
           header: {
-            'content-type': 'application/x-www-form-urlencoded' // 
+            'content-type': 'application/x-www-form-urlencoded' 
           },
           success: function (res) {
             if (res.data.code != 200) {

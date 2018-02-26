@@ -1,3 +1,4 @@
+/* pages/core/cet/cet.wxss */
 /* pages/core/person/feedback/feedback.wxss */
 .logo{
 			width: 150rpx;
