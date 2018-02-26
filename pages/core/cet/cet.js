@@ -5,8 +5,8 @@ Page({
    */
   data: {
     radioItems: [
-      { name: '四级', value: '0' },
-      { name: '六级', value: '1', checked: true }
+      { name: '四级', value: '1' },
+      { name: '六级', value: '2', checked: true }
     ],
     load:false,
     ks_xm:'',
@@ -14,7 +14,7 @@ Page({
     choose:2
   },
   radioChange: function (e) {
-    console.log('radio发生change事件，携带value值为：', e.detail.value+1);
+    console.log('radio发生change事件，携带value值为：', e.detail.value);
 
     var radioItems = this.data.radioItems;
     for (var i = 0, len = radioItems.length; i < len; ++i) {
@@ -23,7 +23,7 @@ Page({
 
     this.setData({
       radioItems: radioItems,
-      choose: e.detail.value+1
+      choose: e.detail.value
     });
   },
   idcardInput(e) {
@@ -77,7 +77,7 @@ Page({
             //   load: false
             // })
             wx.showToast({
-              title: '服务器异常',
+              title: '查询服务器异常',
               ico: 'none'
             })
           }
@@ -87,7 +87,7 @@ Page({
             load: false
           })
           wx.showModal({
-            title: '服务器异常',
+            title: '查询服务器异常',
             content: '',
             cancelText: ''
           })
@@ -96,7 +96,7 @@ Page({
     }catch(e){
       console.log(1)
       wx.showModal({
-        title: '服务器异常',
+        title: '查询服务器异常',
         content: '',
         cancelText: ''
       })
