@@ -8,12 +8,13 @@ Page({
       { name: '四级', value: '0' },
       { name: '六级', value: '1', checked: true }
     ],
-    name:'',
-    idcard:'',
-    choose:''
+    load:false,
+    ks_xm:'',
+    ks_sfz:'',
+    choose:2
   },
   radioChange: function (e) {
-    console.log('radio发生change事件，携带value值为：', e.detail.value);
+    console.log('radio发生change事件，携带value值为：', e.detail.value+1);
 
     var radioItems = this.data.radioItems;
     for (var i = 0, len = radioItems.length; i < len; ++i) {
@@ -21,22 +22,87 @@ Page({
     }
 
     this.setData({
-      radioItems: radioItems
+      radioItems: radioItems,
+      choose: e.detail.value+1
     });
   },
   idcardInput(e) {
     this.setData({
-      idcard: e.detail.value
+      ks_sfz: e.detail.value
     })
   },
   nameInput(e) {
     this.setData({
-      name: e.detail.value
+      ks_xm: e.detail.value
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
+  find(){
+
+    this.setData({
+      load:true
+    })
+    var that=this
+    var type = this.data.choose
+    var ks_xm = this.data.ks_xm
+    var ks_sfz = this.data.ks_sfz
+    try{
+      wx.request({
+        url: 'https://guohe3.com/cet',
+        method: 'POST',
+        data: {
+          ks_xm: ks_xm,
+          ks_sfz: ks_sfz,
+          type: type
+        },
+        header: {
+          'content-type': 'application/x-www-form-urlencoded'
+        },
+        success: function (res) {
+          console.log(res.data)
+          that.setData({
+            load: false
+          })
+          if (res.data.code = 200) {
+            wx.showModal({
+              title: '准考证号',
+              content: res.data.info.zkzh,
+              cancelText: ''
+            })
+          }
+          else {
+            // that.setData({
+            //   load: false
+            // })
+            wx.showToast({
+              title: '服务器异常',
+              ico: 'none'
+            })
+          }
+        },
+        fail() {
+          that.setData({
+            load: false
+          })
+          wx.showModal({
+            title: '服务器异常',
+            content: '',
+            cancelText: ''
+          })
+        }
+      })
+    }catch(e){
+      console.log(1)
+      wx.showModal({
+        title: '服务器异常',
+        content: '',
+        cancelText: ''
+      })
+    }
+  
+  },
   onLoad: function (options) {
     
   },
