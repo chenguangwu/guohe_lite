@@ -40,5 +40,6 @@
             </radio-group>
         </view>
         </view>
-
-         <button bindtap='submit' class="weui-btn" type="primary" plain="true">找回</button>
+           <view class='spinner' wx:if="{{load}}"></view>
+          
+         <button bindtap='find' class="weui-btn" type="primary" plain="true">找回</button>
