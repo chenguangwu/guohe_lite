@@ -33,6 +33,8 @@ Page({
         { id: 'wall', name: '学院墙', disabled: false, teacher_disabled: true, offline_disabled: true },
       ]
     ],
+    semester: '',
+
     card: {
       'kb': {
         show: false,
@@ -150,7 +152,80 @@ Page({
                 if (today_data) {
                   console.log('以后再说')
                 } else {
+                  var localData = wx.getStorageSync(semester)
+                  if (localData) {
 
+                    console.log("从本地获取")
+                    var data_list = [[], [], [], [], [], [], []]
+                    var date = semester + '_' + (parseInt(zc - 1) + 1)
+                    var _data = localData[parseInt(zc - 1)][date]//这个星期的课表数据(未转化)                               
+
+                    //把行数据转换为列数据
+                    for (var i = 0; i < _data.length; i++) {
+                      for (var key in _data[i]) {
+                        if (key == 'monday') {
+                          data_list[0].push(_data[i][key])
+
+                        }
+                        if (key == 'tuesday') {
+                          data_list[1].push(_data[i][key])
+                        }
+                        if (key == 'wednesday') {
+                          data_list[2].push(_data[i][key])
+                        }
+                        if (key == 'thursday') {
+                          data_list[3].push(_data[i][key])
+                        }
+                        if (key == 'friday') {
+                          data_list[4].push(_data[i][key])
+                        }
+                        if (key == 'saturday') {
+                          data_list[5].push(_data[i][key])
+                        }
+                        if (key == 'sunday') {
+                          data_list[6].push(_data[i][key])
+                        }
+                      }
+                    }
+
+                    var today_data = data_list[zj]
+                    var today_data_list = new Array()
+
+                    for (var i = 0; i < today_data.length; i++) {
+                      var temp = {}
+                      if (today_data[i]) {
+                        var info_list = today_data[i].split("@")
+                        temp.index = (i * 2 + 1) + '-' + (i * 2 + 2)
+                        temp.cnum = info_list[0]
+
+                        if (info_list[1].length >= 20) {
+                          temp.cname = info_list[1].split(' ', 1).join(' ')
+                        } else {
+                          temp.cname = info_list[1]
+                        }
+                        temp.tname = info_list[2]
+                        temp.address = info_list.length >= 4 ? info_list[3] : '未指定'
+                      }
+
+                      if (JSON.stringify(temp) != "{}") {
+                        today_data_list.push(temp)
+                      }
+
+                    }
+                    if (today_data_list.length > 0) {
+                      console.log(today_data_list)
+                      that.setData({
+                        todayData: today_data_list,
+                        tdIsNull: false
+                      })
+
+                    } else {
+                      that.setData({
+                        todayData: today_data_list,
+                        tdIsNull: true
+                      })
+                    }
+                  }
                   wx.request({
                     url: 'https://guohe3.com/api/kb',
                     method: 'POST',
@@ -164,11 +239,15 @@ Page({
                     },
                     success: function (res) {
                       if (res.data.code == 200) {
-
+                        //设置课表缓存
+                        wx.setStorage({
+                          key: '2017-2018-2',
+                          data: res.data.info,
+                        })
                         //showDataUtil(res.data.info, semester, week, today, that)
                         var data_list = [[], [], [], [], [], [], []]
                         var date = semester + '_' + (parseInt(zc - 1) + 1)
-                        var _data = res.data.info[parseInt(zc - 1)][date]//这个星期的课表数据(未转化)                     
+                        var _data = res.data.info[parseInt(zc - 1)][date]//这个星期的课表数据(未转化)                               
 
                         //把行数据转换为列数据
                         for (var i = 0; i < _data.length; i++) {

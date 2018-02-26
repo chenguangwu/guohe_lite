@@ -16,7 +16,7 @@
         </view>
       </view>
     </view>
-    <view class="weui-cells weui-cells_after-title">
+    <!-- <view class="weui-cells weui-cells_after-title">
       <view class="weui-cell weui-cell_switch">
         <view class="weui-cell__bd" style="font-size:35rpx">大事儿</view>
         <view class="weui-cell__ft">
@@ -28,7 +28,7 @@
           </view>
         </view>
       </view>
-    </view>
+    </view> -->
   </view>
 
 </view>

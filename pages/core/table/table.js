@@ -142,83 +142,188 @@ Page({
          wx.getStorage({
            key: 'account',
            success: function(res) {
+            
              if(res.data){
-               wx.request({
-                 url: 'https://guohe3.com/api/kb',
-                 method: 'POST',
-                 data: {
-                   username: res.data.username,
-                   password: res.data.password,
-                   semester: that.data.semester
-                 },
-                 header: {
-                   'content-type': 'application/x-www-form-urlencoded' // 默认值
-                 },
-                 success: function (res) {
-                   if (res.data.code == 200) {
-                     //设置课表缓存
-                     wx.setStorage({
-                       key: that.data.semester,
-                       data: res.data.info,
-                     })
-                     console.log('设置课表缓存')
-                     var data_list = [[], [], [], [], [], [], []]
-                     var semester = '2017-2018-2'
-                     var date = semester + '_' + (parseInt(index - 1) + 1)
-                     var _data = res.data.info[parseInt(index - 1)][date]//整个学期的课表数据(未转化)
+               var localData = wx.getStorageSync('2017-2018-2')
+               if (localData){
+                
+                console.log("从本地获取")
+                var data_list = [[], [], [], [], [], [], []]
+                var semester = '2017-2018-2'
+                var date = semester + '_' + (parseInt(index - 1) + 1)
+                var _data = localData[parseInt(index - 1)][date]//整个学期的课表数据(未转化)
 
-                     //把行数据转换为列数据
-                     for (var i = 0; i < _data.length; i++) {
-                       for (var key in _data[i]) {
-                         if (key == 'monday') {
-                           data_list[0].push(_data[i][key])
+                //把行数据转换为列数据
+                for (var i = 0; i < _data.length; i++) {
+                  for (var key in _data[i]) {
+                    if (key == 'monday') {
+                      data_list[0].push(_data[i][key])
 
-                         }
-                         if (key == 'tuesday') {
-                           data_list[1].push(_data[i][key])
-                         }
-                         if (key == 'wednesday') {
-                           data_list[2].push(_data[i][key])
-                         }
-                         if (key == 'thursday') {
-                           data_list[3].push(_data[i][key])
-                         }
-                         if (key == 'friday') {
-                           data_list[4].push(_data[i][key])
-                         }
-                         if (key == 'saturday') {
-                           data_list[5].push(_data[i][key])
-                         }
-                         if (key == 'sunday') {
-                           data_list[6].push(_data[i][key])
+                    }
+                    if (key == 'tuesday') {
+                      data_list[1].push(_data[i][key])
+                    }
+                    if (key == 'wednesday') {
+                      data_list[2].push(_data[i][key])
+                    }
+                    if (key == 'thursday') {
+                      data_list[3].push(_data[i][key])
+                    }
+                    if (key == 'friday') {
+                      data_list[4].push(_data[i][key])
+                    }
+                    if (key == 'saturday') {
+                      data_list[5].push(_data[i][key])
+                    }
+                    if (key == 'sunday') {
+                      data_list[6].push(_data[i][key])
+                    }
+                  }
+                }
+
+                that.setData({
+                  kbData: data_list,
+                  index: index - 1,
+                  currentTab: currentTab,
+                  load: 'hide',
+                  content: 'show'
+                })
+                var today_data = data_list[currentTab]
+
+                var today_data_list = new Array()
+                for (var i = 0; i < today_data.length; i++) {
+                  var temp = {}
+                  if (today_data[i]) {
+                    var info_list = today_data[i].split("@")
+                    temp.index = (i * 2 + 1) + '-' + (i * 2 + 2)
+                    temp.cnum = info_list[0]
+                    if (info_list[1].length >= 20) {
+                      temp.cname = info_list[1].split(' ', 1).join(' ')
+                    } else {
+                      temp.cname = info_list[1]
+                    }
+                    temp.tname = info_list[2]
+                    temp.address = info_list.length >= 4 ? info_list[3] : '未指定'
+
+                  }
+
+                  if (JSON.stringify(temp) != "{}") {
+                    today_data_list.push(temp)
+                  }
+
+                }
+                //更新显示今天的数据
+
+                that.setData({
+                  todayData: today_data_list
+                })
+               }else{
+                 wx.request({
+                   url: 'https://guohe3.com/api/kb',
+                   method: 'POST',
+                   data: {
+                     username: res.data.username,
+                     password: res.data.password,
+                     semester: that.data.semester
+                   },
+                   header: {
+                     'content-type': 'application/x-www-form-urlencoded' // 默认值
+                   },
+                   success: function (res) {
+                     if (res.data.code == 200) {
+                       //设置课表缓存
+                       wx.setStorage({
+                         key: '2017-2018-2',
+                         data: res.data.info,
+                       })
+                       console.log('设置课表缓存')
+                       var data_list = [[], [], [], [], [], [], []]
+                       var semester = '2017-2018-2'
+                       var date = semester + '_' + (parseInt(index - 1) + 1)
+                       var _data = res.data.info[parseInt(index - 1)][date]//整个学期的课表数据(未转化)
+
+                       //把行数据转换为列数据
+                       for (var i = 0; i < _data.length; i++) {
+                         for (var key in _data[i]) {
+                           if (key == 'monday') {
+                             data_list[0].push(_data[i][key])
+
+                           }
+                           if (key == 'tuesday') {
+                             data_list[1].push(_data[i][key])
+                           }
+                           if (key == 'wednesday') {
+                             data_list[2].push(_data[i][key])
+                           }
+                           if (key == 'thursday') {
+                             data_list[3].push(_data[i][key])
+                           }
+                           if (key == 'friday') {
+                             data_list[4].push(_data[i][key])
+                           }
+                           if (key == 'saturday') {
+                             data_list[5].push(_data[i][key])
+                           }
+                           if (key == 'sunday') {
+                             data_list[6].push(_data[i][key])
+                           }
                          }
                        }
+
+                       that.setData({
+                         kbData: data_list,
+                         index: index - 1,
+                         currentTab: currentTab,
+                         load: 'hide',
+                         content: 'show'
+                       })
+                       var today_data = data_list[currentTab]
+
+                       var today_data_list = new Array()
+                       for (var i = 0; i < today_data.length; i++) {
+                         var temp = {}
+                         if (today_data[i]) {
+                           var info_list = today_data[i].split("@")
+                           temp.index = (i * 2 + 1) + '-' + (i * 2 + 2)
+                           temp.cnum = info_list[0]
+                           if (info_list[1].length >= 20) {
+                             temp.cname = info_list[1].split(' ', 1).join(' ')
+                           } else {
+                             temp.cname = info_list[1]
+                           }
+                           temp.tname = info_list[2]
+                           temp.address = info_list.length >= 4 ? info_list[3] : '未指定'
+
+                         }
+
+                         if (JSON.stringify(temp) != "{}") {
+                           today_data_list.push(temp)
+                         }
+
+                       }
+                       //更新显示今天的数据
+
+                       that.setData({
+                         todayData: today_data_list
+                       })
+
                      }
-
-                     that.setData({
-                       kbData: data_list,
-                       index: index - 1,
-                       currentTab: currentTab,
-                       load: 'hide',
-                       content: 'show'
+                     else {
+                       console.log('用户名或密码错误')
+                     }
+                   },
+                   fail() {
+                     wx.showToast({
+                       title: '教务系统异常',
+                       icon: 'loading',
+                       duration: 2000
                      })
-                   
 
+                     that.onLoad()
                    }
-                   else {
-                     console.log('用户名或密码错误')
-                   }
-                 },
-                 fail() {
-                   wx.showToast({
-                     title: '教务系统异常',
-                     icon: 'loading',
-                     duration: 2000
-                   })
-                   
-                   that.onLoad()
-                 }
-               })
+                 })
+               }
+             
              }
            },fail(){
              console.log('账号未登录')
