@@ -10,6 +10,8 @@ Page({
       '2017-2018-1',
       '2017-2018-2'
     ],
+    showDetail:true,
+    currentInfo:{},
     Sindex:1,//第几个学年
     index: 0,//第几周
     winHeight: "",//窗口高度
@@ -19,6 +21,19 @@ Page({
     todayData: [],//当天的课表数据,
     semester:'2017-2018-2',//学年,
     xiaoli:{}
+  },
+  listenerConfirm(){
+    this.setData({
+      showDetail: true
+    })
+  },
+  //详情
+  detail(e){
+    var data = this.data.todayData[e.currentTarget.id]
+    this.setData({
+      currentInfo:data,
+      showDetail:false
+    })
   },
   //切换学年
   bindSemesterChange: function (e) {
@@ -61,9 +76,11 @@ Page({
         temp.index = (i * 2 + 1) + '-' + (i * 2 + 2)
         temp.cnum = info_list[0]
         if (info_list[1].length >= 20) {
-          temp.cname = info_list[1].split(' ', 1).join(' ')
+          temp.cname = info_list[1].substr(0,20)+"..."
+          temp.fullname = info_list[1]
         } else {
           temp.cname = info_list[1]
+          temp.fullname = info_list[1]
         }
         temp.tname = info_list[2]
         temp.address = info_list.length >= 4 ? info_list[3] : '未指定'
@@ -198,9 +215,11 @@ Page({
                     temp.index = (i * 2 + 1) + '-' + (i * 2 + 2)
                     temp.cnum = info_list[0]
                     if (info_list[1].length >= 20) {
-                      temp.cname = info_list[1].split(' ', 1).join(' ')
+                      temp.cname = info_list[1].substr(0, 20) + "..."
+                      temp.fullname = info_list[1]
                     } else {
-                      temp.cname = info_list[1]
+                      temp.cname = info_list[1].substr(0, 20) + "..."
+                      temp.fullname = info_list[1]
                     }
                     temp.tname = info_list[2]
                     temp.address = info_list.length >= 4 ? info_list[3] : '未指定'
@@ -287,9 +306,11 @@ Page({
                            temp.index = (i * 2 + 1) + '-' + (i * 2 + 2)
                            temp.cnum = info_list[0]
                            if (info_list[1].length >= 20) {
-                             temp.cname = info_list[1].split(' ', 1).join(' ')
+                             temp.cname = info_list[1].substr(0, 20) + "..."
+                             temp.fullname = info_list[1]
                            } else {
-                             temp.cname = info_list[1]
+                             temp.cname = info_list[1].substr(0, 20) + "..."
+                             temp.fullname = info_list[1]
                            }
                            temp.tname = info_list[2]
                            temp.address = info_list.length >= 4 ? info_list[3] : '未指定'
