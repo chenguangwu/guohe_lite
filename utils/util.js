@@ -98,8 +98,6 @@ function showData(semester, week, currentTab,that) {//week是星期几
       
     }
   })
-
-
 }
 function showDataUtil(info, semester, week, currentTab,that) {
   var data_list = [[], [], [], [], [], [], []]
@@ -167,4 +165,69 @@ function showDataUtil(info, semester, week, currentTab,that) {
   that.setData({
     todayData: today_data_list
   })
+}
+
+//获取排行榜详细信息
+function getToplistInfo(id, callback) {
+  wx.request({
+    url: 'https://c.y.qq.com/v8/fcg-bin/fcg_v8_toplist_cp.fcg',
+    data: {
+      g_tk: 5381,
+      uin: 0,
+      format: 'json',
+      inCharset: 'utf-8',
+      outCharset: 'utf-8',
+      notice: 0,
+      platform: 'h5',
+      needNewCode: 1,
+      tpl: 3,
+      page: 'detail',
+      type: 'top',
+      topid: id,
+      _: Date.now()
+    },
+    method: 'GET',
+    header: { 'content-type': 'application/json' },
+    success: function (res) {
+      if (res.statusCode == 200) {
+        callback(res.data);
+      }
+    }
+  })
+}
+
+/**
+ * 获取单首歌曲的信息
+ */
+function getSongInfo(id, mid, callback) {
+  wx.request({
+    url: 'https://c.y.qq.com/splcloud/fcgi-bin/fcg_list_songinfo_cp.fcg',
+    data: {
+      url: 1,
+      idlist: id,
+      midlist: mid,
+      typelist: 0
+    },
+    method: 'GET',
+    header: { 'content-type': 'application/json' },
+    success: function (res) {
+      if (res.statusCode == 200) {
+        var data = res.data.data;
+        callback(data);
+      }
+    }
+  });
+}
+
+// 获取最小值到最大值之前的整数随机数
+function GetRandomNum(Min, Max) {
+  var Range = Max - Min;
+  var Rand = Math.random();
+  return (Min + Math.round(Rand * Range));
+}
+
+module.exports = {
+  getToplistInfo: getToplistInfo,
+  getSongInfo: getSongInfo,
+  GetRandomNum: GetRandomNum
 }
