@@ -198,7 +198,7 @@ Page({
                         temp.cnum = info_list[0]
 
                         if (info_list[1].length >= 20) {
-                          temp.cname = info_list[1].split(' ', 1).join(' ')
+                          temp.cname = info_list[1].substr(0, 20) + "..."
                         } else {
                           temp.cname = info_list[1]
                         }
@@ -287,7 +287,7 @@ Page({
                             temp.cnum = info_list[0]
 
                             if (info_list[1].length >= 20) {
-                              temp.cname = info_list[1].split(' ', 1).join(' ')
+                              temp.cname = info_list[1].substr(0, 20) + "..."
                             } else {
                               temp.cname = info_list[1]
                             }

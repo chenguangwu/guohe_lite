@@ -11,6 +11,11 @@
 
 			
 		}
+    .detail text{
+    display:  block;
+    text-align: left;
+    line-height: 1.5rem;
+    }
     	.spinner {
   width: 60px;
   height: 60px;
