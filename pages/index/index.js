@@ -2,6 +2,7 @@
 //获取应用实例
 var app = getApp();
 var order = ['red', 'yellow', 'blue', 'green', 'red']
+var util = require('../../utils/util.js');
 Page({
 
   /**
@@ -345,20 +346,44 @@ Page({
       }
 
     })
-    wx.request({
-      url: 'https://jirenguapi.applinzi.com/fm/getSong.php', //仅为示例，并非真实的接口地址
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      success: function (res) {
-        console.log(res.data)
-        that.setData({
-          poster: res.data.song[0].picture,
-          name: res.data.song[0].title,
-          author: res.data.song[0].artist,
-          src: res.data.song[0].url
-        })
-      }
+    // wx.request({
+    //   url: 'https://jirenguapi.applinzi.com/fm/getSong.php', //
+    //   header: {
+    //     'content-type': 'application/json' // 默认值
+    //   },
+    //   success: function (res) {
+    //     console.log(res.data)
+    //     that.setData({
+    //       poster: res.data.song[0].picture,
+    //       name: res.data.song[0].title,
+    //       author: res.data.song[0].artist,
+    //       src: res.data.song[0].url
+    //     })
+    //   }
+    // })
+    util.getToplistInfo(27, function (data) {
+      wx.hideLoading();
+      if (data.color == '14737632') {
+        that.setData({ isLight: true })
+      };
+      that.setData({
+        songlist: data.songlist,
+      });
+      console.log(data)
+      var num = util.GetRandomNum(1, 90);
+      var mid = data.songlist[num].data.songmid;
+      var albummid = data.songlist[num].data.albummid
+      var name = data.songlist[num].data.albumname
+      var author = data.songlist[num].data.singer[0].name
+      console.log(mid)
+      console.log(albummid)
+
+      that.setData({
+        src: 'http://ws.stream.qqmusic.qq.com/C100' + mid + '.m4a?fromtag=38',
+        poster: 'http://y.gtimg.cn/music/photo_new/T002R150x150M000' + albummid + '.jpg',
+        name: name,
+        author: author,
+      });
     })
   },
 
@@ -453,5 +478,5 @@ Page({
     this.setData({
       scrollTop: this.data.scrollTop + 10
     })
-  }
+  },
 })
