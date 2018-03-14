@@ -99,9 +99,15 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
+  /**
+     * 页面相关事件处理函数--监听用户下拉动作
+     */
+  onPullDownRefresh: function () {
+    wx.showNavigationBarLoading() //在标题栏中显示加载
+    this.onLoad()
 
-  onLoad: function (options) {
-
+  },
+  onLoad: function () {
     var that = this
 
     wx.getStorage({
@@ -154,7 +160,7 @@ Page({
                 } else {
                   var localData = wx.getStorageSync(semester)
                   if (localData) {
-
+                    wx.hideNavigationBarLoading()
                     console.log("从本地获取")
                     var data_list = [[], [], [], [], [], [], []]
                     var date = semester + '_' + (parseInt(zc - 1) + 1)
@@ -225,98 +231,101 @@ Page({
                         tdIsNull: true
                       })
                     }
-                  }
-                  wx.request({
-                    url: 'https://guohe3.com/api/kb',
-                    method: 'POST',
-                    data: {
-                      username: account.username,
-                      password: account.password,
-                      semester: semester
-                    },
-                    header: {
-                      'content-type': 'application/x-www-form-urlencoded' // 默认值
-                    },
-                    success: function (res) {
-                      if (res.data.code == 200) {
-                        //设置课表缓存
-                        wx.setStorage({
-                          key: '2017-2018-2',
-                          data: res.data.info,
-                        })
-                        //showDataUtil(res.data.info, semester, week, today, that)
-                        var data_list = [[], [], [], [], [], [], []]
-                        var date = semester + '_' + (parseInt(zc - 1) + 1)
-                        var _data = res.data.info[parseInt(zc - 1)][date]//这个星期的课表数据(未转化)                               
-
-                        //把行数据转换为列数据
-                        for (var i = 0; i < _data.length; i++) {
-                          for (var key in _data[i]) {
-                            if (key == 'monday') {
-                              data_list[0].push(_data[i][key])
-
-                            }
-                            if (key == 'tuesday') {
-                              data_list[1].push(_data[i][key])
-                            }
-                            if (key == 'wednesday') {
-                              data_list[2].push(_data[i][key])
-                            }
-                            if (key == 'thursday') {
-                              data_list[3].push(_data[i][key])
-                            }
-                            if (key == 'friday') {
-                              data_list[4].push(_data[i][key])
-                            }
-                            if (key == 'saturday') {
-                              data_list[5].push(_data[i][key])
-                            }
-                            if (key == 'sunday') {
-                              data_list[6].push(_data[i][key])
-                            }
-                          }
-                        }
-
-                        var today_data = data_list[zj]
-                        var today_data_list = new Array()
-
-                        for (var i = 0; i < today_data.length; i++) {
-                          var temp = {}
-                          if (today_data[i]) {
-                            var info_list = today_data[i].split("@")
-                            temp.index = (i * 2 + 1) + '-' + (i * 2 + 2)
-                            temp.cnum = info_list[0]
-
-                            if (info_list[1].length >= 20) {
-                              temp.cname = info_list[1].substr(0, 20) + "..."
-                            } else {
-                              temp.cname = info_list[1]
-                            }
-                            temp.tname = info_list[2]
-                            temp.address = info_list.length >= 4 ? info_list[3] : '未指定'
-                          }
-
-                          if (JSON.stringify(temp) != "{}") {
-                            today_data_list.push(temp)
-                          }
-
-                        }
-                        if (today_data_list.length > 0) {
-                          console.log(today_data_list)
-                          that.setData({
-                            todayData: today_data_list,
-                            tdIsNull: false
+                  } else {
+                    wx.request({
+                      url: 'https://guohe3.com/api/kb',
+                      method: 'POST',
+                      data: {
+                        username: account.username,
+                        password: account.password,
+                        semester: semester
+                      },
+                      header: {
+                        'content-type': 'application/x-www-form-urlencoded' // 默认值
+                      },
+                      success: function (res) {
+                        if (res.data.code == 200) {
+                          wx.hideNavigationBarLoading()
+                          //设置课表缓存
+                          wx.setStorage({
+                            key: '2017-2018-2',
+                            data: res.data.info,
                           })
+                          //showDataUtil(res.data.info, semester, week, today, that)
+                          var data_list = [[], [], [], [], [], [], []]
+                          var date = semester + '_' + (parseInt(zc - 1) + 1)
+                          var _data = res.data.info[parseInt(zc - 1)][date]//这个星期的课表数据(未转化)                               
 
-                        } else {
-                          that.setData({
-                            todayData: today_data_list,
-                            tdIsNull: true
-                          })
+                          //把行数据转换为列数据
+                          for (var i = 0; i < _data.length; i++) {
+                            for (var key in _data[i]) {
+                              if (key == 'monday') {
+                                data_list[0].push(_data[i][key])
+
+                              }
+                              if (key == 'tuesday') {
+                                data_list[1].push(_data[i][key])
+                              }
+                              if (key == 'wednesday') {
+                                data_list[2].push(_data[i][key])
+                              }
+                              if (key == 'thursday') {
+                                data_list[3].push(_data[i][key])
+                              }
+                              if (key == 'friday') {
+                                data_list[4].push(_data[i][key])
+                              }
+                              if (key == 'saturday') {
+                                data_list[5].push(_data[i][key])
+                              }
+                              if (key == 'sunday') {
+                                data_list[6].push(_data[i][key])
+                              }
+                            }
+                          }
+
+                          var today_data = data_list[zj]
+                          var today_data_list = new Array()
+
+                          for (var i = 0; i < today_data.length; i++) {
+                            var temp = {}
+                            if (today_data[i]) {
+                              var info_list = today_data[i].split("@")
+                              temp.index = (i * 2 + 1) + '-' + (i * 2 + 2)
+                              temp.cnum = info_list[0]
+
+                              if (info_list[1].length >= 20) {
+                                temp.cname = info_list[1].substr(0, 20) + "..."
+                              } else {
+                                temp.cname = info_list[1]
+                              }
+                              temp.tname = info_list[2]
+                              temp.address = info_list.length >= 4 ? info_list[3] : '未指定'
+                            }
+
+                            if (JSON.stringify(temp) != "{}") {
+                              today_data_list.push(temp)
+                            }
+
+                          }
+                          if (today_data_list.length > 0) {
+                            console.log(today_data_list)
+                            that.setData({
+                              todayData: today_data_list,
+                              tdIsNull: false
+                            })
+
+                          } else {
+                            that.setData({
+                              todayData: today_data_list,
+                              tdIsNull: true
+                            })
+                          }
                         }
                       }
-                    }
-                  })
+                    })
+                  }
+
                 }
               }
             }
@@ -346,21 +355,6 @@ Page({
       }
 
     })
-    // wx.request({
-    //   url: 'https://jirenguapi.applinzi.com/fm/getSong.php', //
-    //   header: {
-    //     'content-type': 'application/json' // 默认值
-    //   },
-    //   success: function (res) {
-    //     console.log(res.data)
-    //     that.setData({
-    //       poster: res.data.song[0].picture,
-    //       name: res.data.song[0].title,
-    //       author: res.data.song[0].artist,
-    //       src: res.data.song[0].url
-    //     })
-    //   }
-    // })
     util.getToplistInfo(27, function (data) {
       wx.hideLoading();
       if (data.color == '14737632') {
@@ -432,13 +426,6 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
 
   },
 

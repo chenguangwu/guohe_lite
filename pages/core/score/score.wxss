@@ -48,7 +48,12 @@
     .hide{
       display: none;
     }
-
+body{
+  overflow-x: hidden;
+}
+canvas{
+  overflow-x: hidden;
+}
     .table {
   border: 0px solid darkgray;
 }
@@ -56,7 +61,7 @@
   display: flex;
   width: 100%;
   justify-content: center;
-  height: 3rem;
+  height: 5rem;
   align-items: center;
 }
 .td {
