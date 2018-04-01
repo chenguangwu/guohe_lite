@@ -300,8 +300,6 @@ Page({
             for (var i = 0; i < res.data.info.length; i++) {
               years[i] = res.data.info[i].year
             }
-
-            wx.hideNavigationBarLoading()
             that.setData({
               gradePoint: res.data.info,
               grade_years: years,
@@ -340,6 +338,7 @@ Page({
               scores: res.data.info,
               change_scores: res.data.info,
             })
+            wx.hideNavigationBarLoading()
             wx.stopPullDownRefresh()
           },
           fail: function () {

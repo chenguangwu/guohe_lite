@@ -18,6 +18,7 @@
         {{semesterArray[1]}}
       </view>
     </view>
+    
   </view>
 </view>
 
@@ -50,7 +51,7 @@
   <swiper class="tab-content" current="{{currentTab}}" duration="300" bindchange="switchTab" style="height:{{winHeight}}rpx">
     <swiper-item wx:for="{{[0,1,2,3,4,5,6]}}">
       <scroll-view scroll-y="true" class="scoll-h">
-        <view class='box' wx:for="{{todayData}}" wx:for-index="select" id="{{select}}" bindtap='detail'>
+        <view class='box' wx:for="{{todayData}}" wx:for-index="select" id="{{select}}" bindtap='detail' wx-if="{{!todayIsNull}}">
           <text class='num'>{{item.index}}</text>
           <block>
             <view class='right'>
@@ -62,7 +63,11 @@
           </block>
 
         </view>
+        <view class='noClass' wx-if="{{todayIsNull}}">
+        今天居然没有课~😆
+        </view>
       </scroll-view>
     </swiper-item>
   </swiper>
+  <view class='pullDown'>下拉刷新获取最新的课表</view>
 </view>

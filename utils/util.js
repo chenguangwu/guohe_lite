@@ -16,10 +16,7 @@ function formatNumber(n) {
   return n[1] ? n : '0' + n
 }
 
-module.exports = {
-  formatTime: formatTime,
-  showData: showData
-}
+
 function showData(semester, week, currentTab,that) {//week是星期几
   wx.getStorage({
     key: semester,
@@ -225,9 +222,19 @@ function GetRandomNum(Min, Max) {
   var Rand = Math.random();
   return (Min + Math.round(Rand * Range));
 }
-
+function today_dataIsNull(data){
+    for(var i=0;i<data.length;i++){
+      if(data[i].length>2){
+        return false
+      }
+    }
+    return true;
+}
 module.exports = {
-  getToplistInfo: getToplistInfo,
-  getSongInfo: getSongInfo,
-  GetRandomNum: GetRandomNum
+  // getToplistInfo: getToplistInfo,
+  // getSongInfo: getSongInfo,
+  // GetRandomNum: GetRandomNum,
+  today_dataIsNull: today_dataIsNull,
+  formatTime: formatTime,
+  showData: showData
 }
