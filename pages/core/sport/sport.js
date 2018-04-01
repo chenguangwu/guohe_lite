@@ -373,6 +373,7 @@ Page({
                 })
               } else {
                 wx.hideNavigationBarLoading() 
+                wx.stopPullDownRefresh()
                 that.setData({
                   info: res.data.info[0].name + ' \r\n ' + res.data.info[0].year + ' \r\n ' + res.data.info[0].total,
                   isLoad: false,
@@ -411,6 +412,7 @@ Page({
                 })
               } else {
                 wx.hideNavigationBarLoading() 
+                wx.stopPullDownRefresh()
                 that.setData({
                   isLoad: false,
                   dataList: res.data.info[1],

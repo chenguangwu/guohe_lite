@@ -231,9 +231,9 @@ function today_dataIsNull(data){
     return true;
 }
 module.exports = {
-  getToplistInfo: getToplistInfo,
-  getSongInfo: getSongInfo,
-  GetRandomNum: GetRandomNum,
+  // getToplistInfo: getToplistInfo,
+  // getSongInfo: getSongInfo,
+  // GetRandomNum: GetRandomNum,
   today_dataIsNull: today_dataIsNull,
   formatTime: formatTime,
   showData: showData

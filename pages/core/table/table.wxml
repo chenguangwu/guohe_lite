@@ -69,4 +69,5 @@
       </scroll-view>
     </swiper-item>
   </swiper>
+  <view class='pullDown'>下拉刷新获取最新的课表</view>
 </view>

@@ -119,12 +119,12 @@ to {transform: rotate(360deg);}
   width: 100%;
   box-sizing: border-box;
   overflow: hidden;
-  line-height: 80rpx;
+  line-height: 30rpx;
    background: #f7f7f7; 
   font-size: 16px;
   white-space: nowrap;
-  position: fixed;
-  top: 100rpx;
+  position: relative;
+  top: 50rpx;
   left: 0;
   z-index: 99;
 }
@@ -264,10 +264,18 @@ page {
 }
 
 .table {
-  margin-top: 100rpx;
+  margin-top: 30rpx;
 }
 
-
+.pullDown{
+  position: fixed;
+  bottom: 5rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #ccc;
+  font-size: 0.65rem;
+  font-style: italic;
+}
 
 .on {
   display: block;

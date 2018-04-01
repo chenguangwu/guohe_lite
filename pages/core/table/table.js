@@ -134,9 +134,13 @@ Page({
     }
   },
   onPullDownRefresh: function () {
+    this.setData({
+      load: 'show',
+      content: 'hide'
+    })
+    wx.removeStorageSync('2017-2018-2')
     wx.showNavigationBarLoading() //在标题栏中显示加载
     this.onLoad()
-
   },
   onLoad: function () {
     
@@ -182,6 +186,7 @@ Page({
                if (localData){
                  console.log(localData)
                  wx.hideNavigationBarLoading()
+                 wx.stopPullDownRefresh()
                 console.log("从本地获取")
                 var data_list = [[], [], [], [], [], [], []]
                 var semester = '2017-2018-2'
@@ -269,6 +274,7 @@ Page({
                    success: function (res) {
                      if (res.data.code == 200) {
                        wx.hideNavigationBarLoading()
+                       wx.stopPullDownRefresh()
                        //设置课表缓存
                        wx.setStorage({
                          key: '2017-2018-2',
@@ -352,21 +358,22 @@ Page({
                        console.log('用户名或密码错误')
                      }
                    },
-                   fail() {
-                     wx.showToast({
-                       title: '教务系统异常',
-                       icon: 'loading',
-                       duration: 2000
-                     })
 
-                     that.onLoad()
-                   }
+                  //  fail() {
+                  //    wx.showToast({
+                  //      title: '教务系统异常',
+                  //      icon: 'loading',
+                  //      duration: 2000
+                  //    })
+
+                  //  }
                  })
                }
              
              }
            },fail(){
              wx.hideNavigationBarLoading()
+             wx.stopPullDownRefresh()
              console.log('账号未登录')
              wx.showModal({
                title: '提示',
