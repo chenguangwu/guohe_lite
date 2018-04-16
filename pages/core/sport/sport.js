@@ -72,7 +72,7 @@ Page({
           },
           success: function (res) {
             if (res.data.code != 200) {
-              wx.removeStorageSync('sport')
+           
               wx.showToast({
                 title: res.data.msg,
                 icon: 'loading'
@@ -140,7 +140,7 @@ Page({
             success: function (res) {
 
               if (res.data.code != 200) {
-                wx.removeStorageSync('sport')
+              
                 wx.showToast({
                   title: res.data.msg,
                   icon: 'loading'
@@ -258,7 +258,7 @@ Page({
               },
               success: function (res) {
                 if (res.data.code != 200) {
-                  wx.removeStorageSync('sport')
+                 
                   wx.showToast({
                     title: res.data.msg,
                     icon: 'loading'
