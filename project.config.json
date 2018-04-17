@@ -10,7 +10,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "1.9.1",
 	"appid": "wx5b6154ad63c373f5",
-	"projectname": "guohe_lite",
+	"projectname": "guohe",
 	"condition": {
 		"search": {
 			"current": -1,

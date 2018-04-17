@@ -1,4 +1,5 @@
 <!--index.wxml-->
+<import src="/pages/core/calendar/calendar.wxml"/>
 
 <!--功能导航-->
 <swiper class="main-swpier" indicator-dots="true" indicator-active-color="#73b4ef">
@@ -61,8 +62,16 @@
     <view class='toast'>
      {{toast}}
     </view>
- 
-
+  </view>
+    <!-- 日子 -->
+  <view class="main-card-item" id="calendar" wx:if="{{news_flag}}">
+    <view class="card-item-hd" >
+      <image class="card-item-icon" src="/images/index/toast.png"></image>
+      <text class="card-item-name">小日子</text>
+    </view>
+    
+   <view><navigator url='/pages/core/test/test'>hello</navigator></view>
+    
   </view>
 
    <!-- 音乐
