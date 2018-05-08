@@ -1,11 +1,13 @@
 ### 果核Lite
 为江苏科技大学学生提供一站式校园服务的微信小程序。
 
+看到大佬给了star，十分激动，所以完善下readme，更多功能正在开发中。
+
 ### 其他
-- 官方网站：www.guohe3.com。 源码：https://github.com/CasualJi/guohe_home
-- 果核安卓App第一版：https://github.com/YueYongDev/GuoHe 
-果核安卓App第二版：https://github.com/YueYongDev/Guohe2（小米，华为，酷安商店均已上架）
-- 后台：https://github.com/CasualJi/guohe
+- 官方网站：www.guohe3.com。 源码：[Github](https://github.com/CasualJi/guohe_home)
+- 果核安卓App第一版：[Github](https://github.com/YueYongDev/GuoHe) 
+- 果核安卓App第二版：[Github](https://github.com/YueYongDev/Guohe2（小米，华为，酷安商店均已上架）)
+- 后台：[Github](https://github.com/CasualJi/guohe)
 
 ### 小程序码
 ![](https://upload-images.jianshu.io/upload_images/5889935-00d908934f11d396.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
