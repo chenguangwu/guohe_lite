@@ -6,7 +6,7 @@
 ### 其他
 - 官方网站：www.guohe3.com。 源码：[Github](https://github.com/CasualJi/guohe_home)
 - 果核安卓App第一版：[Github](https://github.com/YueYongDev/GuoHe) 
-- 果核安卓App第二版：[Github](https://github.com/YueYongDev/Guohe2（小米，华为，酷安商店均已上架）)
+- 果核安卓App第二版：[Github](https://github.com/YueYongDev/Guohe2)（小米，华为，酷安商店均已上架）
 - 后台：[Github](https://github.com/CasualJi/guohe)
 
 ### 小程序码
