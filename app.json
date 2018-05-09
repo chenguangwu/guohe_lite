@@ -16,7 +16,9 @@
     "pages/core/person/feedback/feedback",
     "pages/core/person/switch/switch",
     "pages/core/person/log/log",
-    "pages/core/bus/bus"
+    "pages/core/bus/bus",
+      "pages/core/prize/index/index",
+      "pages/core/prize/detail/detail"
     
   ],
   
@@ -44,8 +46,8 @@
         "selectedIconPath": "images/index/sun_click.png"
       },
       {
-        "pagePath": "pages/core/community/community",
-        "text": "操场",
+        "pagePath": "pages/core/prize/index/index",
+        "text": "抽奖",
         "iconPath": "images/index/community.png",
         "selectedIconPath": "images/index/community_click.png"
       },
