@@ -53,7 +53,7 @@ Page({
               'username': res.data.username
             },
             header: {
-              "Content-Type": "application/x-www-form-urlencoded"
+              "content-type": "application/x-www-form-urlencoded"
             },
             method: 'post',
             success: function (res) {
