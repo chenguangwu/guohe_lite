@@ -190,13 +190,22 @@ function today_dataIsNull(data){
     }
     return true;
 }
-
+function today_dataIsNull(data){
+    for(var i=0;i<data.length;i++){
+      if(data[i].length>2){
+        return false
+      }
+    }
+    return true;
+}
 module.exports = {
   // getToplistInfo: getToplistInfo,
   // getSongInfo: getSongInfo,
   // GetRandomNum: GetRandomNum,
   today_dataIsNull: today_dataIsNull,
   formatTime: formatTime,
+
   showData: showData,
   getOneContent: getOneContent
+
 }

@@ -88,6 +88,8 @@
           <view style="text-align:center;font-size:22rpx;color:grey;margin:30rpx">{{oneWordFrom}}</view>
         </view>
       </view>
+
     </view>
+
   </view>  
 </view>

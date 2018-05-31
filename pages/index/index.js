@@ -16,6 +16,7 @@ Page({
     tdIsNull: false,
     toView: 'red',
     scrollTop: 100,
+
     cores: [
       [
         { id: 'table', name: '课表', disabled: false, teacher_disabled: false, offline_disabled: false },
@@ -204,6 +205,7 @@ Page({
                         temp.index = (i * 2 + 1) + '-' + (i * 2 + 2)
                         temp.cnum = info_list[0]
 
+
                         if (info_list[1].length >= 20) {
                           temp.cname = info_list[1].substr(0, 20) + "..."
                         } else {
@@ -216,6 +218,7 @@ Page({
                       if (JSON.stringify(temp) != "{}") {
                         today_data_list.push(temp)
                       }
+
 
                     }
                     if (today_data_list.length > 0) {
@@ -359,6 +362,7 @@ Page({
 
     util.getOneContent(function(data){
       console.log(data);
+
 
       that.setData({
         oneImg: data.Body.img_url,
