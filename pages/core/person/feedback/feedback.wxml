@@ -19,7 +19,7 @@
         <view class="weui-cells weui-cells_after-title">
             <view class="weui-cell weui-cell_input">
                 <view class="weui-cell__bd">
-                    <input bindinput='contactImput' class="weui-input" placeholder="QQ/Phone/Wechat..." style="font-size:28rpx;text-align: left;" />
+                    <input bindinput='contactImput' class="weui-input" placeholder="QQ \微信，方便我们联系到你来更好解决问题" style="font-size:28rpx;text-align: left;" />
                 </view>
             </view>
         </view>

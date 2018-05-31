@@ -1,34 +1,38 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/login/login",
+    "pages/logs/logs",
     "pages/core/sport/sport",
+    "pages/core/cet/cet",
     "pages/core/library/library",
-
     "pages/core/library/book/book",
-   
     "pages/core/classroom/classroom",
-    
-    
-    
     "pages/core/person/person",
     "pages/core/person/about/about",
     "pages/core/community/community",
     "pages/core/table/table",
-    "pages/login/login",
     "pages/core/score/score",
-    "pages/logs/logs",
     "pages/core/person/feedback/feedback",
     "pages/core/person/switch/switch",
     "pages/core/person/log/log",
-    "pages/core/bus/bus"
-    
+    "pages/core/bus/bus",
+    "pages/core/prize/index/index",
+    "pages/core/prize/detail/detail"
   ],
+  
+
+  
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "果核Lite",
     "navigationBarTextStyle": "black",
     "enablePullDownRefresh": true
+  },
+  "networkTimeout": {
+    "request": 20000,
+    "downloadFile": 10000
   },
   "tabBar": {
     "color": "#000000",
@@ -43,10 +47,10 @@
         "selectedIconPath": "images/index/sun_click.png"
       },
       {
-        "pagePath": "pages/core/community/community",
-        "text": "社群",
-        "iconPath": "images/index/community.png",
-        "selectedIconPath": "images/index/community_click.png"
+        "pagePath": "pages/core/prize/index/index",
+        "text": "抽奖",
+        "iconPath": "images/index/gift.png",
+        "selectedIconPath": "images/index/gift.png"
       },
       {
         "pagePath": "pages/core/person/person",

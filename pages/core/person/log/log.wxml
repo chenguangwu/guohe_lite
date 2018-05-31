@@ -9,4 +9,8 @@
   <view class='text_title'>v1.1</view>
   <view class='text'>完成「空教室」「馆藏」「校车」「体育」功能，动态获取「大事儿」，修复部分BUG，修改部分样式。</view>
 
+  <view class='text_title'>v1.2</view>
+  <view class='text'>修复课表缓存问题，完成「CET」模块，「小曲儿」设定为随机。</view>
+
+
 </view>

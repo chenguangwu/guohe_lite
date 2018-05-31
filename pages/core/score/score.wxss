@@ -9,6 +9,34 @@
 			animation-duration:1.8s;
 			
 		}
+    	.spinner {
+  width: 60px;
+  height: 60px;
+  background-color: #67CF22;
+ 
+  margin: 100px auto;
+  -webkit-animation: rotateplane 1.2s infinite ease-in-out;
+  animation: rotateplane 1.2s infinite ease-in-out;
+}
+ 
+@-webkit-keyframes rotateplane {
+  0% { -webkit-transform: perspective(120px) }
+  50% { -webkit-transform: perspective(120px) rotateY(180deg) }
+  100% { -webkit-transform: perspective(120px) rotateY(180deg)  rotateX(180deg) }
+}
+ 
+@keyframes rotateplane {
+  0% { 
+    transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+    -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg) 
+  } 50% { 
+    transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+    -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg) 
+  } 100% { 
+    transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+    -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+  }
+}
     .card{
   margin-bottom:12px;
    margin-left: 14rpx;
@@ -20,7 +48,12 @@
     .hide{
       display: none;
     }
-
+body{
+  overflow-x: hidden;
+}
+canvas{
+  overflow-x: hidden;
+}
     .table {
   border: 0px solid darkgray;
 }
@@ -28,7 +61,7 @@
   display: flex;
   width: 100%;
   justify-content: center;
-  height: 3rem;
+  height: 5rem;
   align-items: center;
 }
 .td {
@@ -36,6 +69,10 @@
     justify-content: center;
     text-align: center;
     font-size: 30rpx;
+    display: -webkit-box;
+-webkit-box-orient: vertical;
+-webkit-line-clamp: 3;
+overflow: hidden;
 }
 .bg-w{
   background: snow;

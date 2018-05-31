@@ -9,7 +9,7 @@ Page({
     empty_classroom_info:[],
     username:'',
     password:'',
-    school_year:'2017-2018-1',
+    school_year:'2017-2018-2',
     areaArray:[
       "东校区",
       "南校区",

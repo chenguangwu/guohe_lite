@@ -88,11 +88,10 @@ input-holder {
 .logo{
 			width: 150rpx;
 			height: 150rpx;
-			
       margin: 40rpx auto;
       display: block;
-			
 		}
+
 		.load1{
 			width: 150rpx;
 			height: 150rpx;

@@ -1,4 +1,5 @@
-<image class='logo {{loadStyle}}' src='../../../images/logo.jpg'></image>
+
+	<div class="spinner {{loadStyle}}"></div>
 <view class='canvas'>
 <canvas style="width:120%; height: 200px;" canvas-id="point"></canvas>
 </view>

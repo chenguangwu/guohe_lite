@@ -1,22 +1,41 @@
-<image class='logo {{load}}' src='../../../images/logo.jpg'>正在加载中</image>
+<view class='spinner {{load}}'></view>
 <!-- 选择日期 -->
 <view class='fixed {{content}}'>
-  <view class='changeBox'> 
-      <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
-        <view class="picker">
-          {{array[index]}}
-        </view>
-      </picker>
-      
+  <view class='changeBox'>
+    <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+      <view class="picker">
+        {{array[index]}}
+      </view>
+    </picker>
+
     <view class="semesterBox">
-      <picker bindchange="bindSemesterChange" value="{{Sindex}}" range="{{semesterArray}}">
+      <!-- <picker bindchange="bindSemesterChange" value="{{Sindex}}" range="{{semesterArray}}">
         <view class="semester">
           {{semesterArray[Sindex]}}
         </view>
-      </picker>
+      </picker> -->
+      <view class="semester">
+        {{semesterArray[1]}}
+      </view>
     </view>
+    
   </view>
 </view>
+
+<!-- 课表详情-->
+
+<modal title="课程详情" hidden="{{showDetail}}" confirm-text="确定" cancel-text="" bindconfirm="listenerConfirm" >
+  <view class='detail'>
+  <text >课程号：{{currentInfo.cnum}}</text>
+<text>课程名：{{currentInfo.fullname}}</text>
+<text>教师名：{{currentInfo.tname}}</text>
+<text>教室：{{currentInfo.address}}</text></view>
+</modal>
+
+
+
+
+
 <!-- 课表显示 -->
 <view class='table'>
   <scroll-view scroll-x="true" class="tab-h" scroll-left="{{scrollLeft}}">
@@ -32,7 +51,7 @@
   <swiper class="tab-content" current="{{currentTab}}" duration="300" bindchange="switchTab" style="height:{{winHeight}}rpx">
     <swiper-item wx:for="{{[0,1,2,3,4,5,6]}}">
       <scroll-view scroll-y="true" class="scoll-h">
-        <view class='box' wx:for="{{todayData}}">
+        <view class='box' wx:for="{{todayData}}" wx:for-index="select" id="{{select}}" bindtap='detail' wx-if="{{!todayIsNull}}">
           <text class='num'>{{item.index}}</text>
           <block>
             <view class='right'>
@@ -44,7 +63,11 @@
           </block>
 
         </view>
+        <view class='noClass' wx-if="{{todayIsNull}}">
+        今天居然没有课~😆
+        </view>
       </scroll-view>
     </swiper-item>
   </swiper>
+  <view class='pullDown'>下拉刷新获取最新的课表</view>
 </view>
