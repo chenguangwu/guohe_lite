@@ -164,63 +164,31 @@ function showDataUtil(info, semester, week, currentTab,that) {
   })
 }
 
-//获取排行榜详细信息
-function getToplistInfo(id, callback) {
+//获取one的图文信息
+function getOneContent(callback){
   wx.request({
-    url: 'https://c.y.qq.com/v8/fcg-bin/fcg_v8_toplist_cp.fcg',
-    data: {
-      g_tk: 5381,
-      uin: 0,
-      format: 'json',
-      inCharset: 'utf-8',
-      outCharset: 'utf-8',
-      notice: 0,
-      platform: 'h5',
-      needNewCode: 1,
-      tpl: 3,
-      page: 'detail',
-      type: 'top',
-      topid: id,
-      _: Date.now()
+    url: 'https://api.hibai.cn/api/index/index',
+    dataType: 'json',
+    data: { "TransCode": "030111", "OpenId": "123456789", "Body": "" },
+    header: {
+      "Content-Type": "application/x-www-form-urlencoded"  
     },
-    method: 'GET',
-    header: { 'content-type': 'application/json' },
+    method: "POST",  
     success: function (res) {
-      if (res.statusCode == 200) {
+      if(res.statusCode==200){
         callback(res.data);
       }
     }
   })
 }
 
-/**
- * 获取单首歌曲的信息
- */
-function getSongInfo(id, mid, callback) {
-  wx.request({
-    url: 'https://c.y.qq.com/splcloud/fcgi-bin/fcg_list_songinfo_cp.fcg',
-    data: {
-      url: 1,
-      idlist: id,
-      midlist: mid,
-      typelist: 0
-    },
-    method: 'GET',
-    header: { 'content-type': 'application/json' },
-    success: function (res) {
-      if (res.statusCode == 200) {
-        var data = res.data.data;
-        callback(data);
+function today_dataIsNull(data){
+    for(var i=0;i<data.length;i++){
+      if(data[i].length>2){
+        return false
       }
     }
-  });
-}
-
-// 获取最小值到最大值之前的整数随机数
-function GetRandomNum(Min, Max) {
-  var Range = Max - Min;
-  var Rand = Math.random();
-  return (Min + Math.round(Rand * Range));
+    return true;
 }
 function today_dataIsNull(data){
     for(var i=0;i<data.length;i++){
@@ -236,5 +204,8 @@ module.exports = {
   // GetRandomNum: GetRandomNum,
   today_dataIsNull: today_dataIsNull,
   formatTime: formatTime,
-  showData: showData
+
+  showData: showData,
+  getOneContent: getOneContent
+
 }

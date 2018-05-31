@@ -16,10 +16,7 @@ Page({
     tdIsNull: false,
     toView: 'red',
     scrollTop: 100,
-    // poster: 'http://y.gtimg.cn/music/photo_new/T002R300x300M000003rsKF44GyaSk.jpg?max_age=2592000',
-    // name: '此时此刻',
-    // author: '许巍',
-    // src: 'http://ws.stream.qqmusic.qq.com/M500001VfvsJ21xFqb.mp3?guid=ffffffff82def4af4b12b3cd9337d5e7&uin=346897220&vkey=6292F51E1E384E06DCBDC9AB7C49FD713D632D313AC4858BACB8DDD29067D3C601481D36E62053BF8DFEAF74C0A5CCFADD6471160CAF3E6A&fromtag=46',
+
     cores: [
       [
         { id: 'table', name: '课表', disabled: false, teacher_disabled: false, offline_disabled: false },
@@ -92,7 +89,12 @@ Page({
       }
     },
     user: {},
-    disabledItemTap: false //点击了不可用的页面
+    disabledItemTap: false ,//点击了不可用的页面
+    oneImg:'',
+    oneWord:'',
+    oneWordFrom:'',
+    oneDate:'',
+    oneImgAuthor:''
   },
   /**
    * 生命周期函数--监听页面加载
@@ -203,6 +205,7 @@ Page({
                         temp.index = (i * 2 + 1) + '-' + (i * 2 + 2)
                         temp.cnum = info_list[0]
 
+
                         if (info_list[1].length >= 20) {
                           temp.cname = info_list[1].substr(0, 20) + "..."
                         } else {
@@ -215,6 +218,7 @@ Page({
                       if (JSON.stringify(temp) != "{}") {
                         today_data_list.push(temp)
                       }
+
 
                     }
                     if (today_data_list.length > 0) {
@@ -355,29 +359,18 @@ Page({
       }
 
     })
-    util.getToplistInfo(27, function (data) {
-      wx.hideLoading();
-      if (data.color == '14737632') {
-        that.setData({ isLight: true })
-      };
-      that.setData({
-        songlist: data.songlist,
-      });
-      console.log(data)
-      var num = util.GetRandomNum(1, 90);
-      var mid = data.songlist[num].data.songmid;
-      var albummid = data.songlist[num].data.albummid
-      var name = data.songlist[num].data.albumname
-      var author = data.songlist[num].data.singer[0].name
-      console.log(mid)
-      console.log(albummid)
+
+    util.getOneContent(function(data){
+      console.log(data);
+
 
       that.setData({
-        src: 'http://ws.stream.qqmusic.qq.com/C100' + mid + '.m4a?fromtag=38',
-        poster: 'http://y.gtimg.cn/music/photo_new/T002R150x150M000' + albummid + '.jpg',
-        name: name,
-        author: author,
-      });
+        oneImg: data.Body.img_url,
+        oneWord: data.Body.word,
+        oneWordFrom: data.Body.word_from,
+        oneDate: data.Body.date.split(' ')[0].replace(/\-/g, "\/"),
+        oneImgAuthor: data.Body.img_kind + ' | ' +data.Body.img_author
+      })
     })
   },
 
