@@ -16,7 +16,7 @@ Page({
     tdIsNull: false,
     toView: 'red',
     scrollTop: 100,
-    poster: 'http://y.gtimg.cn/music/photo_new/T002R300x300M000003rsKF44GyaSk.jpg?max_age=2592000',
+    // poster: 'http://y.gtimg.cn/music/photo_new/T002R300x300M000003rsKF44GyaSk.jpg?max_age=2592000',
     // name: '此时此刻',
     // author: '许巍',
     // src: 'http://ws.stream.qqmusic.qq.com/M500001VfvsJ21xFqb.mp3?guid=ffffffff82def4af4b12b3cd9337d5e7&uin=346897220&vkey=6292F51E1E384E06DCBDC9AB7C49FD713D632D313AC4858BACB8DDD29067D3C601481D36E62053BF8DFEAF74C0A5CCFADD6471160CAF3E6A&fromtag=46',
@@ -28,7 +28,7 @@ Page({
         { id: 'library', name: '馆藏', disabled: false, teacher_disabled: false, offline_disabled: false },
         { id: 'bus', name: '校车', disabled: false, teacher_disabled: true, offline_disabled: false },
         { id: 'sport', name: '体育', disabled: false, teacher_disabled: true, offline_disabled: false },
-
+       
       ]
     ],
     semester: '',
@@ -355,30 +355,30 @@ Page({
       }
 
     })
-    // util.getToplistInfo(27, function (data) {
-    //   wx.hideLoading();
-    //   if (data.color == '14737632') {
-    //     that.setData({ isLight: true })
-    //   };
-    //   that.setData({
-    //     songlist: data.songlist,
-    //   });
-    //   console.log(data)
-    //   var num = util.GetRandomNum(1, 90);
-    //   var mid = data.songlist[num].data.songmid;
-    //   var albummid = data.songlist[num].data.albummid
-    //   var name = data.songlist[num].data.albumname
-    //   var author = data.songlist[num].data.singer[0].name
-    //   console.log(mid)
-    //   console.log(albummid)
+    util.getToplistInfo(27, function (data) {
+      wx.hideLoading();
+      if (data.color == '14737632') {
+        that.setData({ isLight: true })
+      };
+      that.setData({
+        songlist: data.songlist,
+      });
+      console.log(data)
+      var num = util.GetRandomNum(1, 90);
+      var mid = data.songlist[num].data.songmid;
+      var albummid = data.songlist[num].data.albummid
+      var name = data.songlist[num].data.albumname
+      var author = data.songlist[num].data.singer[0].name
+      console.log(mid)
+      console.log(albummid)
 
-    //   that.setData({
-    //     src: 'http://ws.stream.qqmusic.qq.com/C100' + mid + '.m4a?fromtag=38',
-    //     poster: 'http://y.gtimg.cn/music/photo_new/T002R150x150M000' + albummid + '.jpg',
-    //     name: name,
-    //     author: author,
-    //   });
-    // })
+      that.setData({
+        src: 'http://ws.stream.qqmusic.qq.com/C100' + mid + '.m4a?fromtag=38',
+        poster: 'http://y.gtimg.cn/music/photo_new/T002R150x150M000' + albummid + '.jpg',
+        name: name,
+        author: author,
+      });
+    })
   },
 
   /**

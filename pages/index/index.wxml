@@ -71,7 +71,6 @@
     <calendar />
   </view> -->
 
-   <!-- 音乐
   <view class="main-card-item" id="music" wx:if="{{music_flag}}">
     <view class="card-item-hd">
       <image class="card-item-icon" src="/images/index/music.png"></image>
@@ -90,5 +89,5 @@
         <view style="text-align: center;font-size:30rpx;margin:30rpx">每个人都要学会与这个世界宣战，然后再慢慢学会与这个世界和解。</view>
       </view>
     </scroll-view>
-  </view>  -->
+  </view>  
 </view>
