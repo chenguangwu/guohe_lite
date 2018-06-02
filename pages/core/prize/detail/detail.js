@@ -27,18 +27,21 @@ Page({
       success: function (res) {
         if (res.data.data.student) {
           that.setData({
-            student :res.data.data.student,
-            isOpen : true
+            student: res.data.data.student,
+            isOpen: true
           })
-       
+        }
+        var rankAcademy = res.data.data.rankAcademy
+        for (var i = 0; i < rankAcademy.length; i++) {
+          rankAcademy[i].name = rankAcademy[i].name.substring(0, 9);
         }
         that.setData({
           prize: res.data.data.prize,
           totalJoiners: res.data.data.totalJoiners,
-          rankAcademy: res.data.data.rankAcademy
-          
-        })
+          rankAcademy: rankAcademy
 
+        })
+      
 
       }
     })
