@@ -20,18 +20,20 @@ Page({
     wx.getStorage({
       key: 'account',
       success: function (res) {
+        console.log(res.data.username)
         wx.request({
           url: 'https://jihangyu.cn/prize/isJoined',
           method: "POST",
           data: { "username": res.data.username},
           success: function (res) {
+            console.log(res.data)
             if (res.data.data=='0'){
               that.setData({
-                isJoin: res.data,
+                isJoin: res.data.data,
                 message:'参与抽奖'
               })
             }else{
-   
+  
               that.setData({
                 isJoin: res.data,
                 message: '已参加'
