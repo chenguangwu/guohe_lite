@@ -198,6 +198,7 @@ function today_dataIsNull(data){
     }
     return true;
 }
+
 module.exports = {
   // getToplistInfo: getToplistInfo,
   // getSongInfo: getSongInfo,

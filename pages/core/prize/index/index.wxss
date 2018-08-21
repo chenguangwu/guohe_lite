@@ -1,15 +1,16 @@
 .prize-pic {
-  width: 16rem;
-  height: 20rem;
+  width: 85%;
+  height: 500rpx;
   position: relative;
   left: 50%;
   transform: translateX(-50%);
   margin-top: 1rem;
+
 }
 
 .prize-name {
-  margin-top: 0.8rem;
-  font-size: 1em;
+  margin-top: 20rpx;
+  font-size: 30rpx;
 }
 
 .prize-time {
@@ -52,6 +53,7 @@ body {
   background: rgb(255, 235, 205);
   margin-top: 1rem;
   border-radius: 8px;
+  font-size: 30rpx;
 }
 
 .attend {
