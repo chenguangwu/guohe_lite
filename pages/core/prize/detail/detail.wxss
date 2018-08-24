@@ -48,6 +48,7 @@ page {
   background: rgb(255, 235, 205);
   margin-top: 1rem;
   border-radius: 8px;
+  font-size: 30rpx;
 }
 
 .attend {
