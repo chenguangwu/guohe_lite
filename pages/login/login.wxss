@@ -1,5 +1,5 @@
 page {
-    background: url('../images/logo.png');
+    background: url('https://raw.githubusercontent.com/YueYongDev/guohe_lite/master/images/login.png');
     background-position: center;
     background-size: 100%;
 }
