@@ -140,8 +140,9 @@ Page({
 
     //处理课表信息
     handleKbInfo: function(data) {
-        var kbArray = [];
-
+        this.setData({
+            kb:[]
+        })
         for (var i = 0; i < data.length; i++) {
             //设置课程信息,2*i+1表示节次
             this.setCourse(2 * i + 1, data[i])
@@ -295,7 +296,6 @@ Page({
         this.setData({
             yearIndex: thisYearIndex
         })
-        console.log(thisYearIndex)
         try {
             wx.setStorageSync('thisYearIndex', thisYearIndex)
         } catch (e) {
