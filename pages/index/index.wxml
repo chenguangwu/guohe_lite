@@ -53,6 +53,7 @@
         </view>
     </view>
 
+    <!-- 日知录 -->
     <view class="main-card-item" id="music" wx:if="{{music_flag}}">
         <view class="card-item-hd">
             <image class="card-item-icon" src="/images/index/one.png"></image>
@@ -72,6 +73,7 @@
             </view>
 
         </view>
-
     </view>
+
+    <official-account></official-account>
 </view>
