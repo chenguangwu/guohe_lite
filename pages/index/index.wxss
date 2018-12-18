@@ -1,541 +1,548 @@
 /**index.wxss**/
 
 .out {
-    box-shadow: 0px 0px 10px 5px #aaa;
+  box-shadow: 0px 0px 10px 5px #aaa;
 }
 
 .in {
-    box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.2) inset;
+  box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.2) inset;
 }
 
 .toast {
-    letter-spacing: 3rpx;
-    line-height: 50rpx;
-    font-size: 28rpx;
-    margin-left: 20rpx;
-    margin-top: 20rpx;
-    margin-bottom: 40rpx;
+  letter-spacing: 3rpx;
+  line-height: 50rpx;
+  font-size: 28rpx;
+  margin-left: 20rpx;
+  margin-top: 20rpx;
+  margin-bottom: 40rpx;
+}
+
+.ad {
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
 }
 
 .calendar {
-    letter-spacing: 3rpx;
-    line-height: 50rpx;
-    font-size: 28rpx;
-    margin-left: 20rpx;
-    margin-top: 20rpx;
-    margin-bottom: 40rpx;
+  letter-spacing: 3rpx;
+  line-height: 50rpx;
+  font-size: 28rpx;
+  margin-left: 20rpx;
+  margin-top: 20rpx;
+  margin-bottom: 40rpx;
 }
 
 .show {
-    display: block;
+  display: block;
 }
 
 .hide {
-    display: none;
+  display: none;
 }
 
 .box {
-    display: flex;
-    height: 200rpx;
-    margin: 20rpx auto;
-    background-color: white;
-    width: 100%;
+  display: flex;
+  height: 200rpx;
+  margin: 20rpx auto;
+  background-color: white;
+  width: 100%;
 }
 
 .box .item {
-    height: 52rpx;
-    font-size: 0.8rem;
-    color: rgb(49, 49, 49);
+  height: 52rpx;
+  font-size: 0.8rem;
+  color: rgb(49, 49, 49);
 }
 
 .box .num {
-    line-height: 200rpx;
-    text-align: center;
-    color: rgb(0, 154, 97);
-    flex: 1 0 auto;
-    width: 50rpx;
+  line-height: 200rpx;
+  text-align: center;
+  color: rgb(0, 154, 97);
+  flex: 1 0 auto;
+  width: 50rpx;
 }
 
 .box .right {
-    flex: 5 0 auto;
-    height: 260rpx;
-    display: flex;
-    flex-direction: column;
-    padding-top: 30rpx;
+  flex: 5 0 auto;
+  height: 260rpx;
+  display: flex;
+  flex-direction: column;
+  padding-top: 30rpx;
 }
 
 .address {
-    flex: 1 0 auto;
-    font-size: 0.8rem;
-    line-height: 200rpx;
-    text-align: center;
-    color: #058;
+  flex: 1 0 auto;
+  font-size: 0.8rem;
+  line-height: 200rpx;
+  text-align: center;
+  color: #058;
 }
 
 page {
-    background-color: #f8f8f8;
+  background-color: #f8f8f8;
 }
 
 .container {
-    padding-bottom: 0;
-    background-color: #f0eff5;
-    background-repeat: no-repeat;
-    background-size: 100% auto;
-    background-position: bottom center;
-    /*background-image: url('/images/index/tri.png');*//*微信暂不支持静态bgimg文件，改用服务器url*/
+  padding-bottom: 0;
+  background-color: #f0eff5;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: bottom center;
+  /*background-image: url('/images/index/tri.png');*//*微信暂不支持静态bgimg文件，改用服务器url*/
 }
 
 /**功能导航**/
 
 .main-core {
-    display: flex;
-    flex-flow: row wrap;
-    align-content: flex-start;
-    background: #fff;
-    border-bottom: 1rpx solid #e5e5e5;
-    padding: 15rpx 10rpx 10rpx;
-    min-height: 350rpx;
-    overflow: hidden;
+  display: flex;
+  flex-flow: row wrap;
+  align-content: flex-start;
+  background: #fff;
+  border-bottom: 1rpx solid #e5e5e5;
+  padding: 15rpx 10rpx 10rpx;
+  min-height: 350rpx;
+  overflow: hidden;
 }
 
 .main-core-item {
-    display: flex;
-    flex-flow: column wrap;
-    justify-content: center;
-    align-items: center;
-    box-sizing: border-box;
-    width: 20%;
-    height: 170rpx;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  width: 20%;
+  height: 170rpx;
 }
 
 .main-core-item.disabled {
-    color: #9c9c9c;
+  color: #9c9c9c;
 }
 
 .core-item-icon {
-    display: block;
-    width: 55rpx;
-    height: 55rpx;
-    margin: 15rpx auto;
+  display: block;
+  width: 55rpx;
+  height: 55rpx;
+  margin: 15rpx auto;
 }
 
 .core-item-name {
-    font-size: 12px;
-    display: block;
-    margin: 5rpx;
+  font-size: 12px;
+  display: block;
+  margin: 5rpx;
 }
 
 .main-swpier {
-    height: 390rpx;
-    margin-bottom: 20rpx;
+  height: 390rpx;
+  margin-bottom: 20rpx;
 }
 
 .main-swpier .wx-swiper-dots.wx-swiper-dots-horizontal {
-    bottom: 0;
-    margin-bottom: 2rpx;
+  bottom: 0;
+  margin-bottom: 2rpx;
 }
 
 /**卡片列表**/
 
 .main-card {
-    padding-bottom: 100rpx;
+  padding-bottom: 100rpx;
 }
 
 .main-card-item {
-    display: flex;
-    flex-direction: column;
-    background: #fff;
-    border-top: 1rpx solid #f6f6ef;
-    border-bottom: 1rpx solid #f6f6ef;
-    margin-bottom: 20rpx;
-    background-repeat: no-repeat;
-    background-size: 100% auto;
-    background-position: bottom center;
-    overflow: hidden;
-    margin-left: 12rpx;
-    margin-right: 12rpx;
-    border-radius: 15rpx;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-top: 1rpx solid #f6f6ef;
+  border-bottom: 1rpx solid #f6f6ef;
+  margin-bottom: 20rpx;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: bottom center;
+  overflow: hidden;
+  margin-left: 12rpx;
+  margin-right: 12rpx;
+  border-radius: 15rpx;
 }
 
 .main-card-item#kb {
-    /*background-image: url('/images/index/kb-bg.png');*//*微信暂不支持静态bgimg文件，改用服务器url*/
-    font-size: 35rpx;
-    text-align: center;
+  /*background-image: url('/images/index/kb-bg.png');*//*微信暂不支持静态bgimg文件，改用服务器url*/
+  font-size: 35rpx;
+  text-align: center;
 }
 
 .main-card-item#ykt {
-    /*background-image: url('/images/index/ykt-bg.png');*//*微信暂不支持静态bgimg文件，改用服务器url*/
-    background-image: url('https://we.cqu.pt/app/images/index/ykt-bg.png');
+  /*background-image: url('/images/index/ykt-bg.png');*//*微信暂不支持静态bgimg文件，改用服务器url*/
+  background-image: url('https://we.cqu.pt/app/images/index/ykt-bg.png');
 }
 
 .main-card-item#jy {
-    /*background-image: url('/images/index/jy-bg.png');*//*微信暂不支持静态bgimg文件，改用服务器url*/
-    background-image: url('https://we.cqu.pt/app/images/index/jy-bg.png');
+  /*background-image: url('/images/index/jy-bg.png');*//*微信暂不支持静态bgimg文件，改用服务器url*/
+  background-image: url('https://we.cqu.pt/app/images/index/jy-bg.png');
 }
 
 .main-card-item#sdf {
-    /*background-image: url('/images/index/sdf-bg.png');*//*微信暂不支持静态bgimg文件，改用服务器url*/
-    background-image: url('https://we.cqu.pt/app/images/index/sdf-bg.png');
+  /*background-image: url('/images/index/sdf-bg.png');*//*微信暂不支持静态bgimg文件，改用服务器url*/
+  background-image: url('https://we.cqu.pt/app/images/index/sdf-bg.png');
 }
 
 .main-card-item navigator {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 page .navigator-hover {
-    background-color: rgba(100, 100, 100, 0.1);
-    opacity: 0.8;
+  background-color: rgba(100, 100, 100, 0.1);
+  opacity: 0.8;
 }
 
 .card-item-hd {
-    display: flex;
-    align-items: center;
-    height: 75rpx;
-    border-bottom: 1rpx solid #e5e5e5;
-    margin-left: 30rpx;
+  display: flex;
+  align-items: center;
+  height: 75rpx;
+  border-bottom: 1rpx solid #e5e5e5;
+  margin-left: 30rpx;
 }
 
 .card-item-icon {
-    width: 40rpx;
-    height: 40rpx;
-    margin-right: 10rpx;
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 10rpx;
 }
 
 .card-item-name {
-    letter-spacing: 1px;
-    font-size: 25rpx;
+  letter-spacing: 1px;
+  font-size: 25rpx;
 }
 
 .card-item-more {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding-right: 40rpx;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 40rpx;
 }
 
 .card-item-open {
-    width: 30rpx;
-    height: 30rpx;
+  width: 30rpx;
+  height: 30rpx;
 }
 
 .card-item-bd {
-    padding: 20rpx 25rpx 30rpx 0;
-    margin-left: 30rpx;
-    display: flex;
-    flex-direction: column;
+  padding: 20rpx 25rpx 30rpx 0;
+  margin-left: 30rpx;
+  display: flex;
+  flex-direction: column;
 }
 
 .card-info-hd {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .card-info-left {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .card-info-right {
-    display: flex;
-    color: #acacac;
-    flex-direction: column;
+  display: flex;
+  color: #acacac;
+  flex-direction: column;
 }
 
 .card-info-name {
-    font-size: 16pt;
-    line-height: 1.2;
-    letter-spacing: 1px;
-    color: #acacac;
+  font-size: 16pt;
+  line-height: 1.2;
+  letter-spacing: 1px;
+  color: #acacac;
 }
 
 .card-info-number {
-    line-height: 175%;
-    text-indent: 1px;
-    color: #aaa;
+  line-height: 175%;
+  text-indent: 1px;
+  color: #aaa;
 }
 
 .main-ending {
-    display: none;
-    /*display: flex;*/
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    margin-top: 75rpx;
-    overflow: hidden;
+  display: none;
+  /*display: flex;*/
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 75rpx;
+  overflow: hidden;
 }
 
 .main-ending-text {
-    width: 72pt;
-    color: #ccc;
-    font-size: 8pt;
-    padding: 0 16rpx;
-    text-align: center;
-    white-space: nowrap;
+  width: 72pt;
+  color: #ccc;
+  font-size: 8pt;
+  padding: 0 16rpx;
+  text-align: center;
+  white-space: nowrap;
 }
 
 .main-ending-line {
-    width: 100%;
-    height: 0;
-    border-top: 1rpx solid #e5e5e5;
+  width: 100%;
+  height: 0;
+  border-top: 1rpx solid #e5e5e5;
 }
 
 /**今日课表**/
 
 .main-card-item#kb .card-item-bd {
-    padding: 0;
-    margin-right: 25rpx;
+  padding: 0;
+  margin-right: 25rpx;
 }
 
 .kb-nothing {
-    align-items: center;
-    justify-content: center;
-    font-size: 11pt;
-    min-height: 150rpx;
+  align-items: center;
+  justify-content: center;
+  font-size: 11pt;
+  min-height: 150rpx;
 }
 
 .kb-open {
-    display: flex;
-    font-size: 0.6rem;
-    justify-content: center;
-    text-align: center;
-    color: #ccc;
-    margin: 20rpx;
-    border-top: 1rpx solid #e5e5e5;
-    margin-top: -1rpx;
+  display: flex;
+  font-size: 0.6rem;
+  justify-content: center;
+  text-align: center;
+  color: #ccc;
+  margin: 20rpx;
+  border-top: 1rpx solid #e5e5e5;
+  margin-top: -1rpx;
 }
 
 .kb-item {
-    display: flex;
-    flex-direction: row;
-    height: 120rpx;
-    align-items: center;
-    border-bottom: 1px dotted #e5e5e5;
+  display: flex;
+  flex-direction: row;
+  height: 120rpx;
+  align-items: center;
+  border-bottom: 1px dotted #e5e5e5;
 }
 
 .kb-item-left {
-    flex: 0 0 40%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    padding-right: 25rpx;
-    overflow: hidden;
+  flex: 0 0 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding-right: 25rpx;
+  overflow: hidden;
 }
 
 .kb-item-when {
-    color: #777;
-    font-size: 30rpx;
+  color: #777;
+  font-size: 30rpx;
 }
 
 .kb-item-right {
-    display: flex;
-    flex: 0 0 60%;
-    flex-direction: column;
-    justify-content: flex-start;
+  display: flex;
+  flex: 0 0 60%;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 .kb-item-what {
-    display: -webkit-box;
-    word-break: break-all;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
-    -webkit-box-align: start; /* 居中显示*/
-    font-size: 25rpx;
-    color: #777;
+  display: -webkit-box;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  -webkit-box-align: start; /* 居中显示*/
+  font-size: 25rpx;
+  color: #777;
 }
 
 .kb-item-where {
-    font-size: 25rpx;
-    color: #777;
-    display: flex;
-    justify-content: flex-start;
+  font-size: 25rpx;
+  color: #777;
+  display: flex;
+  justify-content: flex-start;
 }
 
 /**一卡通**/
 
 .ykt-balance {
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    font-weight: bold;
-    padding: 25rpx 0 30rpx;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  font-weight: bold;
+  padding: 25rpx 0 30rpx;
 }
 
 .ykt-balance-text {
-    font-size: 17pt;
-    line-height: 2;
-    color: #999;
+  font-size: 17pt;
+  line-height: 2;
+  color: #999;
 }
 
 .ykt-balance-value {
-    font-size: 58pt;
-    line-height: 1;
-    padding: 0 20rpx;
-    color: #ffbf92;
+  font-size: 58pt;
+  line-height: 1;
+  padding: 0 20rpx;
+  color: #ffbf92;
 }
 
 .ykt-cost {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    padding: 20rpx 0 30rpx;
-    font-weight: bold;
-    line-height: 200%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 20rpx 0 30rpx;
+  font-weight: bold;
+  line-height: 200%;
 }
 
 .ykt-cost-text {
-    font-size: 10pt;
-    color: #999;
+  font-size: 10pt;
+  color: #999;
 }
 
 .ykt-cost-value {
-    font-size: 12pt;
-    font-weight: normal;
-    color: #777;
-    padding: 0 10rpx;
+  font-size: 12pt;
+  font-weight: normal;
+  color: #777;
+  padding: 0 10rpx;
 }
 
 .ykt-cost-total {
-    font-size: 16pt;
-    color: #ffbf92;
-    padding: 0 10rpx;
+  font-size: 16pt;
+  color: #ffbf92;
+  padding: 0 10rpx;
 }
 
 .ykt-title {
-    font-size: 10pt;
+  font-size: 10pt;
 }
 
 .ykt-no-cost {
-    color: #bbb;
+  color: #bbb;
 }
 
 /**借阅信息**/
 
 .main-card-item#jy .card-item-bd {
-    padding-bottom: 85rpx;
+  padding-bottom: 85rpx;
 }
 
 .jy-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 
 .jy-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 20rpx 15rpx 15rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20rpx 15rpx 15rpx;
 }
 
 .jy-book {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    box-sizing: border-box;
-    width: 176rpx;
-    height: 231rpx;
-    /*background-image: url('/images/index/jy-book.png');*//*微信暂不支持静态bgimg文件，改用服务器url*/
-    background-image: url('https://we.cqu.pt/app/images/index/jy-book.png');
-    background-size: 100% 100%;
-    padding: 5rpx 5rpx 50rpx 30rpx;
-    color: #fff;
-    margin-bottom: 10rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  box-sizing: border-box;
+  width: 176rpx;
+  height: 231rpx;
+  /*background-image: url('/images/index/jy-book.png');*//*微信暂不支持静态bgimg文件，改用服务器url*/
+  background-image: url('https://we.cqu.pt/app/images/index/jy-book.png');
+  background-size: 100% 100%;
+  padding: 5rpx 5rpx 50rpx 30rpx;
+  color: #fff;
+  margin-bottom: 10rpx;
 }
 
 .jy-pickup-time {
-    text-align: right;
-    font-size: 8pt;
-    word-wrap: break-word;
-    white-space: nowrap;
+  text-align: right;
+  font-size: 8pt;
+  word-wrap: break-word;
+  white-space: nowrap;
 }
 
 .jy-pickup-time-text {
-    padding-left: 4rpx;
+  padding-left: 4rpx;
 }
 
 .jy-book-name {
-    height: 126rpx;
-    font-size: 28rpx;
-    font-weight: bold;
-    line-height: 150%;
-    word-wrap: break-word;
-    word-break: break-all;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
+  height: 126rpx;
+  font-size: 28rpx;
+  font-weight: bold;
+  line-height: 150%;
+  word-wrap: break-word;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
 }
 
 .jy-timing, jy-return-time {
-    line-height: 200%;
+  line-height: 200%;
 }
 
 .jy-timing-value {
-    font-size: 13pt;
-    font-weight: bold;
-    color: #729fc3;
-    padding: 0 8rpx;
+  font-size: 13pt;
+  font-weight: bold;
+  color: #729fc3;
+  padding: 0 8rpx;
 }
 
 .jy-timing-text {
-    font-size: 10pt;
-    color: #acacac;
+  font-size: 10pt;
+  color: #acacac;
 }
 
 .jy-return-time-value {
-    font-size: 12pt;
-    color: #7f848a;
+  font-size: 12pt;
+  color: #7f848a;
 }
 
 .jy-return-time-text {
-    font-size: 10pt;
-    color: #acacac;
-    padding-left: 8rpx;
+  font-size: 10pt;
+  color: #acacac;
+  padding-left: 8rpx;
 }
 
 /**水电费**/
 
 .main-card-item#sdf .card-item-bd {
-    padding-bottom: 80rpx;
+  padding-bottom: 80rpx;
 }
 
 .sdf-hd {
-    color: #acacac;
-    margin: 40rpx 0 20rpx;
+  color: #acacac;
+  margin: 40rpx 0 20rpx;
 }
 
 .sdf-bd {
-    display: flex;
-    justify-content: space-between;
-    padding: 30rpx 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 30rpx 0;
 }
 
 .sdf-key {
-    padding: 0 10rpx;
+  padding: 0 10rpx;
 }
 
 .sdf-value {
-    color: #ffbf92;
-    font-size: 46pt;
-    font-weight: bold;
-    padding: 0 15rpx;
+  color: #ffbf92;
+  font-size: 46pt;
+  font-weight: bold;
+  padding: 0 15rpx;
 }
 
 .sdf-text {
-    color: #acacac;
-    font-size: 13pt;
+  color: #acacac;
+  font-size: 13pt;
 }
 
 .weui-footer {
-    margin: 50rpx 0;
+  margin: 50rpx 0;
 }
 
 .weui-center {
-    text-align: center;
+  text-align: center;
 }

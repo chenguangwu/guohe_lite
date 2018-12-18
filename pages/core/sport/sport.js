@@ -1,4 +1,6 @@
-// pages/core/sport/sport.js
+var HttpUtils = require('../../../utils/http-utils.js')
+var Constant = require('../../../utils/constant.js')
+
 Page({
 
   /**
@@ -13,17 +15,193 @@ Page({
     dataList: [],
     isLoad: true,
     showModal: true,
-    inputVal: '',
+    inputVal: '', //密码框中输入的内容
     isNoPassword: true,
   },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function(options) {
+    this.isPassExisted();
+  },
+
+  //判断本地是否有体育密码
+  isPassExisted: function() {
+    console.log('判断本地是否有体育密码')
+    var that = this;
+    var password = '';
+    wx.getStorage({
+      key: 'sport',
+      success(res) {
+        //如果存在
+        console.log('密码存在' + res.data)
+        that.setData({
+          isNoPassword: false
+        })
+        console.log(res.data)
+        password = res.data;
+        that.getExerciseData(password);
+      },
+    })
+  },
+
+  //密码对话框点击确定后
+  onConfirm: function() {
+    this.hideModal();
+
+    //获取早操数据
+    this.getExerciseData(this.data.inputVal)
+
+  },
+
+  //获取早操数据
+  getExerciseData: function(password) {
+    var account = wx.getStorageSync('account')
+
+    if (account) {
+      //已经登陆
+      var username = account.username;
+      console.log(username)
+      console.log(password)
+      var param = {
+        'username': username,
+        'password': password
+      }
+      //发送获取学生早操信息的请求
+      HttpUtils._post(
+        Constant.EXERCISE,
+        param,
+        //两个回调函数
+        this.getExerciseSuccess,
+        this.getExerciseFail
+      )
+    }
+  },
+
+  //获取早操信息成功的回调函数
+  getExerciseSuccess: function(res) {
+    if (res.data.code == 500) {
+      wx.showToast({
+        title: '体育系统异常',
+        icon: 'loading'
+      })
+    }
+
+    if (res.data.code == 200) {
+      //响应成功，说明体育系统密码正确
+      //如果当前是无密码状态，将密码缓存到本地
+      if (this.data.isNoPassword) {
+        wx.setStorageSync('sport', this.data.inputVal)
+      }
+
+      //全部早操信息
+      var data = res.data.info;
+      console.log(data);
+
+      //更新早操数据
+      this.setData({
+        info: data[0].name + "\n" + data[0].sum + "\n" + data[0].year + data[0].total,
+        isLoad: false,
+        dataList: data[1],
+      })
+    } else {
+      wx.showToast({
+        title: res.data.msg,
+        icon: 'loading'
+      })
+      this.setData({
+        isLoad: false
+      })
+    }
+  },
+
+  //获取早操信息失败的回调函数
+  getExerciseFail: function(res) {
+    console.log(res)
+    wx.showToast({
+      title: '体育系统异常，请稍后重试',
+      icon: 'loading'
+    })
+  },
+
+  //tab切换时的操作
+  tabClick: function(e) {
+    //更换tab的状态
+    this.setData({
+      sliderOffset: e.currentTarget.offsetLeft,
+      activeIndex: e.currentTarget.id,
+      isLoad: true,
+    });
+
+    var choice = e.currentTarget.id;
+    //获取体育密码
+    var password = wx.getStorageSync('sport');
+    if (choice == 1) {
+      this.getClubData(password);
+    } else {
+      this.getExerciseData(password);
+    }
+  },
+
+  //获取俱乐部刷卡的数据
+  getClubData: function(password) {
+    var account = wx.getStorageSync('account')
+    if (account) {
+      //已经登陆
+      var username = account.username;
+      console.log(username)
+      console.log(password)
+      var param = {
+        'username': username,
+        'password': password
+      }
+      //发送获取学生早操信息的请求
+      HttpUtils._post(
+        Constant.CLUB,
+        param,
+        //两个回调函数
+        this.getClubSuccess,
+        this.getClubFail
+      )
+    }
+  },
+
+  //获取俱乐部刷卡信息成功的回调函数
+  getClubSuccess: function(res) {
+    console.log(res)
+    if (res.data.code == 200) {
+      console.log(res.data.info)
+      var data = res.data.info;
+      this.setData({
+        info: data[0].name + "\n" + data[0].sum + "\n" + data[0].year + data[0].total,
+        isLoad: false,
+        dataList: data[1],
+      })
+    } else {
+      wx.showToast({
+        title: res.data.msg,
+        icon: 'loading'
+      })
+      this.setData({
+        isLoad: false
+      })
+    }
+  },
+
+  //获取俱乐部刷卡信息失败的回调函数
+  getClubFail: function(e) {
+    console.log(e)
+  },
+
   showInfo() {
     console.log(this.data.info)
     wx.showModal({
       title: '小提示',
       showCancel: false,
       content: this.data.info,
-      success: function (res) {
-
+      success: function(res) {
+        console.log(res);
       }
     })
   },
@@ -32,7 +210,7 @@ Page({
       inputVal: e.detail.value
     });
   },
-  hideModal: function () {
+  hideModal: function() {
     this.setData({
       showModal: false
     });
@@ -40,424 +218,18 @@ Page({
   /**
    * 对话框取消按钮点击事件
    */
-  onCancel: function () {
+  onCancel: function() {
     this.hideModal();
+    this.setData({
+      isLoad: false
+    })
   },
   /**
    * 对话框确认按钮点击事件
    */
-  showDialogBtn: function () {
+  showDialogBtn: function() {
     this.setData({
       showModal: true
     })
   },
-  onConfirm: function () {
-    this.hideModal();
-    console.log(this.data.inputVal)
-    wx.setStorageSync('sport', this.data.inputVal)
-    var that = this
-    wx.getStorage({
-      key: 'account',
-      success: function (res) {
-        var sport = wx.getStorageSync("sport")
-        wx.request({
-          url: 'https://guohe3.com/vpnRun',
-          method: 'POST',
-          data: {
-            username: res.data.username,
-            password: sport
-          },
-          header: {
-            'content-type': 'application/x-www-form-urlencoded'
-          },
-          success: function (res) {
-            if (res.data.code != 200) {
-           
-              wx.showToast({
-                title: res.data.msg,
-                icon: 'loading'
-              })
-
-            } else {
-
-              that.setData({
-                isLoad: false,
-                dataList: res.data.info[1],
-              })
-
-            }
-
-          },
-          fail: function () {
-            wx.showToast({
-              title: '体育系统异常',
-              icon: 'loading',
-              duration: 2000
-            })
-          }
-        })
-
-
-      }, fail() {
-        console.log('未登录')
-        wx.showModal({
-          title: '提示',
-          content: '请先用教务系统账号登录',
-          success: function (res) {
-            if (res.confirm) {
-              console.log('用户点击确定')
-              wx.navigateTo({
-                url: '/pages/login/login',
-              })
-            } else if (res.cancel) {
-              console.log('用户点击取消')
-            }
-          }
-        })
-      }
-    })
-
-  },
-
-  tabClick: function (e) {
-    var that = this
-    wx.getStorage({
-      key: 'account',
-      success: function (res) {
-        var sport = wx.getStorageSync("sport")
-        console.log(sport)
-        if (e.currentTarget.id == 1) {
-          wx.request({
-            url: 'https://guohe3.com/vpnSport',
-            method: 'POST',
-            data: {
-              username: res.data.username,
-              password: sport
-            },
-            header: {
-              'content-type': 'application/x-www-form-urlencoded' // 
-            },
-            success: function (res) {
-
-              if (res.data.code != 200) {
-              
-                wx.showToast({
-                  title: res.data.msg,
-                  icon: 'loading'
-                })
-              } else {
-                console.log(res.data.info)
-                that.setData({
-                  info: res.data.info[0].name + "\\n" + res.data.info[0].sum + "\\n" + res.data.info[0].year + res.data.info[0].total,
-                  isLoad: false,
-                  dataList: res.data.info[1],
-                })
-
-              }
-
-            },
-            fail: function () {
-              wx.showToast({
-                title: '体育系统异常',
-                icon: 'loading',
-                duration: 2000
-              })
-            }
-          })
-
-        } else {
-
-          wx.request({
-            url: 'https://guohe3.com/vpnRun',
-            method: 'POST',
-            data: {
-              username: res.data.username,
-              password: sport
-            },
-            header: {
-              'content-type': 'application/x-www-form-urlencoded' // 
-            },
-            success: function (res) {
-              if (res.data.code != 200) {
-                wx.showToast({
-                  title: res.data.msg,
-                  icon: 'loading'
-                })
-              } else {
-
-                that.setData({
-                  info: res.data.info[0].name + "\\n" + res.data.info[0].year + res.data.info[0].total,
-                  isLoad: false,
-                  dataList: res.data.info[1],
-                })
-
-              }
-
-            },
-            fail: function () {
-              wx.showToast({
-                title: '体育系统异常',
-                icon: 'loading',
-                duration: 2000
-              })
-            }
-          })
-        }
-
-      }, fail() {
-        console.log('未登录')
-        wx.showModal({
-          title: '提示',
-          content: '请先用教务系统账号登录',
-          success: function (res) {
-            if (res.confirm) {
-              console.log('用户点击确定')
-              wx.navigateTo({
-                url: '/pages/login/login',
-              })
-            } else if (res.cancel) {
-              console.log('用户点击取消')
-            }
-          }
-        })
-      }
-    })
-    this.setData({
-      sliderOffset: e.currentTarget.offsetLeft,
-      activeIndex: e.currentTarget.id,
-      isLoad: true,
-    });
-
-  },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    var that = this
-    wx.getStorage({
-      key: 'sport',
-      success: function (res) {
-        that.setData({
-          isNoPassword: false
-        })
-        wx.getStorage({
-          key: 'account',
-          success: function (res) {
-            var sport = wx.getStorageSync("sport")
-            console.log(sport)
-            wx.request({
-              url: 'https://guohe3.com/vpnRun',
-              method: 'POST',
-              data: {
-                username: res.data.username,
-                password: sport
-              },
-              header: {
-                'content-type': 'application/x-www-form-urlencoded' // 
-              },
-              success: function (res) {
-                if (res.data.code != 200) {
-                 
-                  wx.showToast({
-                    title: res.data.msg,
-                    icon: 'loading'
-                  })
-                } else {
-                  console.log(res.data.info[0])
-                  that.setData({
-                    info: res.data.info[0].name + ' \r\n ' + res.data.info[0].year + ' \r\n ' + res.data.info[0].total,
-                    isLoad: false,
-                    dataList: res.data.info[1],
-                  })
-
-                }
-
-              },
-              fail: function () {
-                wx.showToast({
-                  title: '体育系统异常',
-                  icon: 'loading',
-                  duration: 2000
-                })
-              }
-            })
-
-
-          }, fail() {
-            console.log('未登录')
-            wx.showModal({
-              title: '提示',
-              content: '请先用教务系统账号登录',
-              success: function (res) {
-                if (res.confirm) {
-                  console.log('用户点击确定')
-                  wx.navigateTo({
-                    url: '/pages/login/login',
-                  })
-                } else if (res.cancel) {
-                  console.log('用户点击取消')
-                }
-              }
-            })
-          }
-        })
-      }
-    })
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-    wx.showNavigationBarLoading() //在标题栏中显示加载
-    this.setData({
-      isLoad: true,
-    });
-    var that = this
-    wx.getStorage({
-      key: 'account',
-      success: function (res) {
-        var sport = wx.getStorageSync("sport")
-        console.log(sport)
-        if (that.data.activeIndex == 1) {
-          wx.request({
-            url: 'https://guohe3.com/vpnSport',
-            method: 'POST',
-            data: {
-              username: res.data.username,
-              password: sport
-            },
-            header: {
-              'content-type': 'application/x-www-form-urlencoded' // 
-            },
-            success: function (res) {
-
-              if (res.data.code != 200) {
-                wx.showToast({
-                  title: res.data.msg,
-                  icon: 'loading'
-                })
-              } else {
-                wx.hideNavigationBarLoading()
-                wx.stopPullDownRefresh()
-                that.setData({
-                  info: res.data.info[0].name + ' \r\n ' + res.data.info[0].year + ' \r\n ' + res.data.info[0].total,
-                  isLoad: false,
-                  dataList: res.data.info[1],
-                })
-
-              }
-
-            },
-            fail: function () {
-              wx.showToast({
-                title: '体育系统异常',
-                icon: 'loading',
-                duration: 2000
-              })
-            }
-          })
-
-        } else {
-
-          wx.request({
-            url: 'https://guohe3.com/vpnRun',
-            method: 'POST',
-            data: {
-              username: res.data.username,
-              password: sport
-            },
-            header: {
-              'content-type': 'application/x-www-form-urlencoded' // 
-            },
-            success: function (res) {
-              if (res.data.code != 200) {
-                wx.showToast({
-                  title: res.data.msg,
-                  icon: 'loading'
-                })
-              } else {
-                wx.hideNavigationBarLoading()
-                wx.stopPullDownRefresh()
-                that.setData({
-                  isLoad: false,
-                  dataList: res.data.info[1],
-                })
-                wx.stopPullDownRefresh()
-              }
-
-            },
-            fail: function () {
-              wx.showToast({
-                title: res.data.msg,
-                icon: 'loading',
-                duration: 2000
-              })
-            }
-          })
-        }
-
-      }, fail() {
-        console.log('未登录')
-        wx.showModal({
-          title: '提示',
-          content: '请先用教务系统账号登录',
-          success: function (res) {
-            if (res.confirm) {
-              console.log('用户点击确定')
-              wx.navigateTo({
-                url: '/pages/login/login',
-              })
-            } else if (res.cancel) {
-              console.log('用户点击取消')
-            }
-          }
-        })
-      }
-    })
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })
