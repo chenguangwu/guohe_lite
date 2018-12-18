@@ -1,6 +1,6 @@
 <view id="app">
   <view class="one">
-       <image class="prize-pic" src="{{prize.img}}"></image>
+    <image class="prize-pic" src="{{prize.img}}"></image>
 
     <view class="first">
       <text class="prize-sponsor">{{prize.sponsor}} 赞助</text>
@@ -19,10 +19,10 @@
       <text class="line"></text>
     </view>
     <view class="rank">
-      <view class="item" wx:for="{{rankAcademy}}" wx:for-index="index" >
+      <view class="item" wx:key='index' wx:for="{{rankAcademy}}" wx:for-index="index">
 
-       <image src="http://p7gzvzwe4.bkt.clouddn.com/{{index+'1'}}.png" class='i' wx:if="{{index<=2}}"></image>   
-       <image src="http://p7gzvzwe4.bkt.clouddn.com/blank.png" class='i' wx:if="{{index>2}}"></image>   
+        <image src="http://p7gzvzwe4.bkt.clouddn.com/{{index+'1'}}.png" class='i' wx:if="{{index<=2}}"></image>
+        <image src="http://p7gzvzwe4.bkt.clouddn.com/blank.png" class='i' wx:if="{{index>2}}"></image>
 
         {{item.name}}
         <view class="people">{{item.number}} 人参与</view>
