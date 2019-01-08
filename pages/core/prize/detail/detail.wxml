@@ -1,6 +1,6 @@
 <view id="app">
   <view class="one">
-       <image class="prize-pic" src="{{prize.img}}"></image>
+    <image class="prize-pic" src="{{prize.img}}"></image>
 
     <view class="first">
       <text class="prize-sponsor">{{prize.sponsor}} 赞助</text>
@@ -14,15 +14,15 @@
       {{prize.saySponsor}}
     </view>
     <view class="participator">
-      <span class="line"></span>
-      <span class="more">已有 {{totalJoiners}} 位参与者</span>
-      <span class="line"></span>
+      <text class="line"></text>
+      <text class="more">已有 {{totalJoiners}} 位参与者</text>
+      <text class="line"></text>
     </view>
     <view class="rank">
-      <view class="item" wx:for="{{rankAcademy}}" wx:for-index="index" >
+      <view class="item" wx:key='index' wx:for="{{rankAcademy}}" wx:for-index="index">
 
-       <image src="http://p7gzvzwe4.bkt.clouddn.com/{{index+'1'}}.png" class='i' wx:if="{{index<=2}}"></image>   
-       <image src="http://p7gzvzwe4.bkt.clouddn.com/blank.png" class='i' wx:if="{{index>2}}"></image>   
+        <image src="http://p7gzvzwe4.bkt.clouddn.com/{{index+'1'}}.png" class='i' wx:if="{{index<=2}}"></image>
+        <image src="http://p7gzvzwe4.bkt.clouddn.com/blank.png" class='i' wx:if="{{index>2}}"></image>
 
         {{item.name}}
         <view class="people">{{item.number}} 人参与</view>
@@ -31,9 +31,9 @@
   </view>
   <view class="three">
 
-    <span class="line"></span>
-    <span class="more">天选之人</span>
-    <span class="line"></span>
+    <text class="line"></text>
+    <text class="more">天选之人</text>
+    <text class="line"></text>
 
     <view wx:if="{{isOpen}}">
       <view class="result-no">{{student.sName}}</view>
@@ -48,7 +48,5 @@
         尽情期待！
       </text>
     </view>
-
-
   </view>
 </view>

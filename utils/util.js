@@ -1,3 +1,22 @@
+function formatDate(date, split) {
+  var year = date.getFullYear()
+  var month = date.getMonth() + 1
+  var day = date.getDate()
+  return [year, month, day].map(formatNumber).join(split || '')
+}
+
+
+function formatNumber(n) {
+  n = n.toString()
+  return n[1] ? n : '0' + n
+}
+
+module.exports = {
+  formatTime: formatTime,
+  formatDate: formatDate
+}
+
+
 function formatTime(date) {
   var year = date.getFullYear()
   var month = date.getMonth() + 1
@@ -17,22 +36,22 @@ function formatNumber(n) {
 }
 
 
-function showData(semester, week, currentTab,that) {//week是星期几
+function showData(semester, week, currentTab, that) { //week是星期几
   wx.getStorage({
     key: semester,
-    success: function (res) {
+    success: function(res) {
       console.log("从缓存读取")
       that.setData({
         load: 'hide',
         content: 'show'
       })
-      showDataUtil(res.data, semester, week, currentTab,that)
+      showDataUtil(res.data, semester, week, currentTab, that)
     },
-    fail: function () {
+    fail: function() {
       console.log('从网络获取')
       wx.getStorage({
         key: 'account',
-        success: function (res) {
+        success: function(res) {
           if (res.data) {
             wx.request({
               url: 'https://guohe3.com/api/kb',
@@ -45,7 +64,7 @@ function showData(semester, week, currentTab,that) {//week是星期几
               header: {
                 'content-type': 'application/x-www-form-urlencoded' // 默认值
               },
-              success: function (res) {
+              success: function(res) {
                 if (res.data.code == 500) {
                   wx.showToast({
                     title: '教务系统异常',
@@ -58,14 +77,15 @@ function showData(semester, week, currentTab,that) {//week是星期几
                     key: semester,
                     data: res.data.info,
                   })
-                 
-                  showDataUtil(res.data.info, semester, week, currentTab,that)
+
+                  showDataUtil(res.data.info, semester, week, currentTab, that)
                   that.setData({
                     load: 'hide',
                     content: 'show'
                   })
                 }
-              },fail(){
+              },
+              fail() {
                 wx.showToast({
                   title: '网络获取失败',
                   icon: 'loading',
@@ -74,12 +94,13 @@ function showData(semester, week, currentTab,that) {//week是星期几
               }
             })
           }
-        },fail(){
+        },
+        fail() {
           console.log('用户未登录')
           wx.showModal({
             title: '提示',
             content: '请先用教务系统账号登录',
-            success: function (res) {
+            success: function(res) {
               if (res.confirm) {
                 console.log('用户点击确定')
                 wx.navigateTo({
@@ -92,16 +113,25 @@ function showData(semester, week, currentTab,that) {//week是星期几
           })
         }
       })
-      
+
     }
   })
 }
-function showDataUtil(info, semester, week, currentTab,that) {
-  var data_list = [[], [], [], [], [], [], []]
+
+function showDataUtil(info, semester, week, currentTab, that) {
+  var data_list = [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    []
+  ]
 
   var date = semester + '_' + (parseInt(week) + 1)
- 
-  var _data = info[parseInt(week)][date]//整个学期的课表数据(未转化)
+
+  var _data = info[parseInt(week)][date] //整个学期的课表数据(未转化)
 
   //把行数据转换为列数据
   for (var i = 0; i < _data.length; i++) {
@@ -134,7 +164,7 @@ function showDataUtil(info, semester, week, currentTab,that) {
   that.setData({
     kbData: data_list
   })
-  
+
   var today_data = data_list[currentTab]
   var today_data_list = new Array()
 
@@ -164,28 +194,15 @@ function showDataUtil(info, semester, week, currentTab,that) {
   })
 }
 
-//获取排行榜详细信息
-function getToplistInfo(id, callback) {
+//获取one的图文信息
+function getOneContent(callback) {
   wx.request({
-    url: 'https://c.y.qq.com/v8/fcg-bin/fcg_v8_toplist_cp.fcg',
-    data: {
-      g_tk: 5381,
-      uin: 0,
-      format: 'json',
-      inCharset: 'utf-8',
-      outCharset: 'utf-8',
-      notice: 0,
-      platform: 'h5',
-      needNewCode: 1,
-      tpl: 3,
-      page: 'detail',
-      type: 'top',
-      topid: id,
-      _: Date.now()
+    url: 'https://api.bzqll.com/one/day',
+    header: {
+      "Content-Type": "application/x-www-form-urlencoded"
     },
-    method: 'GET',
-    header: { 'content-type': 'application/json' },
-    success: function (res) {
+    method: "GET",
+    success: function(res) {
       if (res.statusCode == 200) {
         callback(res.data);
       }
@@ -193,48 +210,31 @@ function getToplistInfo(id, callback) {
   })
 }
 
-/**
- * 获取单首歌曲的信息
- */
-function getSongInfo(id, mid, callback) {
-  wx.request({
-    url: 'https://c.y.qq.com/splcloud/fcgi-bin/fcg_list_songinfo_cp.fcg',
-    data: {
-      url: 1,
-      idlist: id,
-      midlist: mid,
-      typelist: 0
-    },
-    method: 'GET',
-    header: { 'content-type': 'application/json' },
-    success: function (res) {
-      if (res.statusCode == 200) {
-        var data = res.data.data;
-        callback(data);
-      }
+function today_dataIsNull(data) {
+  for (var i = 0; i < data.length; i++) {
+    if (data[i].length > 2) {
+      return false
     }
-  });
+  }
+  return true;
 }
 
-// 获取最小值到最大值之前的整数随机数
-function GetRandomNum(Min, Max) {
-  var Range = Max - Min;
-  var Rand = Math.random();
-  return (Min + Math.round(Rand * Range));
-}
-function today_dataIsNull(data){
-    for(var i=0;i<data.length;i++){
-      if(data[i].length>2){
-        return false
-      }
+function today_dataIsNull(data) {
+  for (var i = 0; i < data.length; i++) {
+    if (data[i].length > 2) {
+      return false
     }
-    return true;
+  }
+  return true;
 }
+
 module.exports = {
   // getToplistInfo: getToplistInfo,
   // getSongInfo: getSongInfo,
   // GetRandomNum: GetRandomNum,
   today_dataIsNull: today_dataIsNull,
   formatTime: formatTime,
-  showData: showData
+  formatDate: formatDate,
+  showData: showData,
+  getOneContent: getOneContent
 }

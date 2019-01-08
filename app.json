@@ -1,7 +1,12 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/daily/daily",
+    "pages/daily/content/content",
+    "pages/login/login",
+    "pages/logs/logs",
     "pages/core/sport/sport",
+    "pages/core/cet/cet",
     "pages/core/library/library",
     "pages/core/library/book/book",
     "pages/core/classroom/classroom",
@@ -9,26 +14,21 @@
     "pages/core/person/about/about",
     "pages/core/community/community",
     "pages/core/table/table",
-    "pages/login/login",
     "pages/core/score/score",
-    "pages/logs/logs",
     "pages/core/person/feedback/feedback",
     "pages/core/person/switch/switch",
     "pages/core/person/log/log",
     "pages/core/bus/bus",
-      "pages/core/prize/index/index",
-      "pages/core/prize/detail/detail"
-    
+    "pages/core/prize/index/index",
+    "pages/core/prize/detail/detail",
+    "pages/core/kb/kb"
   ],
-  
-
-  
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "果核Lite",
     "navigationBarTextStyle": "black",
-    "enablePullDownRefresh": true
+    "enablePullDownRefresh": false
   },
   "networkTimeout": {
     "request": 20000,
@@ -47,10 +47,10 @@
         "selectedIconPath": "images/index/sun_click.png"
       },
       {
-        "pagePath": "pages/core/prize/index/index",
-        "text": "抽奖",
-        "iconPath": "images/index/community.png",
-        "selectedIconPath": "images/index/community_click.png"
+        "pagePath": "pages/daily/daily",
+        "text": "日报",
+        "iconPath": "images/index/daily.png",
+        "selectedIconPath": "images/index/daily_click.png"
       },
       {
         "pagePath": "pages/core/person/person",

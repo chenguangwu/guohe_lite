@@ -3,6 +3,10 @@
 var app = getApp();
 var order = ['red', 'yellow', 'blue', 'green', 'red']
 var util = require('../../utils/util.js');
+var Constant = require('../../utils/constant.js')
+var HttpUtils = require('../../utils/http-utils.js')
+var Bmob = require('../../utils/Bmob-1.6.7.min.js');
+
 Page({
 
   /**
@@ -13,380 +17,56 @@ Page({
     music_flag: true,
     news_flag: true,
     todayData: [],
-    tdIsNull: false,
+    tdIsNull: true,
     toView: 'red',
     scrollTop: 100,
-    poster: 'http://y.gtimg.cn/music/photo_new/T002R300x300M000003rsKF44GyaSk.jpg?max_age=2592000',
-    // name: '此时此刻',
-    // author: '许巍',
-    // src: 'http://ws.stream.qqmusic.qq.com/M500001VfvsJ21xFqb.mp3?guid=ffffffff82def4af4b12b3cd9337d5e7&uin=346897220&vkey=6292F51E1E384E06DCBDC9AB7C49FD713D632D313AC4858BACB8DDD29067D3C601481D36E62053BF8DFEAF74C0A5CCFADD6471160CAF3E6A&fromtag=46',
-    cores: [
-      [
-        { id: 'table', name: '课表', disabled: false, teacher_disabled: false, offline_disabled: false },
-        { id: 'score', name: '成绩', disabled: false, teacher_disabled: true, offline_disabled: false },
-        { id: 'classroom', name: '空教室', disabled: false, teacher_disabled: false, offline_disabled: true },
-        { id: 'library', name: '馆藏', disabled: false, teacher_disabled: false, offline_disabled: false },
-        { id: 'bus', name: '校车', disabled: false, teacher_disabled: true, offline_disabled: false },
-        { id: 'sport', name: '体育', disabled: false, teacher_disabled: true, offline_disabled: false },
-        { id: 'student', name: '校友', disabled: false, teacher_disabled: false, offline_disabled: true },
-        { id: 'cet', name: '四六级', disabled: false, teacher_disabled: true, offline_disabled: true },
-        { id: 'wall', name: '学院墙', disabled: false, teacher_disabled: true, offline_disabled: true },
-      ]
-    ],
+    cores: [], //首页头部的图标item
     semester: '',
-
-    card: {
-      'kb': {
-        show: false,
-        time_list: [
-          { begin: '8:00', end: '8:45' },
-          { begin: '8:55', end: '9:40' },
-          { begin: '10:05', end: '10:50' },
-          { begin: '11:00', end: '11:45' },
-          { begin: '14:00', end: '14:45' },
-          { begin: '14:55', end: '15:40' },
-          { begin: '16:05', end: '16:50' },
-          { begin: '17:00', end: '17:45' },
-          { begin: '19:00', end: '19:45' },
-          { begin: '19:55', end: '20:40' },
-          { begin: '20:50', end: '21:35' },
-          { begin: '21:45', end: '22:30' }
-        ],
-        data: {}
-      },
-      'kb': {
-        show: true,
-        nothing: true,
-        data: {
-          'last_time': '',
-          'balance': 0,
-          'cost_status': false,
-          'today_cost': {
-            value: [],
-            total: 0
-          }
-        }
-      },
-      'ykt': {
-        show: false,
-        data: {
-          'last_time': '',
-          'balance': 0,
-          'cost_status': false,
-          'today_cost': {
-            value: [],
-            total: 0
-          }
-        }
-      },
-      'jy': {
-        show: true,
-        data: {}
-      },
-      'sdf': {
-        show: false,
-        data: {
-          'room': '',
-          'record_time': '',
-          'cost': 0,
-          'spend': 0
-        }
-      }
-    },
+    card: {},
     user: {},
-    disabledItemTap: false //点击了不可用的页面
+    disabledItemTap: false, //点击了不可用的页面
+    isTodayKb: false, //判断今天是否有课,true表示有课，false表示没有课
+    todayKb: [], //今天的课的数组
+    //日知录部分的相关信息
+    oneImg: '',
+    oneWord: '',
+    oneWordFrom: '',
+    oneDate: '',
+    oneImgAuthor: ''
   },
   /**
    * 生命周期函数--监听页面加载
    */
   /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-  onPullDownRefresh: function () {
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function() {
     wx.showNavigationBarLoading() //在标题栏中显示加载
     this.onLoad()
-
   },
-  onLoad: function () {
-    var that = this
+  onLoad: function() {
+    Bmob.initialize("9e77d93cb20fc1422dcc80b7084f65f6", "12e3371ba93881c4f71043c7ab7740c7");
 
-    wx.getStorage({
-      key: 'account',
-      success: function (res) {
-        if (res.data) {
-          console.log('用户已登录')
-          var account = res.data
-          wx.request({
-            url: 'https://guohe3.com/api/xiaoli',
-            method: 'get',
-            header: {
-              'content-type': 'application/x-www-form-urlencoded' // 默认值
-            },
-            success: function (res) {
-              if (res.data.code == 500) {
-                wx.showToast({
-                  title: '教务系统异常',
-                  icon: 'loading'
-                })
-              }
-              if (res.data.code == 200) {
-                var zj = 0;
-                var info = res.data.info
-                if (info.currentTab == '星期二') {
-                  zj = 1
-                }
-                else if (info.currentTab == '星期三') {
-                  zj = 2
-                }
-                else if (info.currentTab == '星期四') {
-                  zj = 3
-                }
-                else if (info.currentTab == '星期五') {
-                  zj = 4
-                }
-                else if (info.currentTab == '星期六') {
-                  zj = 5
-                }
-                else if (info.currentTab == '星期日') {
-                  zj = 6
-                } else {
-                  zj = 0
-                }
-                var zc = info.index
-                var semester = '2017-2018-2'//默认首页是第二学期的课表
-                var today_data = wx.getStorageSync("today_data")
-                if (today_data) {
-                  console.log('以后再说')
-                } else {
-                  var localData = wx.getStorageSync(semester)
-                  if (localData) {
-                    wx.hideNavigationBarLoading()
-                    wx.stopPullDownRefresh()
-                    console.log("从本地获取")
-                    var data_list = [[], [], [], [], [], [], []]
-                    var date = semester + '_' + (parseInt(zc - 1) + 1)
-                    var _data = localData[parseInt(zc - 1)][date]//这个星期的课表数据(未转化)                               
+    //初始化首页头部信息
+    this.initHeader()
 
-                    //把行数据转换为列数据
-                    for (var i = 0; i < _data.length; i++) {
-                      for (var key in _data[i]) {
-                        if (key == 'monday') {
-                          data_list[0].push(_data[i][key])
+    //获取学生的校历信息
+    this.getXiaoli()
 
-                        }
-                        if (key == 'tuesday') {
-                          data_list[1].push(_data[i][key])
-                        }
-                        if (key == 'wednesday') {
-                          data_list[2].push(_data[i][key])
-                        }
-                        if (key == 'thursday') {
-                          data_list[3].push(_data[i][key])
-                        }
-                        if (key == 'friday') {
-                          data_list[4].push(_data[i][key])
-                        }
-                        if (key == 'saturday') {
-                          data_list[5].push(_data[i][key])
-                        }
-                        if (key == 'sunday') {
-                          data_list[6].push(_data[i][key])
-                        }
-                      }
-                    }
+    //获取云端推送消息
+    this.getMess()
 
-                    var today_data = data_list[zj]
-                    var today_data_list = new Array()
+    //初始化首页课表信息
+    this.initTodayKb()
 
-                    for (var i = 0; i < today_data.length; i++) {
-                      var temp = {}
-                      if (today_data[i]) {
-                        var info_list = today_data[i].split("@")
-                        temp.index = (i * 2 + 1) + '-' + (i * 2 + 2)
-                        temp.cnum = info_list[0]
-
-                        if (info_list[1].length >= 20) {
-                          temp.cname = info_list[1].substr(0, 20) + "..."
-                        } else {
-                          temp.cname = info_list[1]
-                        }
-                        temp.tname = info_list[2]
-                        temp.address = info_list.length >= 4 ? info_list[3] : '未指定'
-                      }
-
-                      if (JSON.stringify(temp) != "{}") {
-                        today_data_list.push(temp)
-                      }
-
-                    }
-                    if (today_data_list.length > 0) {
-                      console.log(today_data_list)
-                      that.setData({
-                        todayData: today_data_list,
-                        tdIsNull: false
-                      })
-
-                    } else {
-                      that.setData({
-                        todayData: today_data_list,
-                        tdIsNull: true
-                      })
-                    }
-                  } else {
-                    wx.request({
-                      url: 'https://guohe3.com/api/kb',
-                      method: 'POST',
-                      data: {
-                        username: account.username,
-                        password: account.password,
-                        semester: semester
-                      },
-                      header: {
-                        'content-type': 'application/x-www-form-urlencoded' // 默认值
-                      },
-                      success: function (res) {
-                        if (res.data.code == 200) {
-                          wx.hideNavigationBarLoading()
-                          wx.stopPullDownRefresh()
-                          //设置课表缓存
-                          wx.setStorage({
-                            key: '2017-2018-2',
-                            data: res.data.info,
-                          })
-                          //showDataUtil(res.data.info, semester, week, today, that)
-                          var data_list = [[], [], [], [], [], [], []]
-                          var date = semester + '_' + (parseInt(zc - 1) + 1)
-                          var _data = res.data.info[parseInt(zc - 1)][date]//这个星期的课表数据(未转化)                               
-
-                          //把行数据转换为列数据
-                          for (var i = 0; i < _data.length; i++) {
-                            for (var key in _data[i]) {
-                              if (key == 'monday') {
-                                data_list[0].push(_data[i][key])
-
-                              }
-                              if (key == 'tuesday') {
-                                data_list[1].push(_data[i][key])
-                              }
-                              if (key == 'wednesday') {
-                                data_list[2].push(_data[i][key])
-                              }
-                              if (key == 'thursday') {
-                                data_list[3].push(_data[i][key])
-                              }
-                              if (key == 'friday') {
-                                data_list[4].push(_data[i][key])
-                              }
-                              if (key == 'saturday') {
-                                data_list[5].push(_data[i][key])
-                              }
-                              if (key == 'sunday') {
-                                data_list[6].push(_data[i][key])
-                              }
-                            }
-                          }
-
-                          var today_data = data_list[zj]
-                          var today_data_list = new Array()
-
-                          for (var i = 0; i < today_data.length; i++) {
-                            var temp = {}
-                            if (today_data[i]) {
-                              var info_list = today_data[i].split("@")
-                              temp.index = (i * 2 + 1) + '-' + (i * 2 + 2)
-                              temp.cnum = info_list[0]
-
-                              if (info_list[1].length >= 20) {
-                                temp.cname = info_list[1].substr(0, 20) + "..."
-                              } else {
-                                temp.cname = info_list[1]
-                              }
-                              temp.tname = info_list[2]
-                              temp.address = info_list.length >= 4 ? info_list[3] : '未指定'
-                            }
-
-                            if (JSON.stringify(temp) != "{}") {
-                              today_data_list.push(temp)
-                            }
-
-                          }
-                          if (today_data_list.length > 0) {
-                            console.log(today_data_list)
-                            that.setData({
-                              todayData: today_data_list,
-                              tdIsNull: false
-                            })
-
-                          } else {
-                            that.setData({
-                              todayData: today_data_list,
-                              tdIsNull: true
-                            })
-                          }
-                        }
-                      }
-                    })
-                  }
-
-                }
-              }
-            }
-          })
-        }
-      },
-      fail: function () {
-        console.log("未登录")
-        wx.navigateTo({
-          url: '/pages/login/login',
-        })
-      }
-    })
-    wx.request({
-
-      url: 'https://guohe3.com/getToast',
-      method: 'GET',
-      header: {
-        'content-type': 'application/x-www-form-urlencoded' // 默认值
-      },
-      success: function (res) {
-        var message = res.data.info[0]
-        console.log(message)
-        that.setData({
-          toast: message
-        })
-      }
-
-    })
-    // util.getToplistInfo(27, function (data) {
-    //   wx.hideLoading();
-    //   if (data.color == '14737632') {
-    //     that.setData({ isLight: true })
-    //   };
-    //   that.setData({
-    //     songlist: data.songlist,
-    //   });
-    //   console.log(data)
-    //   var num = util.GetRandomNum(1, 90);
-    //   var mid = data.songlist[num].data.songmid;
-    //   var albummid = data.songlist[num].data.albummid
-    //   var name = data.songlist[num].data.albumname
-    //   var author = data.songlist[num].data.singer[0].name
-    //   console.log(mid)
-    //   console.log(albummid)
-
-    //   that.setData({
-    //     src: 'http://ws.stream.qqmusic.qq.com/C100' + mid + '.m4a?fromtag=38',
-    //     poster: 'http://y.gtimg.cn/music/photo_new/T002R150x150M000' + albummid + '.jpg',
-    //     name: name,
-    //     author: author,
-    //   });
-    // })
+    //获取日知录信息
+    this.getOneContent()
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function (e) {
+  onReady: function(e) {
     // 使用 wx.createAudioContext 获取 audio 上下文 context
     this.audioCtx = wx.createAudioContext('myAudio')
   },
@@ -394,12 +74,11 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-  
+  onShow: function() {
     var that = this
     wx.getStorage({
       key: 'music_flag',
-      success: function (res) {
+      success: function(res) {
         that.setData({
           music_flag: res.data
         })
@@ -407,54 +86,17 @@ Page({
     })
     wx.getStorage({
       key: 'news_flag',
-      success: function (res) {
-        console.log(res.data)
+      success: function(res) {
         that.setData({
           news_flag: res.data
         })
       },
     })
 
-
+    this.initTodayKb()
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
-  upper: function (e) {
-    console.log(e)
-  },
-  lower: function (e) {
-    console.log(e)
-  },
-  scroll: function (e) {
-    console.log(e)
-  },
-  tap: function (e) {
+  tap: function(e) {
     for (var i = 0; i < order.length; ++i) {
       if (order[i] === this.data.toView) {
         this.setData({
@@ -464,9 +106,196 @@ Page({
       }
     }
   },
-  tapMove: function (e) {
+  tapMove: function(e) {
     this.setData({
       scrollTop: this.data.scrollTop + 10
     })
   },
+
+  //获取云端推送消息
+  getMess: function() {
+    var that = this
+    const query = Bmob.Query("push_message");
+    query.find().then(res => {
+      var message = res[res.length - 1]['content']
+      console.log(message)
+      that.setData({
+        toast: message
+      })
+    });
+  },
+
+  //获取日知录信息
+  getOneContent: function() {
+    var that = this
+    util.getOneContent(function(data) {
+      that.setData({
+        oneImg: data.pic,
+        oneWord: data.text,
+        oneWordFrom: data.origin,
+        oneDate: data.time.split(' ')[0].replace(/\-/g, "\/"),
+        oneImgAuthor: data.type + ' | ' + data.pic_origin
+      })
+    })
+  },
+
+  //获取校历信息
+  getXiaoli: function() {
+    var that = this
+    try {
+      //查看是否已经登录
+      var account = wx.getStorageSync('account')
+      if (account) {
+        //已经登陆
+        var username = account.username;
+        var password = account.password;
+        var param = {
+          'username': username,
+          'password': password
+        }
+        //发送获取学生校历信息的请求
+        HttpUtils._post(
+          Constant.XIAO_LI,
+          param,
+          //两个回调函数
+          this.getXiaoliSuccess,
+          this.getXiaoliFail
+        )
+      } else {
+        //没有登录
+        wx.navigateTo({
+          url: '/pages/login/login',
+        })
+      }
+    } catch (e) {
+      // Do something when catch error
+      console.log(e)
+    }
+  },
+
+  //获取校历成功的回掉函数
+  getXiaoliSuccess: function(res) {
+    if (res.data.code == 500) {
+      wx.showToast({
+        title: '教务系统异常',
+        icon: 'loading'
+      })
+    }
+    if (res.data.code == 200) {
+      //全部校历信息
+      var info = res.data.info;
+      //该学生全部学年信息
+      var all_year = info.all_year;
+      //当前周次
+      var weekNum = info.weekNum;
+      try {
+        wx.setStorageSync('all_year', all_year)
+        if (weekNum > 0 && weekNum < 21)
+          wx.setStorageSync('week_num', weekNum)
+        else
+          wx.setStorageSync('week_num', 1)
+      } catch (e) {
+        console.log(e)
+      }
+    }
+  },
+
+  //获取校历失败的回掉函数
+  getXiaoliFail: function(e) {
+    console.log(e)
+  },
+
+  //点击首页的item跳转到相应的页面
+  navigateTo: function(event) {
+    var id = event.currentTarget.dataset.info.id
+    if (id == 'guide') {
+      //如果点击的是自助导览，跳转至“江科大校园导览”小程序
+      wx.navigateToMiniProgram({
+        appId: 'wxbd0a184ead21796e',
+        path: 'pages/index/index',
+        envVersion: 'release',
+        success(res) {
+          // 打开成功
+          console.log(res)
+        }
+      })
+    } else {
+      wx.navigateTo({
+        url: '/pages/core/' + id + '/' + id
+      })
+    }
+  },
+
+  //初始化首页头部内容
+  initHeader: function() {
+    this.setData({
+      cores: Constant.CORE,
+      card: Constant.CARD
+    })
+  },
+
+  //初始化首页课表信息
+  initTodayKb: function() {
+    var that = this
+    var todayKbList = []
+    try {
+      var allKb = wx.getStorageSync('allKb')
+      var value = wx.getStorageSync('week_num')
+      var week = 1
+      if (value) {
+        if (value > 0 && value < 21)
+          week = value
+      }
+      if (allKb) {
+        var date = new Date().getDay()
+        for (var i = 0; i < allKb.length; i++) {
+          var o = allKb[i]
+          if (o.xqj == date) {
+            var zhouci = o.des.split('@')[3]
+            var zhoucis = zhouci.substring(-1, zhouci.length - 3).split(',')
+            for (var j = 0; j < zhoucis.length; j++) {
+              var ss = zhoucis[j].split('-')
+              var begin = ss[0]
+              var end = ss[1]
+              if (week >= begin && week <= end || week == begin || week == end) {
+                console.log(o)
+                var jieci = o.skjc
+                var couese = o.des.split('@')
+                var cName = couese[1]
+                var cRoom = couese[4]
+                var day = {
+                  "when": jieci + "-" + (new Number(jieci) + 1),
+                  "what": cName,
+                  "where": cRoom,
+                };
+                if (day) {
+                  todayKbList.push(day)
+                }
+              }
+            }
+          }
+        }
+      }
+    } catch (e) {
+      console.log(e)
+    }
+    if (todayKbList.length > 0) {
+      this.setData({
+        todayKb: todayKbList,
+        isTodayKb: true
+      })
+    }
+  },
+
+  //点击图片弹出大图
+  imgPreview: function() {
+    var imgUrl = this.data.oneImg
+    var urls = []
+    if (imgUrl) {
+      urls.push(imgUrl)
+      wx.previewImage({
+        urls: urls // 需要预览的图片http链接列表
+      })
+    }
+  }
 })

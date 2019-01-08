@@ -61,11 +61,11 @@
               <view class="weui-search-bar">
                 <view class="weui-search-bar__form">
                   <view class="weui-search-bar__box">
-                    
-                    <input type="text" class="weui-search-bar__input" value="{{inputVal}}"  bindinput="inputTyping" />
-                   
+
+                    <input type="text" class="weui-search-bar__input" value="{{inputVal}}" bindinput="inputTyping" />
+
                   </view>
-                
+
                 </view>
                 <view class="weui-search-bar__cancel-btn" hidden="{{activeIndex != 1}}" bindtap="hideInput" bindtap='search'>搜索</view>
               </view>
@@ -73,7 +73,7 @@
             </view>
           </view>
 
-             <block wx:for="{{dataList}}" wx:key="{{code}}" wx:if="{{!isLoad}}">
+          <block wx:for="{{dataList}}" wx:key="{{code}}" wx:if="{{!isLoad}}">
 
             <view class='card'>
               <view class="weui-form-preview">
@@ -88,7 +88,7 @@
                     <view class="weui-form-preview__label">作者/出版社</view>
                     <view class="weui-form-preview__value">{{item.book_author_press}}</view>
                   </view>
-                  
+
                   <view class="weui-form-preview__item">
                     <view class="weui-form-preview__label">借阅情况</view>
                     <view class="weui-form-preview__value">{{item.book_can_borrow}}</view>
@@ -100,7 +100,7 @@
               </view>
             </view>
           </block>
-          
+
 
         </view>
 
